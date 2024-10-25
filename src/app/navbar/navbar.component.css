@@ -1,0 +1,10 @@
+.navbar{
+    background-color: #333030;
+    height: 60px;
+  }
+  .nav-link {
+    color: white !important; /* !important ile diğer kuralları geçersiz kılar */
+  }
+  .navbar-brand{
+    color: aliceblue !important;
+  }

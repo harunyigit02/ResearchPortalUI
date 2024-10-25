@@ -1,0 +1,36 @@
+
+<h2>Form Ekle</h2>
+<form [formGroup]="researchForm">
+    <div class="mb-3">
+      <label for="questionText" class="form-label">Soru Metni:</label>
+      <input type="text" formControlName="questionText" class="form-control" placeholder="Soru metnini buraya yazın" />
+    </div>
+  
+    <div class="mb-3">
+        <label class="form-label" *ngIf="options.length > 0">Seçenekler:</label>
+      <div formArrayName="options">
+        <div *ngFor="let option of options.controls; let i = index" class="input-group mb-2">
+          <input [formControlName]="i" class="form-control" placeholder="Seçenek {{i + 1}}" />
+          <button type="button" class="btn btn-danger" (click)="removeOption(i)">Kaldır</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addOption()">Seçenek Ekle</button>
+    </div>
+  
+    <button type="button" class="btn btn-primary" (click)="addQuestion()">Ekle</button>
+  </form>
+  
+  <hr>
+  
+  <div *ngIf="questions.length > 0">
+    <h3>Eklenen Sorular:</h3>
+    <ul>
+      <li *ngFor="let question of questions">
+        <strong>Soru {{ question.questionNumber }}: {{ question.questionText }}</strong>
+        <ul>
+          <li *ngFor="let option of question.options">{{ option }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  

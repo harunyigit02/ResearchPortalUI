@@ -1,0 +1,30 @@
+.sidebar{
+    top: 60px; /* Navbar yüksekliği kadar aşağıda başlasın */
+    height: calc(100vh - 60px); /* Ekranın tamamını kapla ve navbar yüksekliğini çıkar */
+    
+    background-color: #333030; /* Sidebar rengi */
+    width: 200px;
+    
+    
+  }
+  
+  .item{
+    margin-top: 150px;
+  }
+  .itemsettings{
+    margin-top: 320px;
+  }
+  
+  .list-group-item{
+    background-color:#333030 ;
+    border: 0;
+  }
+  
+  
+
+  .nav-link{
+     color: rgb(141, 150, 138);
+  }
+  .nav-link:hover{
+    color: rgb(255, 255, 255);
+  }
