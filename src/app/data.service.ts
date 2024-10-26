@@ -23,6 +23,15 @@ export class DataService {
     return this.http.get<any>(`${this.apiUrl}/Category`);
   }
 
+  addQuestion(questionData: { questionText: string, researchId: number }) :Observable<any> {
+    return this.http.post<number>(`${this.apiUrl}/Question`, questionData);
+}
+
+  // Tek bir seçenek ekleme isteği
+  addOption(optionData: { questionId: number; optionText: string }) {
+    return this.http.post(`${this.apiUrl}/Option`, optionData);
+  }
+
 
   
 }

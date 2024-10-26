@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormQuestion } from '../Models/form-question.model';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-add-research-form',
@@ -19,7 +20,7 @@ export class AddResearchFormComponent {
   questions: any[] = []; // Soruları tutan dizi
   questionCount: number = 1; // Soru numarasını takip etmek için
 
-  constructor(private fb: FormBuilder) {
+  constructor(private dataService:DataService, private fb: FormBuilder) {
     this.researchForm = this.fb.group({
       questionText: [''],
       options: this.fb.array([])
@@ -39,13 +40,41 @@ export class AddResearchFormComponent {
   }
 
   addQuestion() {
-    const questionData = this.researchForm.value;
-    this.questions.push({ // Soruları diziye ekle
-      questionNumber: this.questionCount++, // Soru numarasını artır ve ekle
-      questionText: questionData.questionText,
-      options: questionData.options
+    const questionText = this.researchForm.value.questionText;
+
+    // Önce soruyu ekle ve ID'sini al
+    this.dataService.addQuestion({ 
+      questionText, 
+      researchId: 1 
+    }).subscribe({
+      next: (response) => {
+        console.log("Response: ", response);
+        console.log(response.id)
+        const questionId = response.id; // Burada questionId'yi alıyoruz
+    
+        // Eklenen soruyu arayüzde göster
+        this.questions.push({
+          questionText,
+          options: this.options.value 
+        });
+    
+        // Her bir seçenek için POST isteği gönder
+        this.options.value.forEach((optionText: string) => {
+          const optionData = { questionId, optionText };
+          console.log(optionData);
+    
+          this.dataService.addOption(optionData).subscribe(() => {
+            console.log(`Seçenek "${optionText}" eklendi.`);
+          });
+        });
+    
+        // Formu ve seçenekleri sıfırla
+        this.researchForm.reset();
+        this.options.clear();
+      },
+      error: (error) => {
+        console.error('Hata:', error); // Hata durumunda hata mesajını göster
+      }
     });
-    this.researchForm.reset(); // Formu temizle
-    this.options.clear(); // Seçenekleri sıfırla
   }
 }
