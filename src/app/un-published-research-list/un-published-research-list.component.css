@@ -3,7 +3,7 @@
     padding: 20px;
   }
   
-  .article-card {
+  .research-card {
     background-color: #ffffff; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -14,19 +14,18 @@
     height: 100%;
   }
   
-  .article-card:hover {
+  .research-card:hover {
     transform: translateY(-5px);
   }
   
-  .article-card h5 {
+  .research-card h5 {
     font-size: 1.25rem;
     font-weight: 600;
   }
   
-  .article-card p {
+  .research-card p {
     font-size: 1rem;
     color: #6c757d;
-    flex-grow: 1;
   }
   
   .badge {
@@ -36,4 +35,7 @@
   .btn-outline-primary {
     padding: 0.5rem 1.5rem;
   }
+  
+  /* Durum metninin stil ayarları */
+  
   

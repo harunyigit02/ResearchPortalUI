@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row">
+      <div *ngFor="let research of researches" class="col-md-6 col-lg-4 mb-4">
+        <div class="card research-card p-3">
+          <!-- Üst Kısım: Yayınlanma Tarihi ve Kategori -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-primary text-white">{{ getCategoryName(research.categoryId) }}</span>
+            <div class="text-end text-muted small">{{ research.publishedAt | date: 'dd.MM.yyyy' }}</div>
+          </div>
+  
+          <!-- Başlık -->
+          <h5 class="text-center mt-2">{{ research.title }}</h5>
+  
+          <!-- Açıklama -->
+          <p class="text-center text-muted">
+            {{ research.description | slice:0:100 }}
+          </p>
+  
+          <!-- Araştırmaya Git Butonu ve Durum -->
+          <div class="d-flex justify-content-between align-items-end">
+            <button class="btn btn-outline-primary" (click)="goToResearch(research.id)">Araştırmaya Git</button>
+            <span class="research-status badge text-white" [ngClass]="{'bg-success': research.isCompleted, 'bg-warning': !research.isCompleted}">
+                {{ research.isCompleted ? 'Published' : 'Template' }}
+              </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

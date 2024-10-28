@@ -1,4 +1,5 @@
 export interface Question {
     questionText: string;
-    researchId: number; // researchId burada tanımlandı
+    researchId: number;
+    options:string[] // researchId burada tanımlandı
 }

@@ -16,19 +16,29 @@
     <button type="button" class="btn btn-secondary" (click)="addOption()">Seçenek Ekle</button>
   </div>
 
-  <button type="button" class="btn btn-primary" (click)="addQuestion()">Ekle</button>
+  <button type="button" class="btn btn-primary" (click)="addQuestion()"> Soruyu Ekle</button>
 </form>
 
 <hr>
 
-<div *ngIf="questions.length > 0">
+
+  <div *ngIf="questions.length > 0" class="questions-container">
   <h3>Eklenen Sorular:</h3>
   <ul>
-    <li *ngFor="let question of questions">
-      <strong>{{ question.questionText }}</strong>
+    <li *ngFor="let question of questions; let i = index" class="question-item">
+      <strong>Soru {{ i + 1 }}: {{ question.questionText }}</strong>
       <ul>
-        <li *ngFor="let option of question.options">{{ option }}</li>
+        <li *ngFor="let option of question.options" class="option-item">{{ option }}</li>
       </ul>
     </li>
   </ul>
 </div>
+
+
+  <div *ngIf="questions.length > 0" class="d-flex justify-content-end complete-button-container">
+    <button type="button" class="btn btn-primary"(click)="goToResearchPage()">Tamamla</button>
+  </div>
+
+
+
+

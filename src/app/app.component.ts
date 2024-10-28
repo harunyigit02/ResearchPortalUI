@@ -9,6 +9,10 @@ import { FooterComponent } from './footer/footer.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 import { CommonModule } from '@angular/common';
 import { AddResearchFormComponent } from './add-research-form/add-research-form.component';
+import { ResearchListComponent } from './research-list/research-list.component';
+import { AddResearchComponent } from './add-research/add-research.component';
+import { ResearchDetailsComponent } from './research-details/research-details.component';
+import { UnPublishedResearchListComponent } from './un-published-research-list/un-published-research-list.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +27,11 @@ import { AddResearchFormComponent } from './add-research-form/add-research-form.
     FooterComponent,
     AddArticleComponent,
     CommonModule,
-    AddResearchFormComponent
+    AddResearchFormComponent,
+    ResearchListComponent,
+    AddResearchComponent,
+    ResearchDetailsComponent,
+    UnPublishedResearchListComponent
     
   ],
   templateUrl: './app.component.html',
