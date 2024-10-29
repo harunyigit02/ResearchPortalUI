@@ -50,6 +50,12 @@ export class DataService {
    updateResearch(id:number,research: Research): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/Research/${id}`, research);
    }
+
+
+   getArticleViewsCount(articleId:number):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/Views/${articleId}/count`);
+   }
+
    
 
 

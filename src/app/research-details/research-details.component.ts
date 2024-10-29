@@ -94,6 +94,8 @@ export class ResearchDetailsComponent {
     this.router.navigate([`add-research-form`]);
   }
 
+  
+
 
 
 

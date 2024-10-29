@@ -27,6 +27,11 @@ export class ContentComponent {
     this.dataService.getArticle().subscribe({
       next: (data: Article[]) => {
         this.articles = data;
+  
+        // Her makale için görüntülenme sayısını al
+        this.articles.forEach(article => {
+          this.getArticleViewsCount(article); // Her makale için görüntülenme sayısını al
+        });
       },
       error: (err) => {
         this.errorMessage = 'Makaleleri alırken hata oluştu: ' + err.message;
@@ -51,6 +56,17 @@ export class ContentComponent {
   getCategoryName(categoryId: number): string {
     const category = this.categories.find(cat => cat.id === categoryId);
     return category ? category.name : 'Bilinmiyor'; // Kategori bulunamazsa 'Bilinmiyor' yaz
+  }
+
+  getArticleViewsCount(article: Article): void {
+    this.dataService.getArticleViewsCount(article.id).subscribe({
+      next: (count) => {
+        article.totalViews = count.viewsCount; // Makaleye viewsCount ekle
+      },
+      error: (err) => {
+        this.errorMessage = 'Görüntülenme sayısını alırken hata oluştu: ' + err.message;
+      }
+    });
   }
 
 
