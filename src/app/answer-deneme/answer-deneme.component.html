@@ -1,1 +1,38 @@
-<p>answer-deneme works!</p>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 questions-container">
+        <div class="title-div text-center mb-4">
+          <h3>{{ research.title }}</h3>
+        </div>
+        
+        <div *ngIf="research && research.questions">
+          <div *ngIf="research.questions.length === 0">
+            <h5>Henüz Eklenmiş Soru Yok.</h5>
+          </div>
+          
+          <ul *ngIf="research.questions.length > 0" class="p-0">
+            <li *ngFor="let question of research.questions; let i = index" class="question-item mb-4">
+              <strong>Soru {{ i + 1 }}: {{ question.questionText }}</strong>
+              <ul class="p-0">
+                <li *ngFor="let option of question.options" class="option-item">
+                  <input 
+                    type="radio" 
+                    name="question-{{ i }}" 
+                    (change)="toggleSelection(option.id)"
+                    [checked]="isOptionSelected(option.id)"
+                    class="me-2"
+                  />
+                  {{ option.optionText }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+          
+          <div class="text-end mt-4">
+            <button (click)="submit()" class="btn btn-primary">Submit Answers</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

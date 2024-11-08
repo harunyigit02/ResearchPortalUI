@@ -94,6 +94,10 @@ export class ResearchDetailsComponent {
     this.router.navigate([`add-research-form`]);
   }
 
+  goToParticipationFormPage(): void{
+    this.router.navigate([`participation-form/${this.id}`]);
+  }
+
   
 
 

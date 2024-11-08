@@ -1,0 +1,27 @@
+.questions-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-item {
+    list-style-type: none;
+
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-item strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+  }
+  
+  .option-item {
+    list-style-type: none;
+    margin-left: 20px;
+  }
+  

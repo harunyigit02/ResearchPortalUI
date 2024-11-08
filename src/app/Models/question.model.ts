@@ -1,5 +1,7 @@
+import { Option } from "./option.model";
+
 export interface Question {
     questionText: string;
     researchId: number;
-    options:string[] // researchId burada tanımlandı
+    options:Option[] // researchId burada tanımlandı
 }

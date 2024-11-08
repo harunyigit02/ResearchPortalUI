@@ -1,3 +1,5 @@
+import { Question } from "./question.model"
+
 export interface Research{
     id:number
     categoryId:number
@@ -7,5 +9,5 @@ export interface Research{
     status:string
     isFaceToFace:boolean
     isCompleted:boolean
-    questions:string[]
+    questions:Question[]
 }

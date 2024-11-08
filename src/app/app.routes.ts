@@ -8,6 +8,7 @@ import { ResearchListComponent } from './research-list/research-list.component';
 import { AddResearchComponent } from './add-research/add-research.component';
 import { ResearchDetailsComponent } from './research-details/research-details.component';
 import { UnPublishedResearchListComponent } from './un-published-research-list/un-published-research-list.component';
+import { AnswerDenemeComponent } from './answer-deneme/answer-deneme.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path: 'add-research', component: AddResearchComponent},
     {path: 'research-detail/:id', component: ResearchDetailsComponent},
     {path: 'my-researches', component: UnPublishedResearchListComponent},
+    {path: 'participation-form/:id', component: AnswerDenemeComponent},
 
 
 ];

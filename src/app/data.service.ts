@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from './Models/article.model';
 import { Research } from './Models/research.model';
+import { Answer } from './Models/answer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DataService {
 
   addQuestion(questionData: { questionText: string, researchId: number }) :Observable<any> {
     return this.http.post<number>(`${this.apiUrl}/Question`, questionData);
-}
+  }
 
   // Tek bir seçenek ekleme isteği
   addOption(optionData: { questionId: number; optionText: string }) {
@@ -55,6 +56,10 @@ export class DataService {
    getArticleViewsCount(articleId:number):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/Views/${articleId}/count`);
    }
+
+   submitAnswers(answers: Answer[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Answer/submitAnswers`, answers);
+  }
 
    
 
