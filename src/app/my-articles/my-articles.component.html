@@ -1,0 +1,41 @@
+<div class="article-title text-center text-muted">
+    <h3>Yayınlanmış Makaleler</h3>
+  </div>
+  <div class="no-article-text text-center" *ngIf="articles.length === 0">
+    <h4>Henüz Yayınlanmış Hiçbir Makale Yok</h4>
+  </div>
+  
+  <div class="container mt-5">
+    <div class="row">
+      <div *ngFor="let article of articles" class="col-md-6 col-lg-4 mb-4">
+        <div class="card article-card p-3">
+          <!-- Top Section: Published Date and Category -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-primary text-white">
+              {{ getCategoryName(article.categoryId) }}
+            </span>
+            <div class="text-end text-muted small">
+              {{ article.publishedAt | date: 'dd.MM.yyyy' }}
+            </div>
+          </div>
+  
+          <!-- Title -->
+          <h5 class="text-center mt-2">{{ article.title }}</h5>
+  
+          <!-- Description -->
+          <p class="text-center text-muted">
+            {{ article.description | slice: 0:100 }}...
+          </p>
+  
+          <!-- Views Count and Button -->
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <span class="text-muted small">Görüntülenme: {{ article.totalViews }}</span>
+            <div class="text-center mt-3">
+              <button class="btn btn-outline-primary" (click)="goToArticle(article.id)">Makaleye Git</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +13,10 @@ import { ResearchListComponent } from './research-list/research-list.component';
 import { AddResearchComponent } from './add-research/add-research.component';
 import { ResearchDetailsComponent } from './research-details/research-details.component';
 import { UnPublishedResearchListComponent } from './un-published-research-list/un-published-research-list.component';
+import { LoginComponent } from './login/login.component';
+import { MyArticlesComponent } from './my-articles/my-articles.component';
+import { DataService } from './data.service';
+import { RegisterComponent } from './register/register.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +35,10 @@ import { UnPublishedResearchListComponent } from './un-published-research-list/u
     ResearchListComponent,
     AddResearchComponent,
     ResearchDetailsComponent,
-    UnPublishedResearchListComponent
+    UnPublishedResearchListComponent,
+    LoginComponent,
+    MyArticlesComponent,
+    RegisterComponent
     
   ],
   templateUrl: './app.component.html',
@@ -39,4 +46,16 @@ import { UnPublishedResearchListComponent } from './un-published-research-list/u
 })
 export class AppComponent {
   title = 'angular-router-sample';
+  isLoginPage: boolean = false;
+
+
+  constructor(private dataService:DataService,private router: Router) {
+    // NavigationEnd olayını dinle ve isLoginPage'i güncelle
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginPage = this.router.url === '/login'; // Eğer rota '/login' ise true yap
+      }
+    });
+  }
+
 }

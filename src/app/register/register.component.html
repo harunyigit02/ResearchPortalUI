@@ -1,0 +1,50 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 400px;">
+      <div class="card-body">
+        <h4 class="card-title text-center mb-4">Kayıt Ol</h4>
+  
+        <!-- Hata mesajı -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <strong>Hata:</strong> {{ errorMessage }}
+        </div>
+  
+        <!-- Form Başlangıcı -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Email alanı -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              placeholder="Email adresinizi girin"
+            />
+          </div>
+  
+          <!-- Şifre alanı -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Şifre</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              placeholder="Şifrenizi girin"
+            />
+          </div>
+  
+          <!-- Kayıt Ol Butonu -->
+          <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+            Kayıt Ol
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Form geçersizse uyarı mesajı -->
+  <div *ngIf="registerForm.invalid && registerForm.touched" class="alert alert-warning">
+    Lütfen geçerli bir email ve şifre girin.
+  </div>
+  

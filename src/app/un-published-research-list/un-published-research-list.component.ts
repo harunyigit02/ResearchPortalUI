@@ -30,14 +30,20 @@ export class UnPublishedResearchListComponent {
   }
 
   getResearches(): void {
-    this.dataService.getResearches().subscribe({
-      next: (data: Research[]) => {
-        this.researches = data;
-      },
-      error: (err) => {
-        this.errorMessage = 'Araştırmaları alırken hata oluştu: ' + err.message;
-      }
-    });
+    const token= localStorage.getItem("jwt_token");
+    if(token){
+      this.dataService.getUserResearches(token).subscribe({
+        next: (data: Research[]) => {
+          this.researches = data;
+        },
+        error: (err) => {
+          this.errorMessage = 'Araştırmaları alırken hata oluştu: ' + err.message;
+        }
+      });
+    }
+    else {
+      this.errorMessage = 'Kullanıcı girişi yapılmamış.';
+    }
   }
 
   getCategories(): void {

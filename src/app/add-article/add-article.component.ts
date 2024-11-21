@@ -35,8 +35,10 @@ export class AddArticleComponent {
   addArticle(): void {
     if (this.articleForm.valid) {
       this.isLoading = true; // Yükleme durumunu başlat
+      const token=localStorage.getItem("jwt_token");
 
-      this.dataService.addArticle(this.articleForm.value)
+      if(token){
+        this.dataService.addArticle(this.articleForm.value,token)
         .subscribe({
           next: response => {
             this.successMessage = 'Makale başarıyla eklendi!'; // Başarılı mesajı
@@ -55,6 +57,7 @@ export class AddArticleComponent {
       this.errorMessage = 'Form geçersiz! Lütfen gerekli alanları doldurun.'; // Hata mesajı
       this.successMessage = null; // Başarılı mesajı sıfırla
     }
+      }
   }
 
   getCategories(): void {

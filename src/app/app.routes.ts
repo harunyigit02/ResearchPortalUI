@@ -9,6 +9,9 @@ import { AddResearchComponent } from './add-research/add-research.component';
 import { ResearchDetailsComponent } from './research-details/research-details.component';
 import { UnPublishedResearchListComponent } from './un-published-research-list/un-published-research-list.component';
 import { AnswerDenemeComponent } from './answer-deneme/answer-deneme.component';
+import { LoginComponent } from './login/login.component';
+import { MyArticlesComponent } from './my-articles/my-articles.component';
+import { RegisterComponent } from './register/register.component';
 
 
 export const routes: Routes = [
@@ -22,6 +25,10 @@ export const routes: Routes = [
     {path: 'research-detail/:id', component: ResearchDetailsComponent},
     {path: 'my-researches', component: UnPublishedResearchListComponent},
     {path: 'participation-form/:id', component: AnswerDenemeComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'my-articles', component: MyArticlesComponent},
+    {path: 'register', component: RegisterComponent},
+
 
 
 ];

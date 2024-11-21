@@ -44,8 +44,10 @@ export class AddResearchComponent {
         isFaceToFace: this.researchForm.value.isFaceToFace === 'true' // Dönüşüm burada yapılıyor
       };
       console.log("Veriler:",researchData);
+      const token=localStorage.getItem("jwt_token");
 
-      this.dataService.addResearch(researchData)
+      if(token){
+        this.dataService.addResearch(researchData,token)
         .subscribe({
           next: response => {
             this.successMessage = 'Araştırma başarıyla eklendi!';
@@ -60,6 +62,7 @@ export class AddResearchComponent {
             this.isLoading = false;
           }
         });
+      }
     } else {
       this.errorMessage = 'Form geçersiz! Lütfen gerekli alanları doldurun.';
       this.successMessage = null;
