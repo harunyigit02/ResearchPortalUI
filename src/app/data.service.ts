@@ -33,7 +33,7 @@ export class DataService {
       'Authorization': `Bearer ${token}`,
     });
 
-    return this.http.get<any>(`${this.apiUrl}/Article/MyArticles`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/Article/UserArticles`, { headers });
   }
 
   addArticle(article: Article,token:string): Observable<any> {
@@ -65,7 +65,7 @@ export class DataService {
       'Authorization': `Bearer ${token}`,
     });
 
-    return this.http.get<any>(`${this.apiUrl}/Research/MyResearches`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/Research/UserResearches`, { headers });
   }
 
 

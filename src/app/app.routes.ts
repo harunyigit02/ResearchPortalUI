@@ -12,21 +12,22 @@ import { AnswerDenemeComponent } from './answer-deneme/answer-deneme.component';
 import { LoginComponent } from './login/login.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
     {path: 'crisis-list', component: CrisisListComponent},
     {path: 'heroes-list', component: HeroesListComponent},
-    {path: 'articles', component: ContentComponent},
-    {path: 'add-article', component: AddArticleComponent},
-    {path: 'add-research-form', component: AddResearchFormComponent},
-    {path: 'researches', component: ResearchListComponent},
-    {path: 'add-research', component: AddResearchComponent},
-    {path: 'research-detail/:id', component: ResearchDetailsComponent},
-    {path: 'my-researches', component: UnPublishedResearchListComponent},
-    {path: 'participation-form/:id', component: AnswerDenemeComponent},
+    {path: 'articles', component: ContentComponent,canActivate:[AuthGuard]},
+    {path: 'add-article', component: AddArticleComponent,canActivate:[AuthGuard]},
+    {path: 'add-research-form', component: AddResearchFormComponent,canActivate:[AuthGuard]},
+    {path: 'researches', component: ResearchListComponent,canActivate:[AuthGuard]},
+    {path: 'add-research', component: AddResearchComponent,canActivate:[AuthGuard]},
+    {path: 'research-detail/:id', component: ResearchDetailsComponent,canActivate:[AuthGuard]},
+    {path: 'my-researches', component: UnPublishedResearchListComponent,canActivate:[AuthGuard]},
+    {path: 'participation-form/:id', component: AnswerDenemeComponent,canActivate:[AuthGuard]},
     {path: 'login', component: LoginComponent},
-    {path: 'my-articles', component: MyArticlesComponent},
+    {path: 'my-articles', component: MyArticlesComponent,canActivate:[AuthGuard]},
     {path: 'register', component: RegisterComponent},
 
 

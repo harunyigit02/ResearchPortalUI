@@ -47,13 +47,15 @@ import { RegisterComponent } from './register/register.component';
 export class AppComponent {
   title = 'angular-router-sample';
   isLoginPage: boolean = false;
+  isRegisterPage: boolean = false;
 
 
   constructor(private dataService:DataService,private router: Router) {
     // NavigationEnd olayını dinle ve isLoginPage'i güncelle
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage = this.router.url === '/login'; // Eğer rota '/login' ise true yap
+        this.isLoginPage = this.router.url === '/login'
+        this.isRegisterPage = this.router.url === '/register';
       }
     });
   }
