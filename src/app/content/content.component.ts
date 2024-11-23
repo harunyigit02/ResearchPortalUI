@@ -3,6 +3,7 @@ import { Article } from '../Models/article.model';
 import { Category } from '../Models/category.model';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
+import { PagedResult } from '../Models/pagingResult.model';
 
 @Component({
   selector: 'app-content',
@@ -15,6 +16,10 @@ export class ContentComponent {
   articles: Article[] = []; // Makale verilerini saklamak için dizi
   categories: Category[] = []; // Kategori verilerini saklamak için dizi
   errorMessage: string | null = null;
+  totalItems = 0;
+  pageNumber = 1;
+  pageSize = 6;
+  Math = Math;
 
   constructor(private dataService: DataService) {}
 
@@ -24,9 +29,10 @@ export class ContentComponent {
   }
 
   getArticles(): void {
-    this.dataService.getArticle().subscribe({
-      next: (data: Article[]) => {
-        this.articles = data;
+    this.dataService.getPagedArticles(this.pageNumber, this.pageSize).subscribe({
+      next: (result: PagedResult<Article>) => {
+        this.articles = result.items;
+        this.totalItems = result.totalItems;
   
         // Her makale için görüntülenme sayısını al
         this.articles.forEach(article => {
@@ -37,6 +43,10 @@ export class ContentComponent {
         this.errorMessage = 'Makaleleri alırken hata oluştu: ' + err.message;
       }
     });
+  }
+  onPageChange(page: number): void {
+    this.pageNumber = page;
+    this.getArticles();
   }
 
   getCategories(): void {

@@ -65,16 +65,19 @@ export class AnswerDenemeComponent {
     return undefined;
   }
   submit() {
+    const token=localStorage.getItem("jwt_token");
     console.log(this.selectedAnswers);
-    this.dataService.submitAnswers(this.selectedAnswers).subscribe({
-      next: (response) => {
-        console.log("Cevaplar başarıyla gönderildi", response);
-        this.router.navigate([`/research-detail/${this.id}`]); // Yönlendirme yapmak istediğiniz yolu buraya ekleyin
-      },
-      error: (error) => {
-        console.error("Cevap gönderimi sırasında hata oluştu", error);
-      }
-    });
+    if(token){
+      this.dataService.submitAnswers(this.selectedAnswers,token).subscribe({
+        next: (response) => {
+          console.log("Cevaplar başarıyla gönderildi", response);
+          this.router.navigate([`/research-detail/${this.id}`]); // Yönlendirme yapmak istediğiniz yolu buraya ekleyin
+        },
+        error: (error) => {
+          console.error("Cevap gönderimi sırasında hata oluştu", error);
+        }
+      });
+    }
   }
   isOptionSelected(optionId: number): boolean {
     return this.selectedAnswers.some((answer) => answer.optionId === optionId);

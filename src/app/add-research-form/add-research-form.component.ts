@@ -43,42 +43,45 @@ export class AddResearchFormComponent {
 
   addQuestion() {
     const questionText = this.researchForm.value.questionText;
+    const token=localStorage.getItem("jwt_token");
 
     // Önce soruyu ekle ve ID'sini al
-    this.dataService.addQuestion({ 
-      questionText, 
-      researchId: this.researchId,
-    }).subscribe({
-      next: (response) => {
-        console.log("Response: ", response);
-        console.log(response.id)
-        const questionId = response.id; // Burada questionId'yi alıyoruz
-    
-        // Eklenen soruyu arayüzde göster
-        this.questions.push({
-          questionText,
-          options: this.options.value 
-        });
-    
-        // Her bir seçenek için POST isteği gönder
-        this.options.value.forEach((optionText: string) => {
-          const optionData = { questionId, optionText };
-          console.log(optionData);
-    
-          this.dataService.addOption(optionData).subscribe(() => {
-            console.log(`Seçenek "${optionText}" eklendi.`);
+    if(token){
+      this.dataService.addQuestion({ 
+        questionText, 
+        researchId: this.researchId,
+      },token).subscribe({
+        next: (response) => {
+          console.log("Response: ", response);
+          console.log(response.id)
+          const questionId = response.id; // Burada questionId'yi alıyoruz
+      
+          // Eklenen soruyu arayüzde göster
+          this.questions.push({
+            questionText,
+            options: this.options.value 
           });
-        });
-    
-        // Formu ve seçenekleri sıfırla
-        this.researchForm.reset();
-        this.options.clear();
-        
-      },
-      error: (error) => {
-        console.error('Hata:', error); // Hata durumunda hata mesajını göster
-      }
-    });
+      
+          // Her bir seçenek için POST isteği gönder
+          this.options.value.forEach((optionText: string) => {
+            const optionData = { questionId, optionText };
+            console.log(optionData);
+      
+            this.dataService.addOption(optionData,token).subscribe(() => {
+              console.log(`Seçenek "${optionText}" eklendi.`);
+            });
+          });
+      
+          // Formu ve seçenekleri sıfırla
+          this.researchForm.reset();
+          this.options.clear();
+          
+        },
+        error: (error) => {
+          console.error('Hata:', error); // Hata durumunda hata mesajını göster
+        }
+      });
+    }
   }
 
 

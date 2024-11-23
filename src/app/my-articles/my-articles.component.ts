@@ -3,6 +3,7 @@ import { Article } from '../Models/article.model';
 import { Category } from '../Models/category.model';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
+import { PagedResult } from '../Models/pagingResult.model';
 
 @Component({
   selector: 'app-my-articles',
@@ -15,6 +16,10 @@ export class MyArticlesComponent {
   articles: Article[] = []; // Makale verilerini saklamak için dizi
   categories: Category[] = []; // Kategori verilerini saklamak için dizi
   errorMessage: string | null = null;
+  pageNumber=1;
+  pageSize=2;
+  totalItems = 0;
+  Math = Math;
 
   constructor(private dataService: DataService) {}
 
@@ -27,9 +32,12 @@ export class MyArticlesComponent {
     const token = localStorage.getItem('jwt_token'); // Token'ı localStorage'dan al
 
     if (token) {
-      this.dataService.getUserArticles(token).subscribe({
-        next: (data: Article[]) => {
-          this.articles = data;
+      this.dataService.getUserArticles(token,this.pageNumber, this.pageSize).subscribe({
+        
+        next: (result: PagedResult<Article>) => {
+          
+          this.articles = result.items;
+          this.totalItems = result.totalItems;
 
           // Her makale için görüntülenme sayısını al
           this.articles.forEach(article => {
@@ -43,6 +51,10 @@ export class MyArticlesComponent {
     } else {
       this.errorMessage = 'Kullanıcı girişi yapılmamış.';
     }
+  }
+  onPageChange(page: number): void {
+    this.pageNumber = page;
+    this.getUserArticles();
   }
 
   getCategories(): void {

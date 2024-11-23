@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../Models/login-request.model';
@@ -22,14 +22,33 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
       
-    });
+    },
+    { validators: this.passwordsMatchValidator }
+  );
+  }
+  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
   // Login fonksiyonu
   onSubmit(): void {
     console.log("onsubmit çalıştı.")
+    this.errorMessage = ''; // Hata mesajını sıfırla
+
+    // Şifrelerin eşleşip eşleşmediğini kontrol et
+    const password = this.registerForm.get('password')?.value;
+    const confirmPassword = this.registerForm.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      this.errorMessage = 'Şifreler eşleşmiyor!';
+      return;
+    }
+   
     if (this.registerForm.invalid) {
       console.log("Form geçersiz.");
     }
