@@ -1,9 +1,24 @@
+
+
 <div class="article-title text-center text-muted">
   <h3>Yayınlanmış Makaleler</h3>
 </div>
 <div class="no-article-text text-center" *ngIf="articles.length === 0">
   <h4>Henüz Yayınlanmış Hiçbir Makale yok</h4>
 </div>
+
+<div class="container mt-4 text-center">
+  <div class="dropdown-wrapper">
+    <label for="categoryFilter" class="dropdown-label">Kategori Seç</label>
+    <select [(ngModel)]="selectedCategoryId" (change)="onCategoryChange()">
+      <option [value]=params>Tüm Kategoriler</option> <!-- null seçildiğinde, categoryId null olacak -->
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+</div>
+
 
 <div class="container mt-5">
   <div class="row">

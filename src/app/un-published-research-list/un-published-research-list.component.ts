@@ -4,6 +4,7 @@ import { Category } from '../Models/category.model';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PagedResult } from '../Models/pagingResult.model';
 
 @Component({
   selector: 'app-un-published-research-list',
@@ -17,6 +18,10 @@ export class UnPublishedResearchListComponent {
   researches: Research[] = [];
   categories: Category[] = [];
   errorMessage: string | null = null;
+  pageNumber=1;
+  pageSize=1; 
+  totalItems = 0;
+  Math=Math;
 
 
   constructor(
@@ -32,9 +37,11 @@ export class UnPublishedResearchListComponent {
   getResearches(): void {
     const token= localStorage.getItem("jwt_token");
     if(token){
-      this.dataService.getUserResearches(token).subscribe({
-        next: (data: Research[]) => {
-          this.researches = data;
+      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize).subscribe({
+        next: (data: PagedResult<Research>) => {
+          this.researches = data.items; // API'den gelen araştırmalar
+          this.totalItems = data.totalItems; // Toplam öğe sayısı
+          
         },
         error: (err) => {
           this.errorMessage = 'Araştırmaları alırken hata oluştu: ' + err.message;
@@ -44,6 +51,10 @@ export class UnPublishedResearchListComponent {
     else {
       this.errorMessage = 'Kullanıcı girişi yapılmamış.';
     }
+  }
+  onPageChange(page: number): void {
+    this.pageNumber = page;
+    this.getResearches();
   }
 
   getCategories(): void {

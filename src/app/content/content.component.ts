@@ -4,11 +4,12 @@ import { Category } from '../Models/category.model';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { PagedResult } from '../Models/pagingResult.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
@@ -20,6 +21,9 @@ export class ContentComponent {
   pageNumber = 1;
   pageSize = 6;
   Math = Math;
+  selectedCategoryId: number | null=null;
+  params: any = "";
+
 
   constructor(private dataService: DataService) {}
 
@@ -29,7 +33,11 @@ export class ContentComponent {
   }
 
   getArticles(): void {
-    this.dataService.getPagedArticles(this.pageNumber, this.pageSize).subscribe({
+    console.log(this.params)
+    if (this.selectedCategoryId !== null) {
+      this.params.categoryId = this.selectedCategoryId;  // null değilse, değeri ekleyelim
+    }
+    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.params.categoryId).subscribe({
       next: (result: PagedResult<Article>) => {
         this.articles = result.items;
         this.totalItems = result.totalItems;
@@ -58,6 +66,17 @@ export class ContentComponent {
         this.errorMessage = 'Kategorileri alırken hata oluştu: ' + err.message;
       }
     });
+  }
+  onCategoryChange(): void {
+    console.log('Selected Category ID:', this.selectedCategoryId);
+    this.params = {
+      categoryId: this.selectedCategoryId // Add categoryId property
+    };  
+    
+      // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
+      this.pageNumber = 1;
+    
+    this.getArticles(); // Filtreye göre makaleleri getir
   }
   goToArticle(id: number): void {
     // Makaleye gitme işlevselliğini burada yönlendirebilirsiniz

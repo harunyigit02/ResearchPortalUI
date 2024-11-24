@@ -17,11 +17,13 @@ import { LoginComponent } from './login/login.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { DataService } from './data.service';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    FormsModule,
     RouterOutlet,
     CrisisListComponent,
     HeroesListComponent,

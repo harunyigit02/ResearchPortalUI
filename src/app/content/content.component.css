@@ -36,4 +36,41 @@
   .btn-outline-primary {
     padding: 0.5rem 1.5rem;
   }
+  .form-select {
+    transition: all 0.3s ease-in-out;
+  }
   
+  .dropdown-wrapper {
+    margin: 2rem auto;
+    max-width: 400px; /* Daha geniş ve mobil uyumlu */
+  }
+  
+  .custom-dropdown {
+    display: block;
+    width: 100%; /* Kutucuk genişliği her cihazda uygun olur */
+    padding: 0.8rem 1.2rem; /* Daha büyük ve kullanımı kolay */
+    font-size: 1.1rem; /* Yazı boyutunu artır */
+    color: #495057; /* Daha açık renk yazı */
+    background-color: #fff; /* Kontrast artır */
+    border: 2px solid #ddd; /* Hafif gölgelendirme ile estetik */
+    border-radius: 30px; /* Daha modern ve yuvarlak hatlar */
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .custom-dropdown:hover {
+    border-color: #007bff; /* Hover durumunda mavi kenarlık */
+  }
+  
+  .custom-dropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); /* Geri bildirim */
+    outline: none;
+  }
+  
+  .dropdown-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.2rem; /* Daha büyük ve okunabilir */
+    color: #333; /* Daha koyu ve belirgin */
+  }

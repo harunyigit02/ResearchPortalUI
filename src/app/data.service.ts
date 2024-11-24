@@ -39,10 +39,13 @@ export class DataService {
 
     return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article/UserArticles`, { headers,params });
   }
-  getPagedArticles(pageNumber:number,pageSize:number):Observable<any> {
-    const params= new HttpParams()
+  getPagedArticles(pageNumber:number,pageSize:number,categoryId?:number):Observable<any> {
+    let params= new HttpParams()
     .set('pageNumber',pageNumber)
-    .set('pageSize',pageSize);
+    .set('pageSize',pageSize)
+    if(categoryId!=null){
+       params=params.set('categoryId',categoryId);
+    }
     return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article`, { params });
   }
 
@@ -71,22 +74,31 @@ export class DataService {
     })
     return this.http.post(`${this.apiUrl}/Option`, optionData,{headers});
   }
-  getResearches(): Observable<Research[]> {
-    return this.http.get<Research[]>(`${this.apiUrl}/Research`);
+  getResearches(pageNumber:number,pageSize:number): Observable<Research[]> {
+    const params=new HttpParams()
+    .set('pageNumber',pageNumber)
+    .set('pageSize',pageSize)
+    return this.http.get<Research[]>(`${this.apiUrl}/Research`,{params});
   }
 
-  getUserResearches(token: string): Observable<any> {
+  getUserResearches(token: string,pageNumber:number,pageSize:number): Observable<any> {
     // Token varsa, header'a Authorization ekliyoruz
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
+    const params=new HttpParams()
+    .set('pageNumber',pageNumber)
+    .set('pageSize',pageSize)
 
-    return this.http.get<any>(`${this.apiUrl}/Research/UserResearches`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/Research/UserResearches`, { headers, params });
   }
 
 
-  getPublishedResearches():Observable<Research[]>{
-    return this.http.get<Research[]>(`${this.apiUrl}/Research/Published`);
+  getPublishedResearches(pageNumber:number,pageSize:number):Observable<any>{
+    const params=new HttpParams()
+    .set('pageNumber',pageNumber)
+    .set('pageSize',pageSize)
+    return this.http.get<any>(`${this.apiUrl}/Research/Published`,{params});
   }
 
   getResearchById(id:number):Observable<any>{

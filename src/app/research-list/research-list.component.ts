@@ -4,6 +4,7 @@ import { Category } from '../Models/category.model';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { PagedResult } from '../Models/pagingResult.model';
 
 @Component({
   selector: 'app-research-list',
@@ -18,6 +19,10 @@ export class ResearchListComponent {
   researches: Research[] = [];
   categories: Category[] = [];
   errorMessage: string | null = null;
+  pageNumber:number=1;
+  pageSize:number=3;
+  totalItems=0;
+  Math=Math;
 
 
   constructor(
@@ -31,14 +36,19 @@ export class ResearchListComponent {
   }
 
   getResearches(): void {
-    this.dataService.getPublishedResearches().subscribe({
-      next: (data: Research[]) => {
-        this.researches = data;
+    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize).subscribe({
+      next: (data: PagedResult<Research>) => {
+        this.researches = data.items; // API'den gelen araştırmalar
+        this.totalItems = data.totalItems;
       },
       error: (err) => {
         this.errorMessage = 'Araştırmaları alırken hata oluştu: ' + err.message;
       }
     });
+  }
+  onPageChange(page: number): void {
+    this.pageNumber = page;
+    this.getResearches();
   }
 
   getCategories(): void {
