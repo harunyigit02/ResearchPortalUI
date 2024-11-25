@@ -5,11 +5,12 @@ import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PagedResult } from '../Models/pagingResult.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-un-published-research-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './un-published-research-list.component.html',
   styleUrl: './un-published-research-list.component.css'
 })
@@ -22,6 +23,7 @@ export class UnPublishedResearchListComponent {
   pageSize=1; 
   totalItems = 0;
   Math=Math;
+  selectedCategoryId:number|null|undefined=null;
 
 
   constructor(
@@ -37,7 +39,7 @@ export class UnPublishedResearchListComponent {
   getResearches(): void {
     const token= localStorage.getItem("jwt_token");
     if(token){
-      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize).subscribe({
+      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId).subscribe({
         next: (data: PagedResult<Research>) => {
           this.researches = data.items; // API'den gelen araştırmalar
           this.totalItems = data.totalItems; // Toplam öğe sayısı
@@ -66,6 +68,19 @@ export class UnPublishedResearchListComponent {
         this.errorMessage = 'Kategorileri alırken hata oluştu: ' + err.message;
       }
     });
+  }
+  onCategoryChange(): void {
+    console.log(' on category change basşında Selected Category ID:', this.selectedCategoryId);
+    if (!this.selectedCategoryId) {
+      this.selectedCategoryId = null;
+    }
+    
+    
+      // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
+    this.pageNumber = 1;
+    console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
+    
+    this.getResearches(); // Filtreye göre makaleleri getir
   }
 
   getCategoryName(categoryId: number): string {

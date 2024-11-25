@@ -22,7 +22,8 @@ export class ContentComponent {
   pageSize = 6;
   Math = Math;
   selectedCategoryId: number | null=null;
-  params: any = "";
+  nullValue:null=null;
+  
 
 
   constructor(private dataService: DataService) {}
@@ -33,11 +34,9 @@ export class ContentComponent {
   }
 
   getArticles(): void {
-    console.log(this.params)
-    if (this.selectedCategoryId !== null) {
-      this.params.categoryId = this.selectedCategoryId;  // null değilse, değeri ekleyelim
-    }
-    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.params.categoryId).subscribe({
+    console.log("get article başında selectedCategoryId:",this.selectedCategoryId)
+   
+    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId).subscribe({
       next: (result: PagedResult<Article>) => {
         this.articles = result.items;
         this.totalItems = result.totalItems;
@@ -68,13 +67,15 @@ export class ContentComponent {
     });
   }
   onCategoryChange(): void {
-    console.log('Selected Category ID:', this.selectedCategoryId);
-    this.params = {
-      categoryId: this.selectedCategoryId // Add categoryId property
-    };  
+    console.log(' on category change basşında Selected Category ID:', this.selectedCategoryId);
+    if (!this.selectedCategoryId) {
+      this.selectedCategoryId = null;
+    }
+    
     
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
-      this.pageNumber = 1;
+    this.pageNumber = 1;
+    console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
     
     this.getArticles(); // Filtreye göre makaleleri getir
   }

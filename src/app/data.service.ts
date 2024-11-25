@@ -28,25 +28,39 @@ export class DataService {
   getArticle(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Article`);
   }
-  getUserArticles(token: string,pageNumber:number,pageSize:number): Observable<any> {
+  getUserArticles(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined): Observable<any> {
     // Token varsa, header'a Authorization ekliyoruz
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
-    const params= new HttpParams()
+    let params= new HttpParams()
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize);
+    if(categoryId!=null&&categoryId!=undefined){
+      
+      params=params.set('categoryId',categoryId);
+      
+    }
 
     return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article/UserArticles`, { headers,params });
   }
-  getPagedArticles(pageNumber:number,pageSize:number,categoryId?:number):Observable<any> {
+  getPagedArticles(pageNumber:number,pageSize:number,categoryId:number|null|undefined):Observable<any> {
+    console.log("dataService başında selectedCategoryId:",categoryId,typeof(categoryId));
     let params= new HttpParams()
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize)
-    if(categoryId!=null){
+    if(categoryId!=null&&categoryId!=undefined){
+      
        params=params.set('categoryId',categoryId);
+       
     }
+    console.log(" dataService  sonunda selectedcategoryId:",categoryId);
+    console.log("param:"+params);
+    
     return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article`, { params });
+    
+
+    
   }
 
   addArticle(article: Article,token:string): Observable<any> {
@@ -81,23 +95,31 @@ export class DataService {
     return this.http.get<Research[]>(`${this.apiUrl}/Research`,{params});
   }
 
-  getUserResearches(token: string,pageNumber:number,pageSize:number): Observable<any> {
+  getUserResearches(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined): Observable<any> {
     // Token varsa, header'a Authorization ekliyoruz
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
-    const params=new HttpParams()
+    let params=new HttpParams()
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize)
+    if(categoryId!=null&&categoryId!=undefined){
+      params=params.set('categoryId',categoryId);
+
+    }
 
     return this.http.get<any>(`${this.apiUrl}/Research/UserResearches`, { headers, params });
   }
 
 
-  getPublishedResearches(pageNumber:number,pageSize:number):Observable<any>{
-    const params=new HttpParams()
+  getPublishedResearches(pageNumber:number,pageSize:number,categoryId:number|null|undefined):Observable<any>{
+    let params=new HttpParams()
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize)
+    if(categoryId!=null&&categoryId!=undefined){
+      params=params.set('categoryId',categoryId);
+
+    }
     return this.http.get<any>(`${this.apiUrl}/Research/Published`,{params});
   }
 

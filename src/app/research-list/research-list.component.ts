@@ -5,11 +5,12 @@ import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PagedResult } from '../Models/pagingResult.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-research-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './research-list.component.html',
   styleUrl: './research-list.component.css'
 })
@@ -23,6 +24,7 @@ export class ResearchListComponent {
   pageSize:number=3;
   totalItems=0;
   Math=Math;
+  selectedCategoryId:number|null|undefined=null;
 
 
   constructor(
@@ -36,7 +38,7 @@ export class ResearchListComponent {
   }
 
   getResearches(): void {
-    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize).subscribe({
+    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize,this.selectedCategoryId).subscribe({
       next: (data: PagedResult<Research>) => {
         this.researches = data.items; // API'den gelen araştırmalar
         this.totalItems = data.totalItems;
@@ -60,6 +62,19 @@ export class ResearchListComponent {
         this.errorMessage = 'Kategorileri alırken hata oluştu: ' + err.message;
       }
     });
+  }
+  onCategoryChange(): void {
+    console.log(' on category change basşında Selected Category ID:', this.selectedCategoryId);
+    if (!this.selectedCategoryId) {
+      this.selectedCategoryId = null;
+    }
+    
+    
+      // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
+    this.pageNumber = 1;
+    console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
+    
+    this.getResearches(); // Filtreye göre makaleleri getir
   }
 
   getCategoryName(categoryId: number): string {
