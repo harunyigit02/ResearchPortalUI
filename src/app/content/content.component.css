@@ -1,85 +1,113 @@
 .container {
-    background-color: #f8f9fa; /* Açık gri arka plan */
-    padding: 20px;
-  }
-  
-  .article-card {
-    background-color: #ffffff; 
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .article-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .article-card h5 {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-  
-  .article-card p {
-    font-size: 1rem;
-    color: #6c757d;
-    flex-grow: 1;
-  }
-  
-  .badge {
-    font-size: 0.875rem;
-  }
-  
-  .btn-outline-primary {
-    padding: 0.5rem 1.5rem;
-  }
-  .form-select {
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .custom-dropdown {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdown-label {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #495057;
-  }
-  
-  .custom-select {
-    border-radius: 8px;
-    font-size: 1rem;
-    padding: 8px 16px;
-    transition: all 0.3s ease;
-  }
-  
-  .custom-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
-  }
-  
-  .dropdown-container {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
-  
-  .dropdown-container:after {
-    content: '\25BC'; /* Dropdown arrow */
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    font-size: 1rem;
-    color: #6c757d;
-  }
+  background-color: #f8f9fa; /* Açık gri arka plan */
+  padding: 20px;
+}
+
+.article-card {
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+}
+
+.article-card h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.article-card p {
+  font-size: 1rem;
+  color: #6c757d;
+  flex-grow: 1;
+}
+
+.badge {
+  font-size: 0.875rem;
+}
+
+.btn-outline-primary {
+  padding: 0.5rem 1.5rem;
+}
+
+.form-select {
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-dropdown {
+  max-width: 300px;
+  margin: 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+.custom-select {
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.custom-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
+}
+
+/* Filtreleme kutucuğunun sağa hizalanması */
+.row.justify-content-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-dropdown {
+  position: relative;
+  max-width: 300px;
+  margin: 0;
+}
+
+.custom-select {
+  width: 100%;
+}
+
+/* Makale Listesi */
+.row {
+  margin-top: 20px;
+}
+
+.article-card {
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+}
+.search-box-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.25rem;
+  border-radius: 8px;
+}

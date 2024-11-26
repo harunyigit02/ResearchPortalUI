@@ -22,7 +22,7 @@ export class ContentComponent {
   pageSize = 6;
   Math = Math;
   selectedCategoryId: number | null=null;
-  nullValue:null=null;
+  searchKeyword: string = '';
   
 
 
@@ -36,7 +36,7 @@ export class ContentComponent {
   getArticles(): void {
     console.log("get article başında selectedCategoryId:",this.selectedCategoryId)
    
-    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId).subscribe({
+    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
       next: (result: PagedResult<Article>) => {
         this.articles = result.items;
         this.totalItems = result.totalItems;
@@ -53,6 +53,12 @@ export class ContentComponent {
   }
   onPageChange(page: number): void {
     this.pageNumber = page;
+    this.getArticles();
+  }
+  onSearchChange(): void {
+    // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
+    this.pageNumber = 1;
+    console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
     this.getArticles();
   }
 

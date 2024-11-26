@@ -25,7 +25,7 @@ export class ResearchListComponent {
   totalItems=0;
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
-
+  searchKeyword: string = '';
 
   constructor(
     private router:Router,
@@ -38,7 +38,7 @@ export class ResearchListComponent {
   }
 
   getResearches(): void {
-    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize,this.selectedCategoryId).subscribe({
+    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
       next: (data: PagedResult<Research>) => {
         this.researches = data.items; // API'den gelen araştırmalar
         this.totalItems = data.totalItems;
@@ -52,6 +52,13 @@ export class ResearchListComponent {
     this.pageNumber = page;
     this.getResearches();
   }
+  onSearchChange(): void {
+    // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
+    this.pageNumber = 1;
+    console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
+    this.getResearches();
+  }
+
 
   getCategories(): void {
     this.dataService.getCategories().subscribe({

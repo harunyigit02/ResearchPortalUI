@@ -24,6 +24,7 @@ export class UnPublishedResearchListComponent {
   totalItems = 0;
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
+  searchKeyword: string = '';
 
 
   constructor(
@@ -39,7 +40,7 @@ export class UnPublishedResearchListComponent {
   getResearches(): void {
     const token= localStorage.getItem("jwt_token");
     if(token){
-      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId).subscribe({
+      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
         next: (data: PagedResult<Research>) => {
           this.researches = data.items; // API'den gelen araştırmalar
           this.totalItems = data.totalItems; // Toplam öğe sayısı
@@ -56,6 +57,12 @@ export class UnPublishedResearchListComponent {
   }
   onPageChange(page: number): void {
     this.pageNumber = page;
+    this.getResearches();
+  }
+  onSearchChange(): void {
+    // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
+    this.pageNumber = 1;
+    console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
     this.getResearches();
   }
 

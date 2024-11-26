@@ -22,6 +22,7 @@ export class MyArticlesComponent {
   totalItems = 0;
   Math = Math;
   selectedCategoryId: number | null=null;
+  searchKeyword: string = '';
 
   constructor(private dataService: DataService) {}
 
@@ -34,7 +35,7 @@ export class MyArticlesComponent {
     const token = localStorage.getItem('jwt_token'); // Token'ı localStorage'dan al
 
     if (token) {
-      this.dataService.getUserArticles(token,this.pageNumber, this.pageSize,this.selectedCategoryId).subscribe({
+      this.dataService.getUserArticles(token,this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
         
         next: (result: PagedResult<Article>) => {
           
@@ -56,6 +57,12 @@ export class MyArticlesComponent {
   }
   onPageChange(page: number): void {
     this.pageNumber = page;
+    this.getUserArticles();
+  }
+  onSearchChange(): void {
+    // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
+    this.pageNumber = 1;
+    console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
     this.getUserArticles();
   }
 

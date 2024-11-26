@@ -80,4 +80,18 @@
     font-size: 1rem;
     color: #6c757d;
   }
+
+  .search-box-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .search-box {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+  }
+  
   
