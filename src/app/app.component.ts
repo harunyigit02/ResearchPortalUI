@@ -18,6 +18,7 @@ import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { DataService } from './data.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     UnPublishedResearchListComponent,
     LoginComponent,
     MyArticlesComponent,
-    RegisterComponent
+    RegisterComponent,
+    ParticipantInfoFormComponent
     
   ],
   templateUrl: './app.component.html',
@@ -50,6 +52,7 @@ export class AppComponent {
   title = 'angular-router-sample';
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
+  isParticipantPage:boolean = false;
 
 
   constructor(private dataService:DataService,private router: Router) {
@@ -58,6 +61,7 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         this.isLoginPage = this.router.url === '/login'
         this.isRegisterPage = this.router.url === '/register';
+        this.isParticipantPage = this.router.url === '/participant-form'
       }
     });
   }

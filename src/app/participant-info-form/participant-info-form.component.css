@@ -1,0 +1,39 @@
+/* src/app/participant-info/participant-info.component.css */
+
+/* Başlık için stil */
+.form-title {
+    font-size: 2rem;             /* Başlık boyutunu ayarla */
+    font-weight: bold;           /* Başlık kalın yap */
+    color: #4a90e2;              /* Başlık rengi */
+    text-align: center;          /* Başlığı ortala */
+    margin-bottom: 20px;         /* Başlık ile form arasına boşluk ekle */
+    text-transform: uppercase;   /* Başlığı büyük harflerle yaz */
+  }
+  
+  /* Formun genel görünümünü iyileştirmek */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Formun etrafına gölge ve yuvarlatılmış köşe ekleyin */
+  form {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Butonun genişliğini tam yapmak */
+  button {
+    width: 100%;
+  }
+  
+  /* Formu ortalamak */
+  .container {
+    margin-top: 60px;
+  }
+  
+  /* Kolonun genişliği */
+  .col-md-6 {
+    max-width: 600px;
+  }
+  

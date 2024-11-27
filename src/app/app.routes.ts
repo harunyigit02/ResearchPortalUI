@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
 
 
 export const routes: Routes = [
@@ -30,6 +31,8 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'my-articles', component: MyArticlesComponent,canActivate:[AuthGuard]},
     {path: 'register', component: RegisterComponent},
+    {path: 'participant-form', component: ParticipantInfoFormComponent},
+
 
 
 

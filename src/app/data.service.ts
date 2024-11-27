@@ -160,6 +160,21 @@ export class DataService {
     return this.http.post<any>(`${this.apiUrl}/Answer/submitAnswers`, answers,{headers});
   }
 
+  getUserParticipantInfo(token:string):Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
+
+    return this.http.get<any>(`${this.apiUrl}/ParticipantInfo/UserInfos`,{headers});
+  }
+
+   addParticipantInfo(token:string,participantInfo:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
+    return this.http.post<any>(`${this.apiUrl}/ParticipantInfo`, participantInfo,{headers});
+   }
+
 
 
   //Auth işlemleri---------------
@@ -190,6 +205,11 @@ export class DataService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+
+  //Participant Form
+
+  
 
    
 
