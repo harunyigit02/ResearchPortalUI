@@ -8,6 +8,7 @@ import { LoginRequest } from './Models/login-request.model';
 import { NavigationEnd, Router } from '@angular/router';
 import { RegisterRequest } from './Models/register-request.model';
 import { PagedResult } from './Models/pagingResult.model';
+import { VerifyEmail } from './Models/verify-email.model';
 
 @Injectable({
   providedIn: 'root'
@@ -185,10 +186,16 @@ export class DataService {
   register(registerRequest:RegisterRequest):Observable<any>{
     return this.http.post(`${this.apiUrl}/Auth/register`,registerRequest);
   }
+  verifyEmail(verifyEmail:VerifyEmail):Observable<any> {
+    return this.http.post(`${this.apiUrl}/Auth/verify-email`,verifyEmail)
+  }
 
   // Token'ı localStorage'a kaydet
   saveToken(token: string): void {
     localStorage.setItem('jwt_token', token);
+  }
+  saveEmailLocal(email:string):void {
+    localStorage.setItem('email',email);
   }
 
   // Kullanıcıyı çıkış yaptırma (Token'ı silme)
@@ -199,6 +206,9 @@ export class DataService {
   // Token'ı al
   getToken(): string | null {
     return localStorage.getItem('jwt_token');
+  }
+  getEmailLocal():string | null {
+    return localStorage.getItem('email');
   }
 
   // Kullanıcının oturum açıp açmadığını kontrol et

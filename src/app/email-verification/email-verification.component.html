@@ -1,0 +1,35 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 400px;">
+      <div class="card-body">
+        <h4 class="card-title text-center mb-4">{{userEmail}} Adresine Kontrol Edin</h4>
+  
+        <!-- Başarılı mesaj -->
+        <div *ngIf="successMessage" class="alert alert-success">
+          <strong>Başarılı:</strong> {{ successMessage }}
+        </div>
+  
+        <!-- Hata mesajı -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <strong>Hata:</strong> {{ errorMessage }}
+        </div>
+  
+        <!-- Doğrulama formu -->
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="verificationCode" class="form-label">Doğrulama Kodu</label>
+            <input
+              type="text"
+              class="form-control"
+              id="verificationCode"
+              [(ngModel)]="verifyEmail.verificationCode"
+              name="verificationCode"
+              required
+            />
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100">Doğrula</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

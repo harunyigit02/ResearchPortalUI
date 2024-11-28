@@ -19,6 +19,7 @@ import { DataService } from './data.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,8 @@ import { ParticipantInfoFormComponent } from './participant-info-form/participan
     LoginComponent,
     MyArticlesComponent,
     RegisterComponent,
-    ParticipantInfoFormComponent
+    ParticipantInfoFormComponent,
+    EmailVerificationComponent
     
   ],
   templateUrl: './app.component.html',

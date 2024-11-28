@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-participant-info-form',
@@ -25,7 +26,8 @@ export class ParticipantInfoFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private dataService:DataService
+    private dataService:DataService,
+    private router:Router
   ) {
     this.participantForm = this.fb.group({
       age: ['',Validators.min(0)],
@@ -58,6 +60,7 @@ export class ParticipantInfoFormComponent {
           const formData = this.participantForm.value;
           this.dataService.addParticipantInfo(token,formData).subscribe(response => {
             console.log('Form submitted successfully!', response);
+            this.router.navigate(['/articles']);
           }, error => {
             console.error('Error submitting form', error);
           });

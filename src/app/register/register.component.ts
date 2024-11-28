@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../Models/login-request.model';
@@ -54,15 +54,16 @@ export class RegisterComponent {
     }
 
     const registerRequest: RegisterRequest = {
-      ...this.registerForm.value,
-      role: 'user' // Varsayılan olarak 'user' rolünü ekliyoruz
+      ...this.registerForm.value
+       // Varsayılan olarak 'user' rolünü ekliyoruz
     };
 
     this.dataService.register(registerRequest).subscribe(
       (response) => {
         console.log("Giriş Başarılı:");
         this.dataService.saveToken(response.token);
-        this.router.navigate(['/login']); // Başarılı giriş sonrası yönlendirme
+        this.dataService.saveEmailLocal(registerRequest.email)
+        this.router.navigate(['/email-verification']); // Başarılı giriş sonrası yönlendirme
       },
       (error) => {
         console.log("Giriş Hatası:", error); 

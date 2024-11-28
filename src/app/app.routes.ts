@@ -14,6 +14,7 @@ import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
     {path: 'my-articles', component: MyArticlesComponent,canActivate:[AuthGuard]},
     {path: 'register', component: RegisterComponent},
     {path: 'participant-form', component: ParticipantInfoFormComponent},
+    {path: 'email-verification', component: EmailVerificationComponent},
 
 
 
