@@ -7,12 +7,12 @@
   <app-navbar></app-navbar>
 </div>
 <div class="app-layout">
-  <div *ngIf="!isLoginPage && !isRegisterPage && !isParticipantPage">
+  <div *ngIf="!isLoginPage && !isRegisterPage && !isParticipantPage && !isVerificationPage">
     <app-sidebar></app-sidebar>
   </div>
   <div [ngClass]="{
     'main-content': !isLoginPage && !isRegisterPage, 
-    'login-content': isLoginPage || isRegisterPage || isParticipantPage
+    'login-content': isLoginPage || isRegisterPage || isParticipantPage || isVerificationPage
   }">
     <router-outlet></router-outlet>
   </div>

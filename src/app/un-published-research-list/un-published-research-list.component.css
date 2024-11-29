@@ -92,6 +92,28 @@
     font-size: 1.25rem;
     border-radius: 8px;
   }
+
+  .status-badge {
+    font-size: 0.875rem; /* Yazı boyutu */
+    border-radius: 0.5rem; /* Köşe yuvarlama */
+    padding: 0.3rem 0.6rem; /* İç boşluk */
+    display: inline-block; /* Inline olmasını sağlar */
+    text-align: center;
+    white-space: nowrap; /* Satır taşmasını engeller */
+    margin-top: 0; /* Üst boşluğu sıfırladık */
+  }
+  
+  
+  .bg-success {
+    background-color: #28a745 !important; /* Özel yeşil */
+    color: #ffffff !important; /* Beyaz yazı */
+  }
+  
+  .bg-warning {
+    background-color: #ffc107 !important; /* Özel turuncu */
+    color: #ffffff !important; /* Beyaz yazı */
+  }
+  
   
   
   

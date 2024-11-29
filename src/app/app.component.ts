@@ -55,6 +55,7 @@ export class AppComponent {
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
   isParticipantPage:boolean = false;
+  isVerificationPage:boolean = false;
 
 
   constructor(private dataService:DataService,private router: Router) {
@@ -64,6 +65,7 @@ export class AppComponent {
         this.isLoginPage = this.router.url === '/login'
         this.isRegisterPage = this.router.url === '/register';
         this.isParticipantPage = this.router.url === '/participant-form'
+        this.isVerificationPage = this.router.url === '/email-verification'
       }
     });
   }

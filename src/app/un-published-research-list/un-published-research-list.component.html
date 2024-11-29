@@ -52,8 +52,19 @@
         </p>
   
         <!-- Araştırmaya Git Butonu -->
-        <div class="text-center mt-3">
-          <button class="btn btn-outline-primary" (click)="goToResearch(research.id)">Araştırmaya Git</button>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <button class="btn btn-outline-primary" (click)="goToResearch(research.id)">
+            Araştırmaya Git
+          </button>
+          <span 
+            class="badge text-white"
+            [ngClass]="{
+              'bg-success': research.isCompleted,  
+              'bg-warning': !research.isCompleted 
+            }"
+          >
+            {{ research.isCompleted ? 'Published' : 'Template' }}
+          </span>
         </div>
       </div>
     </div>

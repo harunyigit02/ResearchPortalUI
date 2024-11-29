@@ -36,6 +36,7 @@ export class EmailVerificationComponent {
         this.successMessage = 'Doğrulama başarılı! Yönlendiriliyorsunuz...';
         this.errorMessage = null;
         // Giriş ekranına yönlendir
+        localStorage.removeItem("email");
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
