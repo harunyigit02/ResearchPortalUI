@@ -9,6 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { RegisterRequest } from './Models/register-request.model';
 import { PagedResult } from './Models/pagingResult.model';
 import { VerifyEmail } from './Models/verify-email.model';
+import { ResearchRequirement } from './Models/research-requirement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -175,6 +176,10 @@ export class DataService {
     })
     return this.http.post<any>(`${this.apiUrl}/ParticipantInfo`, participantInfo,{headers});
    }
+   addResearchRequirement(researchRequirement: any): Observable<ResearchRequirement> {
+    
+    return this.http.post<ResearchRequirement>(`${this.apiUrl}/ResearchRequirement`, researchRequirement);
+  }
 
 
 
@@ -215,6 +220,42 @@ export class DataService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+  getUserRole(): any {
+    const token = localStorage.getItem('jwt_token');
+    console.log("GetUserRole Token:", token);
+  
+    if (!token) {
+      console.error('Token bulunamadı.');
+      return ''; // Eğer token yoksa boş rol döner
+    }
+  
+    const decodedToken = this.decodeToken(token);
+    console.log('Decoded Token:', decodedToken); // Decode edilmiş token'ı logla
+  
+    // Burada doğru key ile role bilgisine erişin
+    return decodedToken?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || '';
+  }
+  decodeToken(token: string): any {
+    if (!token) {
+      return null;
+    }
+  
+    const payload = token.split('.')[1];
+    if (!payload) {
+      console.error('Token payload kısmı bulunamadı.');
+      return null;
+    }
+  
+    try {
+      const decodedPayload = atob(payload); // Base64 çözümleme
+      console.log('Decoded Payload:', decodedPayload); // Base64 sonrası payload'u logla
+      return JSON.parse(decodedPayload); // JSON dönüşüm
+    } catch (e) {
+      console.error('Token çözümleme hatası:', e);
+      return null;
+    }
+  }
+
 
 
   //Participant Form

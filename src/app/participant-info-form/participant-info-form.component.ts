@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
+import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, Location, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class ParticipantInfoFormComponent {
   participantForm: FormGroup;
   genders = Object.values(Gender);
+  locations = Object.values(Location);
   childStatuses = Object.values(ChildStatus);
   disabilityStatuses = Object.values(DisabilityStatus);
   educationLevels = Object.values(EducationLevel);
@@ -32,7 +33,7 @@ export class ParticipantInfoFormComponent {
     this.participantForm = this.fb.group({
       age: ['',Validators.min(0)],
       gender: ['', Validators.required],
-      location:['',Validators.required],
+      location: ['', Validators.required],
       childStatus: ['', Validators.required],
       disabilityStatus: ['', Validators.required],
       educationLevel: ['', Validators.required],
@@ -57,7 +58,20 @@ export class ParticipantInfoFormComponent {
   
         if (this.participantForm.valid) {
           console.log("Form verileri:",this.participantForm.value)
-          const formData = this.participantForm.value;
+          const formData = {
+            age: this.participantForm.value.age,
+            gender: this.getEnumKey(Gender, this.participantForm.value.gender),  // Gender'ı integer'a çeviriyoruz
+            location: this.getEnumKey(Location, this.participantForm.value.location),
+            childStatus: this.getEnumKey(ChildStatus, this.participantForm.value.childStatus),
+            disabilityStatus: this.getEnumKey(DisabilityStatus, this.participantForm.value.disabilityStatus),
+            educationLevel: this.getEnumKey(EducationLevel, this.participantForm.value.educationLevel),
+            ethnicity: this.getEnumKey(Ethnicity, this.participantForm.value.ethnicity),
+            housingType: this.getEnumKey(HousingType, this.participantForm.value.housingType),
+            maritalStatus: this.getEnumKey(MaritalStatus, this.participantForm.value.maritalStatus),
+            occupation: this.getEnumKey(Occupation, this.participantForm.value.occupation),
+            parentalStatus: this.getEnumKey(ParentalStatus, this.participantForm.value.parentalStatus)
+          };
+          console.log("Integer formData:",formData);
           this.dataService.addParticipantInfo(token,formData).subscribe(response => {
             console.log('Form submitted successfully!', response);
             this.router.navigate(['/articles']);
@@ -72,6 +86,10 @@ export class ParticipantInfoFormComponent {
     else{
       console.log("UnAuthorized for this action.");
     }
+  }
+  getEnumKey(enumObj: any, value: string): number {
+    const key = Object.keys(enumObj).find(key => enumObj[key] === value);
+    return key ? parseInt(key, 10) : 0; // Integer olarak döndür
   }
 
 }

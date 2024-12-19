@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { ResearchRequirementFormComponent } from './research-requirement-form/research-requirement-form.component';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,8 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
     MyArticlesComponent,
     RegisterComponent,
     ParticipantInfoFormComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    ResearchRequirementFormComponent
     
   ],
   templateUrl: './app.component.html',

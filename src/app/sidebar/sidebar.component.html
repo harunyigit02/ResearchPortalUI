@@ -9,7 +9,8 @@
           <i class="fas fa-book"></i>
           <a href="researches" class="nav-link">Researches</a>
       </li>
-      <li class="list-group-item sidebar-header">Publishing</li>
+      <div  *ngIf="hasRole(['Admin'])" class="publishing-items">
+        <li class="list-group-item sidebar-header">Publishing</li>
       <li class="list-group-item sidebar-item">
           <i class="fas fa-upload"></i>
           <a href="add-article" class="nav-link">Create Article</a>
@@ -22,13 +23,24 @@
           <i class="fas fa-plus-square"></i>
           <a href="add-research-form" class="nav-link">Create Form</a>
       </li>
+      </div>
       <li class="list-group-item sidebar-header">Profile</li>
+      <li *ngIf="hasRole(['Admin'])" class="list-group-item sidebar-item">
+          <i *ngIf="hasRole(['Admin'])" class="fas fa-microscope"></i>
+          <a *ngIf="hasRole(['Admin'])" href="my-researches" class="nav-link">My Researches</a>
+      </li>
+      <li *ngIf="hasRole(['Admin'])" class="list-group-item sidebar-item">
+          <i *ngIf="hasRole(['Admin'])" class="fas fa-microscope"></i>
+          <a *ngIf="hasRole(['Admin'])" href="my-articles" class="nav-link">My Articles</a>
+      </li>
+      <!-- Saved Articles and Saved Researches (visible to all users) -->
       <li class="list-group-item sidebar-item">
-        <i class="fas fa-microscope"></i>
-          <a href="my-researches" class="nav-link">My Researches</a>
-          <li class="list-group-item sidebar-item">
-            <i class="fas fa-microscope"></i>
-              <a href="my-articles" class="nav-link">My Articles</a>
+          <i class="fas fa-bookmark"></i>
+          <a href="saved-articles" class="nav-link">Saved Articles</a>
+      </li>
+      <li class="list-group-item sidebar-item">
+          <i class="fas fa-bookmark"></i>
+          <a href="saved-researches" class="nav-link">Saved Researches</a>
       </li>
       <li class="list-group-item sidebar-header">Settings</li>
       <li class="list-group-item sidebar-item">
@@ -37,3 +49,5 @@
       </li>
   </ul>
 </div>
+
+

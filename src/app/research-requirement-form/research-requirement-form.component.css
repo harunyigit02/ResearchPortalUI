@@ -1,0 +1,25 @@
+/* Tüm Checkbox grupları için */
+h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .container {
+    max-width: 800px;
+    background-color: #f8f9fa;
+  }
+  
+  .form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  button.btn-primary {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+  }
+  
+  button.btn-primary:hover {
+    background: linear-gradient(90deg, #0056b3, #003d80);
+  }
+  

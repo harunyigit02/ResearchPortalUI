@@ -1,92 +1,100 @@
+// enums.ts
 export const Gender = {
-    Male: 'Male',
-    Female: 'Female'
-  };
-  
-  export const ChildStatus = {
-    NoChildren: 'No Children',
-    OneChild: 'One Child',
-    TwoChildren: 'Two Children',
-    MultipleChildren: 'Multiple Children',
-    Twins: 'Twins',
-    SpecialNeedsChild: 'Special Needs Child',
-    TeenagerChild: 'Teenager Child',
-    InfantChild: 'Infant Child',
-    AdultChildren: 'Adult Children',
-    AdultWithOwnFamily: 'Adult With Own Family',
-    Other: 'Other'
-  };
-  
-  export const DisabilityStatus = {
-    None: 'None',
-    PhysicalDisability: 'Physical Disability',
-    MentalDisability: 'Mental Disability',
-    Both: 'Both',
-    Other: 'Other'
-  };
-  
-  export const EducationLevel = {
-    NoFormalEducation: 'No Formal Education',
-    PrimarySchool: 'Primary School',
-    SecondarySchool: 'Secondary School',
-    HighSchool: 'High School',
-    AssociateDegree: 'Associate Degree',
-    BachelorDegree: 'Bachelor Degree',
-    MasterDegree: 'Master Degree',
-    DoctorateDegree: 'Doctorate Degree'
-  };
-  
-  export const Ethnicity = {
-    Caucasian: 'Caucasian',
-    Hispanic: 'Hispanic',
-    AfricanAmerican: 'African American',
-    Asian: 'Asian',
-    MiddleEastern: 'Middle Eastern',
-    NativeAmerican: 'Native American',
-    PacificIslander: 'Pacific Islander',
-    Other: 'Other'
-  };
-  
-  export const HousingType = {
-    Own: 'Own',
-    Rent: 'Rent',
-    LivingWithFamily: 'Living With Family',
-    Shelter: 'Shelter',
-    Other: 'Other'
-  };
-  
-  export const MaritalStatus = {
-    Single: 'Single',
-    Married: 'Married',
-    Divorced: 'Divorced',
-    Widowed: 'Widowed',
-    Separated: 'Separated',
-    Other: 'Other'
-  };
-  
-  export const Occupation = {
-    Unemployed: 'Unemployed',
-    Student: 'Student',
-    Professional: 'Professional',
-    Teacher: 'Teacher',
-    Engineer: 'Engineer',
-    Doctor: 'Doctor',
-    Lawyer: 'Lawyer',
-    BusinessOwner: 'Business Owner',
-    Freelancer: 'Freelancer',
-    Other: 'Other'
-  };
-  
-  export const ParentalStatus = {
-    NotParent: 'Not Parent',
-    SingleParent: 'Single Parent',
-    TwoParentHousehold: 'TwoParent Household',
-    DivorcedParent: 'Divorced Parent',
-    SeparatedParent: 'Separated Parent',
-    CoParenting: 'CoParenting',
-    StepParent: 'Step Parent',
-    AdoptiveParent: 'Adoptive Parent',
-    FosterParent: 'Foster Parent',
-    GrandparentAsParent: 'Grandparent AsParent',
-    Other: 'Other'
-  };
+  1: 'Male',     // Erkek
+  2: 'Female',   // Kadın
+};
+
+export const EducationLevel = {
+  1: 'No Formal Education', // Resmi eğitim yok
+  2: 'Primary School',      // İlkokul
+  3: 'Secondary School',    // Ortaokul
+  4: 'High School',         // Lise
+  5: 'Associate Degree',    // Ön Lisans
+  6: 'Bachelor Degree',     // Lisans
+  7: 'Master Degree',       // Yüksek Lisans
+  8: 'Doctorate Degree',    // Doktora
+};
+
+export const Location = {
+  1: 'Ankara',
+  2: 'İstanbul',
+  3: 'İzmir',
+  4: 'Sakarya'
+};
+
+export const Ethnicity = {
+  1: 'Caucasian',          // Beyaz
+  2: 'Hispanic',           // Hispanik
+  3: 'African American',   // Afrikalı Amerikalı
+  4: 'Asian',              // Asyalı
+  5: 'Middle Eastern',     // Orta Doğulu
+  6: 'Native American',    // Kızılderili
+  7: 'Pacific Islander',   // Pasifik Adalı
+  8: 'Other',
+};
+
+export const MaritalStatus = {
+  1: 'Single',        // Bekar
+  2: 'Married',       // Evli
+  3: 'Divorced',      // Boşanmış
+  4: 'Widowed',       // Dul
+  5: 'Separated',     // Ayrı
+  6: 'Other',
+};
+
+export const DisabilityStatus = {
+  1: 'None',                 // Engelli değil
+  2: 'Physical Disability',  // Fiziksel engellilik
+  3: 'Mental Disability',    // Zihinsel engellilik
+  4: 'Both',                 // Hem fiziksel hem zihinsel engellilik
+  5: 'Other',
+};
+
+export const HousingType = {
+  1: 'Own',                 // Kendi malı
+  2: 'Rent',                // Kirada
+  3: 'Living with Family', // Aileyle yaşıyor
+  4: 'Shelter',             // Sığınma evi
+  5: 'Other',
+};
+
+export const Occupation = {
+  1: 'Unemployed',        // İşsiz
+  2: 'Student',           // Öğrenci
+  3: 'Professional',      // Profesyonel
+  4: 'Teacher',           // Öğretmen
+  5: 'Engineer',          // Mühendis
+  6: 'Doctor',            // Doktor
+  7: 'Lawyer',            // Avukat
+  8: 'Business Owner',    // İşletme Sahibi
+  9: 'Freelancer',        // Serbest Çalışan
+  10: 'Other',
+};
+
+export const ParentalStatus = {
+  1: 'Not a Parent',          // Ebeveyn değil
+  2: 'Single Parent',         // Tek ebeveyn
+  3: 'Two Parent Household',  // İki ebeveynli aile
+  4: 'Divorced Parent',       // Boşanmış ebeveyn
+  5: 'Separated Parent',      // Ayrı yaşayan ebeveyn
+  6: 'Co-Parenting',          // Ortak ebeveynlik
+  7: 'Step Parent',           // Üvey ebeveyn
+  8: 'Adoptive Parent',       // Evlat edinmiş ebeveyn
+  9: 'Foster Parent',         // Geçici bakıcı ebeveyn
+  10: 'Grandparent as Parent',// Büyükanne/büyükbaba ebeveyni
+  11: 'Other',
+};
+
+export const ChildStatus = {
+  1: 'No Children',            // Çocuk yok
+  2: 'One Child',              // Bir çocuğa sahip
+  3: 'Two Children',           // İki çocuğa sahip
+  4: 'Multiple Children',      // Birden fazla çocuğa sahip
+  5: 'Twins',                  // İkiz çocuklara sahip
+  6: 'Special Needs Child',    // Özel gereksinimli çocuğa sahip
+  7: 'Teenager Child',         // Ergen çocuğa sahip
+  8: 'Infant Child',           // Bebek çocuğa sahip
+  9: 'Adult Children',         // Yetişkin çocuğa sahip
+  10: 'Adult With Own Family', // Çocuğu evli ve kendi ailesi olan
+  11: 'Other',
+};

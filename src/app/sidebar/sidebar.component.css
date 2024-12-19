@@ -4,12 +4,34 @@
   background-color: #333030; /* Sidebar rengi */
   width: 200px;
   padding-top: 20px; /* Üstten biraz boşluk bırak */
+  overflow-y: auto; /* Scroll aktif et */
   transition: width 0.3s ease;
   z-index: 10;
 }
-.sidebar:hover{
-  
+
+.sidebar:hover {
   width: 250px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px; /* Scroll genişliği */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent; /* Arka plan transparan */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scroll rengi */
+  border-radius: 4px; /* Scroll kenarları yuvarlak */
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background-color: #555; /* Hover'da scroll rengi */
+}
+
+.sidebar:hover::-webkit-scrollbar-track {
+  background-color: #333030; /* Hover'da scroll track arka plan */
 }
 
 .sidebar-header {
