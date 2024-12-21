@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { ParticipantInfoFormComponent } from './participant-info-form/participant-info-form.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ResearchRequirementFormComponent } from './research-requirement-form/research-requirement-form.component';
+import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
 
 @Component({
   selector: 'app-root',
@@ -46,7 +47,8 @@ import { ResearchRequirementFormComponent } from './research-requirement-form/re
     RegisterComponent,
     ParticipantInfoFormComponent,
     EmailVerificationComponent,
-    ResearchRequirementFormComponent
+    ResearchRequirementFormComponent,
+    ConditionDenemeComponent
     
   ],
   templateUrl: './app.component.html',

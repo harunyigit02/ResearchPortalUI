@@ -1,4 +1,3 @@
-
 <div *ngIf="successMessage" class="alert alert-success">
   {{ successMessage }}
 </div>
@@ -18,14 +17,117 @@
       </div>
   </div>
 
-  <!-- Katılım Formu Kutucuğu -->
-  <div  class="card p-4 mt-4">
-      <h5>Katılım Formu</h5>
-      <button *ngIf="research.isCompleted==true" class="btn btn-outline-primary mt-2" (click)="goToParticipationFormPage()">Araştırmaya katıl</button>
-      <button *ngIf="research.isCompleted==false" class="btn btn-outline-primary mt-2"(click)="toggleQuestions()">{{ showQuestions ? 'Soruları Gizle' : 'Soruları Görüntüle' }}</button>
+  <div class="card p-4 mt-4">
+    <h5>Araştırma Katılım Şartları</h5>
+    <button class="btn btn-outline-primary mt-2" (click)="toggleResearchRequirements()">
+      Katılım Şartlarını Görüntüle
+    </button>
+  </div>
   
-    </div>
+  <!-- Katılım Şartları Kontrolü -->
+  <div *ngIf="showResearchRequirements" class="card p-4 mt-4">
+    <h5>Katılım Şartları</h5>
+    <div>
+      
+      <!-- Katılım şartları eksikse, "Katılım Şartı Eklenmemiş" mesajı ve buton -->
+      <div *ngIf="isEmptyResearchRequirements()">
+        <p><strong>Katılım Şartı Eklenmemiş.</strong></p>
+        <button class="btn btn-outline-primary" (click)="goToResearchRequirementsCreationPage()">Şartları Oluştur</button>
+      </div>
+      <div *ngIf="researchRequirements.minAge == null&&
+      researchRequirements.maxAge == null&&
+      researchRequirements.gender == null&&
+      researchRequirements.location == null&&
+      researchRequirements.educationLevel == null&&
+      researchRequirements.occupation == null&&
+      researchRequirements.ethnicity == null&&
+      researchRequirements.maritalStatus == null&&
+      researchRequirements.parentalStatus == null&&
+      researchRequirements.childStatus == null&&
+      researchRequirements.disabilityStatus == null&&
+      researchRequirements.housingType == null
+      ">
+        <p><strong>Katılım Şartı Yok Herkes Katılabilir.</strong></p>
+      </div>
 
+      <!-- Katılım şartları varsa, her bir şartı göster -->
+      <div *ngIf="researchRequirements">
+        <div *ngIf="researchRequirements.minAge != null">
+          <strong>Minimum Yaş:</strong> {{ researchRequirements.minAge }}
+        </div>
+        <div *ngIf="researchRequirements.maxAge != null">
+          <strong>Maksimum Yaş:</strong> {{ researchRequirements.maxAge }}
+        </div>
+        <div *ngIf="researchRequirements.gender != null">
+          <strong>Cinsiyet:</strong>
+          <ul>
+            <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.location != null">
+          <strong>Konum:</strong>
+          <ul>
+            <li *ngFor="let location of transformEnumToString(researchRequirements.location, 'location')">{{ location }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.educationLevel != null">
+          <strong>Eğitim Seviyesi:</strong>
+          <ul>
+            <li *ngFor="let education of transformEnumToString(researchRequirements.educationLevel, 'educationLevel')">{{ education }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.occupation != null">
+          <strong>Meslek:</strong>
+          <ul>
+            <li *ngFor="let occupation of transformEnumToString(researchRequirements.occupation, 'occupation')">{{ occupation }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.ethnicity != null">
+          <strong>Etnik Köken:</strong>
+          <ul>
+            <li *ngFor="let ethnicity of transformEnumToString(researchRequirements.ethnicity, 'ethnicity')">{{ ethnicity }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.maritalStatus != null">
+          <strong>Medeni Durum:</strong>
+          <ul>
+            <li *ngFor="let status of transformEnumToString(researchRequirements.maritalStatus, 'maritalStatus')">{{ status }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.parentalStatus != null">
+          <strong>Anne/Baba Durumu:</strong>
+          <ul>
+            <li *ngFor="let status of transformEnumToString(researchRequirements.parentalStatus, 'parentalStatus')">{{ status }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.childStatus != null">
+          <strong>Çocuk Durumu:</strong>
+          <ul>
+            <li *ngFor="let status of transformEnumToString(researchRequirements.childStatus, 'childStatus')">{{ status }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.disabilityStatus != null">
+          <strong>Engellilik Durumu:</strong>
+          <ul>
+            <li *ngFor="let status of transformEnumToString(researchRequirements.disabilityStatus, 'disabilityStatus')">{{ status }}</li>
+          </ul>
+        </div>
+        <div *ngIf="researchRequirements.housingType != null">
+          <strong>Konaklama Türü:</strong>
+          <ul>
+            <li *ngFor="let housing of transformEnumToString(researchRequirements.housingType, 'housingType')">{{ housing }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Katılım Formu Kutucuğu -->
+  <div class="card p-4 mt-4">
+      <h5>Katılım Formu</h5>
+      <button *ngIf="research.isCompleted" class="btn btn-outline-primary mt-2" (click)="goToParticipationFormPage()">Araştırmaya Katıl</button>
+      <button *ngIf="!research.isCompleted" class="btn btn-outline-primary mt-2" (click)="toggleQuestions()">{{ showQuestions ? 'Soruları Gizle' : 'Soruları Görüntüle' }}</button>
+  </div>
 
   <div *ngIf="showQuestions" class="questions-container">
     <h3>Sorular:</h3>
@@ -34,39 +136,33 @@
     <div *ngIf="research && research.questions">
         <div *ngIf="research.questions.length === 0">
             <h5>Henüz Eklenmiş Soru Yok.</h5>
-            <button class="btn btn-outline-primary"(click)="goToFormPage()">Soru ekle</button>
+            <button class="btn btn-outline-primary" (click)="goToFormPage()">Soru Ekle</button>
         </div>
         <ul *ngIf="research.questions.length > 0">
             <li *ngFor="let question of research.questions; let i = index" class="question-item">
                 <strong>Soru {{ i + 1 }}: {{ question.questionText }}</strong>
                 <ul>
-                    <li *ngFor="let option of question.options" class="option-item" >{{ option.optionText }}</li>
+                    <li *ngFor="let option of question.options" class="option-item">{{ option.optionText }}</li>
                 </ul>
             </li>
         </ul>
     </div>
   </div>
   
-    <!-- Publish Button -->
-    <div *ngIf="research && research.isCompleted === true">
-      <div class="d-flex justify-content-end mt-4">
-        <div class="publish-button">
-            <button class="btn btn-outline-primary"(click)="changeStatusResearch()">Yayınlamayı İptal Et</button>
-        </div>
+  <!-- Publish Button -->
+  <div *ngIf="research && research.isCompleted">
+    <div class="d-flex justify-content-end mt-4">
+      <div class="publish-button">
+        <button class="btn btn-outline-primary" (click)="changeStatusResearch()">Yayınlamayı İptal Et</button>
+      </div>
     </div>
   </div>
-     
-    <div *ngIf="research && research.isCompleted === false">
-      <div class="d-flex justify-content-end mt-4">
-        <div class="publish-button">
-            <button class="btn btn-outline-primary"(click)="changeStatusResearch()">Yayınla</button>
-        </div>
+  
+  <div *ngIf="research && !research.isCompleted">
+    <div class="d-flex justify-content-end mt-4">
+      <div class="publish-button">
+        <button class="btn btn-outline-primary" (click)="changeStatusResearch()">Yayınla</button>
+      </div>
     </div>
   </div>
-    
-
-
-
 </div>
-
-

@@ -14,8 +14,9 @@
   />
 </div>
 <div class="container mt-4">
-  <div class="row justify-content-end"> <!-- Filtreyi sola hizalamak için buraya justify-content-start ekliyoruz -->
-    <div class="col-md-3 mb-4 filter-box"> <!-- Bu div'in genişliğini koruyoruz -->
+  <div class="row justify-content-end align-items-center mb-4">
+    <!-- Kategori Seçimi Kutusu -->
+    <div class="col-lg-3 col-md-6 col-sm-12 filter-box">
       <div class="dropdown-wrapper custom-dropdown">
         <label for="categoryFilter" class="dropdown-label mb-2">Kategori Seç</label>
         <div class="dropdown-container">
@@ -29,6 +30,41 @@
               {{ category.name }}
             </option>
           </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Eşleşme Filtreleme Kutusu -->
+    
+
+    <!-- Başlangıç Tarihi Kutusu -->
+    <div class="col-lg-3 col-md-6 col-sm-12 filter-box">
+      <div class="dropdown-wrapper custom-dropdown">
+        <label for="startDateFilter" class="dropdown-label mb-2">Başlangıç Tarihi</label>
+        <div class="dropdown-container">
+          <input
+            type="date"
+            id="startDateFilter"
+            class="form-control"
+            [(ngModel)]="startDate"
+            (change)="onDateChange()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bitiş Tarihi Kutusu -->
+    <div class="col-lg-3 col-md-6 col-sm-12 filter-box">
+      <div class="dropdown-wrapper custom-dropdown">
+        <label for="endDateFilter" class="dropdown-label mb-2">Bitiş Tarihi</label>
+        <div class="dropdown-container">
+          <input
+            type="date"
+            id="endDateFilter"
+            class="form-control"
+            [(ngModel)]="endDate"
+            (change)="onDateChange()"
+          />
         </div>
       </div>
     </div>

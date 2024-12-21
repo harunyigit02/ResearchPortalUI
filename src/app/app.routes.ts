@@ -17,6 +17,7 @@ import { ParticipantInfoFormComponent } from './participant-info-form/participan
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { RoleGuard } from './guards/role.guard';
 import { ResearchRequirementFormComponent } from './research-requirement-form/research-requirement-form.component';
+import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
 
 
 export const routes: Routes = [
@@ -37,4 +38,5 @@ export const routes: Routes = [
     {path: 'participant-form', component: ParticipantInfoFormComponent},
     {path: 'email-verification', component: EmailVerificationComponent},
     {path: 'research-requirement-form', component: ResearchRequirementFormComponent},
+    {path: 'condition-deneme', component: ConditionDenemeComponent},
 ];

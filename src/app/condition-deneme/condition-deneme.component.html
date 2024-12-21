@@ -1,0 +1,87 @@
+<div *ngIf="researchRequirements">
+    <h3>Araştırma Şartları (Research ID: {{ researchRequirements.researchId }})</h3>
+  
+    <div *ngIf="researchRequirements.minAge != null">
+      <strong>Minimum Yaş:</strong> {{ researchRequirements.minAge }}
+    </div>
+    
+    <div *ngIf="researchRequirements.maxAge != null">
+      <strong>Maksimum Yaş:</strong> {{ researchRequirements.maxAge }}
+    </div>
+  
+    <div *ngIf="researchRequirements.gender != null">
+      <strong>Cinsiyet:</strong>
+      <ul>
+        <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.location != null">
+      <strong>Konum:</strong>
+      <ul>
+        <li *ngFor="let location of transformEnumToString(researchRequirements.location, 'location')">{{ location }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.educationLevel != null">
+      <strong>Eğitim Seviyesi:</strong>
+      <ul>
+        <li *ngFor="let education of transformEnumToString(researchRequirements.educationLevel, 'educationLevel')">{{ education }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.occupation != null">
+      <strong>Meslek:</strong>
+      <ul>
+        <li *ngFor="let occupation of transformEnumToString(researchRequirements.occupation, 'occupation')">{{ occupation }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.ethnicity != null">
+      <strong>Etnik Köken:</strong>
+      <ul>
+        <li *ngFor="let ethnicity of transformEnumToString(researchRequirements.ethnicity, 'ethnicity')">{{ ethnicity }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.maritalStatus != null">
+      <strong>Medeni Durum:</strong>
+      <ul>
+        <li *ngFor="let status of transformEnumToString(researchRequirements.maritalStatus, 'maritalStatus')">{{ status }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.parentalStatus != null">
+      <strong>Anne/Baba Durumu:</strong>
+      <ul>
+        <li *ngFor="let status of transformEnumToString(researchRequirements.parentalStatus, 'parentalStatus')">{{ status }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.childStatus != null">
+      <strong>Çocuk Durumu:</strong>
+      <ul>
+        <li *ngFor="let status of transformEnumToString(researchRequirements.childStatus, 'childStatus')">{{ status }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.disabilityStatus != null">
+      <strong>Engellilik Durumu:</strong>
+      <ul>
+        <li *ngFor="let status of transformEnumToString(researchRequirements.disabilityStatus, 'disabilityStatus')">{{ status }}</li>
+      </ul>
+    </div>
+  
+    <div *ngIf="researchRequirements.housingType != null">
+      <strong>Konaklama Türü:</strong>
+      <ul>
+        <li *ngFor="let housing of transformEnumToString(researchRequirements.housingType, 'housingType')">{{ housing }}</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Yükleme sırasında görüntülenecek mesaj -->
+  <div *ngIf="!researchRequirements">
+    <p>Veriler yükleniyor...</p>
+  </div>
+  

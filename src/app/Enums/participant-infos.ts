@@ -19,7 +19,9 @@ export const Location = {
   1: 'Ankara',
   2: 'İstanbul',
   3: 'İzmir',
-  4: 'Sakarya'
+  4: 'Adana',
+  5:'Sakarya'
+
 };
 
 export const Ethnicity = {

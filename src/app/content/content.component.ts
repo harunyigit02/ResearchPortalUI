@@ -23,6 +23,8 @@ export class ContentComponent {
   Math = Math;
   selectedCategoryId: number | null=null;
   searchKeyword: string = '';
+  startDate:any;
+  endDate:any;
   
 
 
@@ -36,7 +38,7 @@ export class ContentComponent {
   getArticles(): void {
     console.log("get article başında selectedCategoryId:",this.selectedCategoryId)
    
-    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
+    this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
       next: (result: PagedResult<Article>) => {
         this.articles = result.items;
         this.totalItems = result.totalItems;
@@ -85,6 +87,17 @@ export class ContentComponent {
     
     this.getArticles(); // Filtreye göre makaleleri getir
   }
+
+  onDateChange():void {
+    
+    this.pageNumber = 1;
+    console.log('baslangic tarihi:',this.startDate);
+    console.log('bitiş tarihi:',this.endDate);
+    this.getArticles();
+  }
+
+
+
   goToArticle(id: number): void {
     // Makaleye gitme işlevselliğini burada yönlendirebilirsiniz
     console.log(`Makaleye git: ${id}`);

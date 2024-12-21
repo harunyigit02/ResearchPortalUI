@@ -26,6 +26,9 @@ export class ResearchListComponent {
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
   searchKeyword: string = '';
+  matched:boolean=false;
+  startDate: any = null;
+  endDate: any = null;
 
   constructor(
     private router:Router,
@@ -38,7 +41,7 @@ export class ResearchListComponent {
   }
 
   getResearches(): void {
-    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
+    this.dataService.getPublishedResearches(this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
       next: (data: PagedResult<Research>) => {
         this.researches = data.items; // API'den gelen araştırmalar
         this.totalItems = data.totalItems;
@@ -48,15 +51,30 @@ export class ResearchListComponent {
       }
     });
   }
+
+  getMatchedResearches():void{
+    const token=localStorage.getItem("jwt_token");
+    this.dataService.getMatchedResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
+      next: (data: PagedResult<Research>)=>{
+        this.researches = data.items; // API'den gelen araştırmalar
+        this.totalItems = data.totalItems;
+      },
+      error: (err) =>{
+        this.errorMessage = 'Eşleşen araştırmalar alınırken hata oluştu.'
+      }
+    })
+  }
   onPageChange(page: number): void {
     this.pageNumber = page;
-    this.getResearches();
+    if(this.matched==true) this.getMatchedResearches();
+    else this.getResearches();
   }
   onSearchChange(): void {
     // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
     this.pageNumber = 1;
     console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
-    this.getResearches();
+    if(this.matched== true) this.getMatchedResearches();
+    else this.getResearches();
   }
 
 
@@ -80,8 +98,8 @@ export class ResearchListComponent {
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
-    
-    this.getResearches(); // Filtreye göre makaleleri getir
+    if(this.matched == true) this.getMatchedResearches();
+    else this.getResearches(); // Filtreye göre makaleleri getir
   }
 
   getCategoryName(categoryId: number): string {
@@ -93,6 +111,21 @@ export class ResearchListComponent {
     console.log(`Araştırmaya git: ${id}`);
     localStorage.setItem("ResearchId",id.toString())
     this.router.navigate([`/research-detail/${id}`]);
+  }
+  onFilterChange(){
+    console.log("selectedFilter:",this.matched);
+    if(this.matched==true){
+      this.getMatchedResearches();
+    }
+    else this.getResearches();
+  }
+
+  onDateChange():void {
+    
+    this.pageNumber = 1;
+    console.log('baslangic tarihi:',this.startDate);
+    console.log('bitiş tarihi:',this.endDate);
+    this.getResearches();
   }
 
 }

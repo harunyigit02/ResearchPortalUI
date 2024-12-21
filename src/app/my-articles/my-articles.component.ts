@@ -23,6 +23,8 @@ export class MyArticlesComponent {
   Math = Math;
   selectedCategoryId: number | null=null;
   searchKeyword: string = '';
+  startDate:any;
+  endDate:any;
 
   constructor(private dataService: DataService) {}
 
@@ -35,7 +37,7 @@ export class MyArticlesComponent {
     const token = localStorage.getItem('jwt_token'); // Token'ı localStorage'dan al
 
     if (token) {
-      this.dataService.getUserArticles(token,this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
+      this.dataService.getUserArticles(token,this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
         
         next: (result: PagedResult<Article>) => {
           
@@ -83,11 +85,20 @@ export class MyArticlesComponent {
     }
     
     
+    
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
     
     this.getUserArticles(); // Filtreye göre makaleleri getir
+  }
+
+  onDateChange():void {
+    
+    this.pageNumber = 1;
+    console.log('baslangic tarihi:',this.startDate);
+    console.log('bitiş tarihi:',this.endDate);
+    this.getUserArticles();
   }
 
   goToArticle(id: number): void {

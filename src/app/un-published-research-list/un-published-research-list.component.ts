@@ -20,11 +20,14 @@ export class UnPublishedResearchListComponent {
   categories: Category[] = [];
   errorMessage: string | null = null;
   pageNumber=1;
-  pageSize=1; 
+  pageSize=3; 
   totalItems = 0;
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
   searchKeyword: string = '';
+  startDate:string|null=null;
+  endDate:string|null=null;
+  matched:any;
 
 
   constructor(
@@ -40,7 +43,7 @@ export class UnPublishedResearchListComponent {
   getResearches(): void {
     const token= localStorage.getItem("jwt_token");
     if(token){
-      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword).subscribe({
+      this.dataService.getUserResearches(token,this.pageNumber,this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
         next: (data: PagedResult<Research>) => {
           this.researches = data.items; // API'den gelen araştırmalar
           this.totalItems = data.totalItems; // Toplam öğe sayısı
@@ -64,6 +67,12 @@ export class UnPublishedResearchListComponent {
     this.pageNumber = 1;
     console.log('Arama Anahtar Kelimesi:', this.searchKeyword);
     this.getResearches();
+  }
+  onDateChange():void {
+    this.pageNumber = 1;
+    console.log('baslangic tarihi:',this.startDate);
+    console.log('bitiş tarihi:',this.endDate);
+    this.getResearches();   
   }
 
   getCategories(): void {
@@ -100,5 +109,6 @@ export class UnPublishedResearchListComponent {
     localStorage.setItem("ResearchId",id.toString())
     this.router.navigate([`/research-detail/${id}`]);
   }
+  
 
 }

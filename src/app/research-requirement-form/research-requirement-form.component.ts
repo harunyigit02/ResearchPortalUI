@@ -88,6 +88,6 @@ export class ResearchRequirementFormComponent {
         console.error("Araştırma koşulları eklenirken bir hata oluştur",err.message);
       } 
     })
-    // API çağrısını burada yapabilirsiniz
+    
   }
 }

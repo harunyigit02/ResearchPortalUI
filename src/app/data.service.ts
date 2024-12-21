@@ -30,7 +30,7 @@ export class DataService {
   getArticle(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Article`);
   }
-  getUserArticles(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined): Observable<any> {
+  getUserArticles(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null|undefined,maxDate:string|null|undefined): Observable<any> {
     // Token varsa, header'a Authorization ekliyoruz
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -46,10 +46,16 @@ export class DataService {
     if(keyword){
       params=params.set('keyword',keyword);
     }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('keyword',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('keyword',maxDate);
+    }
 
     return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article/UserArticles`, { headers,params });
   }
-  getPagedArticles(pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined):Observable<any> {
+  getPagedArticles(pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null|undefined,maxDate:string|null|undefined):Observable<any> {
     console.log("dataService başında selectedCategoryId:",categoryId,typeof(categoryId));
     let params= new HttpParams()
     .set('pageNumber',pageNumber)
@@ -59,6 +65,12 @@ export class DataService {
     }
     if(keyword){
       params=params.set('keyword',keyword);
+    }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('keyword',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('keyword',maxDate);
     }
     console.log(" dataService  sonunda selectedcategoryId:",categoryId);
     console.log("param:"+params);
@@ -101,7 +113,7 @@ export class DataService {
     return this.http.get<Research[]>(`${this.apiUrl}/Research`,{params});
   }
 
-  getUserResearches(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined): Observable<any> {
+  getUserResearches(token: string,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null,maxDate:string|null): Observable<any> {
     // Token varsa, header'a Authorization ekliyoruz
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -116,12 +128,18 @@ export class DataService {
     if(keyword){
       params=params.set('keyword',keyword);
     }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('minDate',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('maxDate',maxDate);
+    }
 
     return this.http.get<any>(`${this.apiUrl}/Research/UserResearches`, { headers, params });
   }
 
 
-  getPublishedResearches(pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined):Observable<any>{
+  getPublishedResearches(pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null|undefined,maxDate:string|null|undefined):Observable<any>{
     let params=new HttpParams()
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize)
@@ -130,6 +148,12 @@ export class DataService {
     }
     if(keyword){
       params=params.set('keyword',keyword);
+    }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('minDate',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('maxDate',maxDate);
     }
     return this.http.get<any>(`${this.apiUrl}/Research/Published`,{params});
   }
@@ -180,6 +204,35 @@ export class DataService {
     
     return this.http.post<ResearchRequirement>(`${this.apiUrl}/ResearchRequirement`, researchRequirement);
   }
+
+  getResearchRequirementByResearchId(researchId:number):Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/ResearchRequirement/ResearchsConditions/${researchId}`);
+  }
+
+  getMatchedResearches(token: string | null,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null,maxDate:string|null):Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+    let params=new HttpParams()
+    .set('pageNumber',pageNumber)
+    .set('pageSize',pageSize)
+    if(categoryId!=null&&categoryId!=undefined){
+      params=params.set('categoryId',categoryId);
+    }
+    if(keyword){
+      params=params.set('keyword',keyword);
+    }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('minDate',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('maxDate',maxDate);
+    }
+    return this.http.get<any>(`${this.apiUrl}/ResearchRequirement/MatchedResearchRequirements`,{headers,params});
+  }
+
+
+  
 
 
 
