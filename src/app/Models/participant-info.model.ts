@@ -2,14 +2,14 @@ export interface ParticipantInfo{
     id:number
     userId:number
     age:number
-    gender:string
-    location:string
-    educationLevel:string
-    occupation:string
-    ethnicity:string
-    martialStatus:string
-    parentelStatus:string
-    disabilityStatus:string
-    housingType:string
+    gender:number
+    location:number
+    educationLevel:number
+    occupation:number
+    ethnicity:number
+    maritalStatus:number
+    parentalStatus:number
+    disabilityStatus:number
+    housingType:number
 
 }

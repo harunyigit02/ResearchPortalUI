@@ -22,6 +22,7 @@ import { ParticipantInfoFormComponent } from './participant-info-form/participan
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ResearchRequirementFormComponent } from './research-requirement-form/research-requirement-form.component';
 import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +49,8 @@ import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.co
     ParticipantInfoFormComponent,
     EmailVerificationComponent,
     ResearchRequirementFormComponent,
-    ConditionDenemeComponent
+    ConditionDenemeComponent,
+    UserProfileComponent
     
   ],
   templateUrl: './app.component.html',

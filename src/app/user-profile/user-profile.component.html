@@ -1,0 +1,73 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
+          <div class="card-header text-center bg-primary text-white">
+            <h2 class="mb-0">Kullanıcı Profili</h2>
+          </div>
+          <div class="card-body">
+            <div class="text-center mb-4">
+              <!-- Avatar -->
+              <div class="avatar mx-auto" style="width: 100px; height: 100px; border-radius: 50%; background-color: #dee2e6;">
+                <!-- Avatar Görseli Buraya Eklenecek -->
+              </div>
+              <!-- Kullanıcı Bilgileri -->
+              <h3 class="mt-3">Ad Soyad</h3>
+              <p class="text-muted">Üniversite Adı</p>
+              <p class="text-muted"><i class="fas fa-envelope"></i> {{ email }}</p>
+            </div>
+            <!-- Katılımcı Bilgileri -->
+            <div *ngIf="participantInfos; else loading">
+              <h4 class="text-center text-primary mb-4">Katılımcı Bilgileri</h4>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Yaş:</div>
+                <div class="col-8">{{ participantInfos.age }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Cinsiyet:</div>
+                <div class="col-8">{{ getEnumValue(enums.Gender, participantInfos.gender) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Konum:</div>
+                <div class="col-8">{{ getEnumValue(enums.Location, participantInfos.location) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Eğitim Seviyesi:</div>
+                <div class="col-8">{{ getEnumValue(enums.EducationLevel, participantInfos.educationLevel) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Meslek:</div>
+                <div class="col-8">{{ getEnumValue(enums.Occupation, participantInfos.occupation) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Etnik Köken:</div>
+                <div class="col-8">{{ getEnumValue(enums.Ethnicity, participantInfos.ethnicity) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Medeni Durum:</div>
+                <div class="col-8">{{ getEnumValue(enums.MaritalStatus, participantInfos.maritalStatus) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Ebeveynlik Durumu:</div>
+                <div class="col-8">{{ getEnumValue(enums.ParentalStatus, participantInfos.parentalStatus) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Engel Durumu:</div>
+                <div class="col-8">{{ getEnumValue(enums.DisabilityStatus, participantInfos.disabilityStatus) }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4 font-weight-bold">Konut Türü:</div>
+                <div class="col-8">{{ getEnumValue(enums.HousingType, participantInfos.housingType) }}</div>
+              </div>
+            </div>
+            <ng-template #loading>
+              <div class="alert alert-info text-center mt-3" role="alert">
+                Kullanıcı bilgileri yükleniyor...
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -78,16 +78,21 @@ export class ResearchRequirementFormComponent {
   onSubmit() {
 
     console.log(this.researchForm.value);
+    const token=localStorage.getItem('jwt_token');
+    if(token){
+      this.dataService.addResearchRequirement(token,this.researchForm.value).subscribe({
+        next: () => {
+          console.log("Araştırma koşulları eklendi");
+          this.router.navigate([`research-detail/:${this.researchForm.value.researchId}`])
+        },
+        error: (err) => {
+          console.error("Araştırma koşulları eklenirken bir hata oluştur",err.message);
+        } 
+      })
+    }
 
-    this.dataService.addResearchRequirement(this.researchForm.value).subscribe({
-      next: (data) => {
-        console.log("Araştırma koşulları eklendi");
-        this.router.navigate([`research-detail/:${this.researchForm.value.researchId}`])
-      },
-      error: (err) => {
-        console.error("Araştırma koşulları eklenirken bir hata oluştur",err.message);
-      } 
-    })
+
+    
     
   }
 }

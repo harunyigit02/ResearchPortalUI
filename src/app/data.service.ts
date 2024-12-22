@@ -200,9 +200,13 @@ export class DataService {
     })
     return this.http.post<any>(`${this.apiUrl}/ParticipantInfo`, participantInfo,{headers});
    }
-   addResearchRequirement(researchRequirement: any): Observable<ResearchRequirement> {
+   addResearchRequirement(token:string,researchRequirement: any): Observable<ResearchRequirement> {
+    const headers=new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
     
-    return this.http.post<ResearchRequirement>(`${this.apiUrl}/ResearchRequirement`, researchRequirement);
+    
+    return this.http.post<ResearchRequirement>(`${this.apiUrl}/ResearchRequirement`, researchRequirement,{headers});
   }
 
   getResearchRequirementByResearchId(researchId:number):Observable<any> {
@@ -229,6 +233,13 @@ export class DataService {
       params=params.set('maxDate',maxDate);
     }
     return this.http.get<any>(`${this.apiUrl}/ResearchRequirement/MatchedResearchRequirements`,{headers,params});
+  }
+
+  getParticipantInfos(token:string):Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
+    return this.http.get<any>(`${this.apiUrl}/ParticipantInfo/UserInfos`,{headers});
   }
 
 
