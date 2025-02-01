@@ -21,7 +21,7 @@ export class ResearchListComponent {
   categories: Category[] = [];
   errorMessage: string | null = null;
   pageNumber:number=1;
-  pageSize:number=3;
+  pageSize:number=6;
   totalItems=0;
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
@@ -93,8 +93,8 @@ export class ResearchListComponent {
     if (!this.selectedCategoryId) {
       this.selectedCategoryId = null;
     }
-    
-    
+
+
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
@@ -121,7 +121,7 @@ export class ResearchListComponent {
   }
 
   onDateChange():void {
-    
+
     this.pageNumber = 1;
     console.log('baslangic tarihi:',this.startDate);
     console.log('bitiş tarihi:',this.endDate);

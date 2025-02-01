@@ -25,7 +25,7 @@ export class ContentComponent {
   searchKeyword: string = '';
   startDate:any;
   endDate:any;
-  
+
 
 
   constructor(private dataService: DataService) {}
@@ -37,12 +37,12 @@ export class ContentComponent {
 
   getArticles(): void {
     console.log("get article başında selectedCategoryId:",this.selectedCategoryId)
-   
+
     this.dataService.getPagedArticles(this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
       next: (result: PagedResult<Article>) => {
         this.articles = result.items;
         this.totalItems = result.totalItems;
-  
+
         // Her makale için görüntülenme sayısını al
         this.articles.forEach(article => {
           this.getArticleViewsCount(article); // Her makale için görüntülenme sayısını al
@@ -79,17 +79,17 @@ export class ContentComponent {
     if (!this.selectedCategoryId) {
       this.selectedCategoryId = null;
     }
-    
-    
+
+
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
-    
+
     this.getArticles(); // Filtreye göre makaleleri getir
   }
 
   onDateChange():void {
-    
+
     this.pageNumber = 1;
     console.log('baslangic tarihi:',this.startDate);
     console.log('bitiş tarihi:',this.endDate);

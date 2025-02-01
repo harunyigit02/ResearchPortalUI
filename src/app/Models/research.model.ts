@@ -6,6 +6,7 @@ export interface Research{
     title:string
     description:string
     publishedAt:Date
+    publishedBy:number
     status:string
     isFaceToFace:boolean
     isCompleted:boolean

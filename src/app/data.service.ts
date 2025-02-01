@@ -39,9 +39,9 @@ export class DataService {
     .set('pageNumber',pageNumber)
     .set('pageSize',pageSize);
     if(categoryId!=null&&categoryId!=undefined){
-      
+
       params=params.set('categoryId',categoryId);
-      
+
     }
     if(keyword){
       params=params.set('keyword',keyword);
@@ -74,11 +74,11 @@ export class DataService {
     }
     console.log(" dataService  sonunda selectedcategoryId:",categoryId);
     console.log("param:"+params);
-    
-    return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article`, { params });
-    
 
-    
+    return this.http.get<PagedResult<Article>>(`${this.apiUrl}/Article`, { params });
+
+
+
   }
 
   addArticle(article: Article,token:string): Observable<any> {
@@ -204,13 +204,15 @@ export class DataService {
     const headers=new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     })
-    
-    
+
+
     return this.http.post<ResearchRequirement>(`${this.apiUrl}/ResearchRequirement`, researchRequirement,{headers});
   }
 
   getResearchRequirementByResearchId(researchId:number):Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/ResearchRequirement/ResearchsConditions/${researchId}`);
+    const result = this.http.get<any>(`${this.apiUrl}/ResearchRequirement/ResearchsConditions/${researchId}`);
+    console.log("Service yanıtı",result);
+    return result;
   }
 
   getMatchedResearches(token: string | null,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null,maxDate:string|null):Observable<any> {
@@ -243,7 +245,7 @@ export class DataService {
   }
 
 
-  
+
 
 
 
@@ -287,29 +289,41 @@ export class DataService {
   getUserRole(): any {
     const token = localStorage.getItem('jwt_token');
     console.log("GetUserRole Token:", token);
-  
+
     if (!token) {
       console.error('Token bulunamadı.');
       return ''; // Eğer token yoksa boş rol döner
     }
-  
+
     const decodedToken = this.decodeToken(token);
     console.log('Decoded Token:', decodedToken); // Decode edilmiş token'ı logla
-  
+
     // Burada doğru key ile role bilgisine erişin
     return decodedToken?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || '';
+
+  }
+  getUserId(){
+    const token = localStorage.getItem('jwt_token');
+    if(!token) {
+      console.error('Token missing token');
+      return null;
+    }
+    const decodedToken= this.decodeToken(token);
+
+    return decodedToken?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || '';
+
   }
   decodeToken(token: string): any {
     if (!token) {
       return null;
     }
-  
+
     const payload = token.split('.')[1];
     if (!payload) {
       console.error('Token payload kısmı bulunamadı.');
       return null;
     }
-  
+
     try {
       const decodedPayload = atob(payload); // Base64 çözümleme
       console.log('Decoded Payload:', decodedPayload); // Base64 sonrası payload'u logla
@@ -324,10 +338,10 @@ export class DataService {
 
   //Participant Form
 
-  
-
-   
 
 
-  
+
+
+
+
 }

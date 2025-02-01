@@ -20,7 +20,7 @@ export class UnPublishedResearchListComponent {
   categories: Category[] = [];
   errorMessage: string | null = null;
   pageNumber=1;
-  pageSize=3; 
+  pageSize=6;
   totalItems = 0;
   Math=Math;
   selectedCategoryId:number|null|undefined=null;
@@ -47,7 +47,7 @@ export class UnPublishedResearchListComponent {
         next: (data: PagedResult<Research>) => {
           this.researches = data.items; // API'den gelen araştırmalar
           this.totalItems = data.totalItems; // Toplam öğe sayısı
-          
+
         },
         error: (err) => {
           this.errorMessage = 'Araştırmaları alırken hata oluştu: ' + err.message;
@@ -72,7 +72,7 @@ export class UnPublishedResearchListComponent {
     this.pageNumber = 1;
     console.log('baslangic tarihi:',this.startDate);
     console.log('bitiş tarihi:',this.endDate);
-    this.getResearches();   
+    this.getResearches();
   }
 
   getCategories(): void {
@@ -90,12 +90,12 @@ export class UnPublishedResearchListComponent {
     if (!this.selectedCategoryId) {
       this.selectedCategoryId = null;
     }
-    
-    
+
+
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
-    
+
     this.getResearches(); // Filtreye göre makaleleri getir
   }
 
@@ -109,6 +109,6 @@ export class UnPublishedResearchListComponent {
     localStorage.setItem("ResearchId",id.toString())
     this.router.navigate([`/research-detail/${id}`]);
   }
-  
+
 
 }

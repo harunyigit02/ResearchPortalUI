@@ -23,12 +23,12 @@
       Katılım Şartlarını Görüntüle
     </button>
   </div>
-  
+
   <!-- Katılım Şartları Kontrolü -->
   <div *ngIf="showResearchRequirements" class="card p-4 mt-4">
     <h5>Katılım Şartları</h5>
     <div>
-      
+
       <!-- Katılım şartları eksikse, "Katılım Şartı Eklenmemiş" mesajı ve buton -->
       <div *ngIf="isEmptyResearchRequirements()">
         <p><strong>Katılım Şartı Eklenmemiş.</strong></p>
@@ -131,9 +131,9 @@
 
   <div *ngIf="showQuestions" class="questions-container">
     <h3>Sorular:</h3>
-  
+
     <!-- Soruların olup olmadığını kontrol et -->
-    <div *ngIf="research && research.questions">
+    <div *ngIf="research && research.questions&& hasRole(['Admin'])">
         <div *ngIf="research.questions.length === 0">
             <h5>Henüz Eklenmiş Soru Yok.</h5>
             <button class="btn btn-outline-primary" (click)="goToFormPage()">Soru Ekle</button>
@@ -148,17 +148,17 @@
         </ul>
     </div>
   </div>
-  
+
   <!-- Publish Button -->
-  <div *ngIf="research && research.isCompleted">
+  <div *ngIf="research && research.isCompleted&& isOwnResearch()">
     <div class="d-flex justify-content-end mt-4">
       <div class="publish-button">
         <button class="btn btn-outline-primary" (click)="changeStatusResearch()">Yayınlamayı İptal Et</button>
       </div>
     </div>
   </div>
-  
-  <div *ngIf="research && !research.isCompleted">
+
+  <div *ngIf="research && !research.isCompleted&& isOwnResearch()">
     <div class="d-flex justify-content-end mt-4">
       <div class="publish-button">
         <button class="btn btn-outline-primary" (click)="changeStatusResearch()">Yayınla</button>

@@ -18,7 +18,7 @@ export class MyArticlesComponent {
   categories: Category[] = []; // Kategori verilerini saklamak için dizi
   errorMessage: string | null = null;
   pageNumber=1;
-  pageSize=2;
+  pageSize=6;
   totalItems = 0;
   Math = Math;
   selectedCategoryId: number | null=null;
@@ -38,9 +38,9 @@ export class MyArticlesComponent {
 
     if (token) {
       this.dataService.getUserArticles(token,this.pageNumber, this.pageSize,this.selectedCategoryId,this.searchKeyword,this.startDate,this.endDate).subscribe({
-        
+
         next: (result: PagedResult<Article>) => {
-          
+
           this.articles = result.items;
           this.totalItems = result.totalItems;
 
@@ -83,18 +83,18 @@ export class MyArticlesComponent {
     if (!this.selectedCategoryId) {
       this.selectedCategoryId = null;
     }
-    
-    
-    
+
+
+
       // Tüm kategorilere geri dönüldüğünde sayfa numarasını 1 yaparak filtreyi sıfırla
     this.pageNumber = 1;
     console.log("on category change sonunda selectedCATEGORYId",this.selectedCategoryId);
-    
+
     this.getUserArticles(); // Filtreye göre makaleleri getir
   }
 
   onDateChange():void {
-    
+
     this.pageNumber = 1;
     console.log('baslangic tarihi:',this.startDate);
     console.log('bitiş tarihi:',this.endDate);

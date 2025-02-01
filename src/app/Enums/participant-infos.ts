@@ -100,3 +100,9 @@ export const ChildStatus = {
   10: 'Adult With Own Family', // Çocuğu evli ve kendi ailesi olan
   11: 'Other',
 };
+export const University = {
+  1: 'Konya Teknik Üniversitesi',
+  2: 'Hacettepe Üniversitesi',
+  3: 'Bilkent Üniversitesi',
+  4: 'OrtaDoğu Teknik Üniversitesi'
+}

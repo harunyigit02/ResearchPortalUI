@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, Location, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
+import {
+  ChildStatus,
+  DisabilityStatus,
+  EducationLevel,
+  Ethnicity,
+  Gender,
+  HousingType,
+  Location,
+  MaritalStatus,
+  Occupation,
+  ParentalStatus,
+  University
+} from '../Enums/participant-infos';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
@@ -14,6 +26,7 @@ import { Router } from '@angular/router';
 })
 export class ParticipantInfoFormComponent {
   participantForm: FormGroup;
+  universities= Object.values(University);
   genders = Object.values(Gender);
   locations = Object.values(Location);
   childStatuses = Object.values(ChildStatus);
@@ -31,7 +44,10 @@ export class ParticipantInfoFormComponent {
     private router:Router
   ) {
     this.participantForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       age: ['',Validators.min(0)],
+      university: ['', Validators.required],
       gender: ['', Validators.required],
       location: ['', Validators.required],
       childStatus: ['', Validators.required],
@@ -47,7 +63,7 @@ export class ParticipantInfoFormComponent {
 
 
   ngOnInit() {
-    
+
   }
 
 
@@ -55,11 +71,14 @@ export class ParticipantInfoFormComponent {
     const token = localStorage.getItem("jwt_token");
     if(token){
       if(this.participantForm){
-  
+
         if (this.participantForm.valid) {
           console.log("Form verileri:",this.participantForm.value)
           const formData = {
+            firstName: this.participantForm.value.firstName,
+            lastName: this.participantForm.value.lastName,
             age: this.participantForm.value.age,
+            university: this.getEnumKey(University, this.participantForm.value.university),
             gender: this.getEnumKey(Gender, this.participantForm.value.gender),  // Gender'ı integer'a çeviriyoruz
             location: this.getEnumKey(Location, this.participantForm.value.location),
             childStatus: this.getEnumKey(ChildStatus, this.participantForm.value.childStatus),

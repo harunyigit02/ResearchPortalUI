@@ -2,7 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DataService } from '../data.service';
 import { ParticipantInfo } from '../Models/participant-info.model';
-import { DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, Location, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
+import {
+  DisabilityStatus,
+  EducationLevel,
+  Ethnicity,
+  Gender,
+  HousingType,
+  Location,
+  MaritalStatus,
+  Occupation,
+  ParentalStatus,
+  University
+} from '../Enums/participant-infos';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,6 +35,7 @@ export class UserProfileComponent {
     ParentalStatus,
     DisabilityStatus,
     HousingType,
+    University,
   };
 
 
@@ -34,11 +46,11 @@ export class UserProfileComponent {
 
     this.getParticipantInfos();
   }
-  
+
   getParticipantInfos() {
 
     const token=localStorage.getItem('jwt_token');
-    
+
     if(token){
       const decodedToken=this.dataService.decodeToken(token);
       console.log("decoded token:",decodedToken);
@@ -56,8 +68,8 @@ export class UserProfileComponent {
         }
       });
     }
-  
-    
+
+
   }
   getEnumValue(enumObj: any, key: number): string {
     return enumObj[key] || 'Bilinmiyor';

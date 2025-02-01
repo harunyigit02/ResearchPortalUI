@@ -2,90 +2,106 @@
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        
+
         <!-- Başlık -->
         <h2 class="form-title text-center mb-4">Participant Info Form</h2>
-        
+
         <form [formGroup]="participantForm" (ngSubmit)="onSubmit()" class="p-4 shadow-sm bg-white rounded">
-          
+
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="string" formControlName="firstName" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input id="lastname" type="string" formControlName="lastName" class="form-control" />
+          </div>
+
+
           <div class="form-group">
             <label for="age">Age</label>
             <input id="age" type="number" formControlName="age" class="form-control" />
           </div>
-  
+          <div class="form-group">
+            <label for="university">University</label>
+            <select id="university" formControlName="university" class="form-control">
+              <option *ngFor="let university of universities" [value]="university">{{ university }}</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <label for="gender">Gender</label>
             <select id="gender" formControlName="gender" class="form-control">
               <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="location">Location</label>
             <select id="location" formControlName="location" class="form-control">
               <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="childStatus">Child Status</label>
             <select id="childStatus" formControlName="childStatus" class="form-control">
               <option *ngFor="let status of childStatuses" [value]="status">{{ status }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="disabilityStatus">Disability Status</label>
             <select id="disabilityStatus" formControlName="disabilityStatus" class="form-control">
               <option *ngFor="let status of disabilityStatuses" [value]="status">{{ status }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="educationLevel">Education Level</label>
             <select id="educationLevel" formControlName="educationLevel" class="form-control">
               <option *ngFor="let level of educationLevels" [value]="level">{{ level }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="ethnicity">Ethnicity</label>
             <select id="ethnicity" formControlName="ethnicity" class="form-control">
               <option *ngFor="let ethnicity of ethnicities" [value]="ethnicity">{{ ethnicity }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="housingType">Housing Type</label>
             <select id="housingType" formControlName="housingType" class="form-control">
               <option *ngFor="let type of housingTypes" [value]="type">{{ type }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="maritalStatus">Marital Status</label>
             <select id="maritalStatus" formControlName="maritalStatus" class="form-control">
               <option *ngFor="let status of maritalStatuses" [value]="status">{{ status }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="occupation">Occupation</label>
             <select id="occupation" formControlName="occupation" class="form-control">
               <option *ngFor="let occupation of occupations" [value]="occupation">{{ occupation }}</option>
             </select>
           </div>
-  
+
           <div class="form-group">
             <label for="parentalStatus">Parental Status</label>
             <select id="parentalStatus" formControlName="parentalStatus" class="form-control">
               <option *ngFor="let status of parentalStatuses" [value]="status">{{ status }}</option>
             </select>
           </div>
-  
+
           <button type="submit" [disabled]="participantForm.invalid" class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>
     </div>
   </div>
-  

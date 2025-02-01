@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import { Research } from '../Models/research.model';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, Housi
   templateUrl: './research-details.component.html',
   styleUrl: './research-details.component.css'
 })
-export class ResearchDetailsComponent {
+export class ResearchDetailsComponent implements OnInit {
   research: any;
   id:any;
   successMessage: string | null = null;
@@ -22,22 +22,30 @@ export class ResearchDetailsComponent {
   showQuestions: boolean = false;
   researchRequirements!: ResearchRequirement;
   showResearchRequirements: boolean = false;
-  
+  userRole:any;
+  userId:any;
+
 
   constructor(private dataService:DataService, private router:Router){}
 
 
   ngOnInit(): void {
+    console.log("ngOnInit()");
+    this.userRole = this.dataService.getUserRole();
+    this.userId = this.dataService.getUserId();
+    console.log("userRole:",this.userRole);
     this.id=Number(localStorage.getItem("ResearchId"));
     this.getResearchesById(this.id);
+
+    console.log("rr a giriyorum ngoninit---------------------------")
     this.getResearchRequirements();
-    
-    
+
+
   }
 
 
   getResearchesById(id:number): void {
-    
+
     this.dataService.getResearchById(id).subscribe({
       next: (data: Research) => {
         this.research = data;
@@ -48,14 +56,14 @@ export class ResearchDetailsComponent {
     });
   }
 
-  
+
 
   changeStatusResearch() {
     console.log('Research nesnesi:', this.research);
-    
+
     // isCompleted durumunu tersine çevir
     this.research.isCompleted = !this.research.isCompleted; // Bu satırı ekleyin
-    
+
     // Güncellenen araştırmayı sunucuya gönder
     this.dataService.updateResearch(this.id, this.research).subscribe({
       next: response => {
@@ -74,9 +82,9 @@ export class ResearchDetailsComponent {
     setTimeout(() => {
       this.successMessage = null;  // Burada hata olmayacak
     }, 3000);
-    
+
   }
-  
+
   private handleError(message: string) {
     this.errorMessage = message;
     this.successMessage = null;
@@ -85,7 +93,7 @@ export class ResearchDetailsComponent {
       this.errorMessage = null;  // Burada hata olmayacak
     }, 3000);
   }
-  
+
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Sayfayı yukarı kaydır
   }
@@ -95,8 +103,8 @@ export class ResearchDetailsComponent {
   }
   goToFormPage(): void {
     // Makaleye gitme işlevselliğini burada yönlendirebilirsiniz
-    
-    
+
+
     this.router.navigate([`add-research-form`]);
   }
 
@@ -107,11 +115,12 @@ export class ResearchDetailsComponent {
   }
 
   getResearchRequirements() {
+    console.log("buraya girdi");
     const researchId = Number(localStorage.getItem("ResearchId"));
     this.dataService.getResearchRequirementByResearchId(researchId).subscribe({
       next: (data) => {
         this.researchRequirements = data;
-        console.log('Araştırma Şartları:', this.researchRequirements);
+        console.log('Araştırma Şartları------------:', this.researchRequirements);
       },
       error: (err) => {
         console.log('Hata oluştu.', err.message);
@@ -148,7 +157,21 @@ export class ResearchDetailsComponent {
     return false
   }
 
-  
+
+  hasRole(roles: string[]): boolean {
+    return roles.includes(this.userRole);
+  }
+  isOwnResearch(): boolean {
+    console.log("userId:",this.userId,"research.UserId:",this.research);
+    if(this.userId == this.research.publishedBy){
+      console.log("true");
+      return true;
+    }
+    console.log("false");
+    return false;
+  }
+
+
 
 
 
