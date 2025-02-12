@@ -43,6 +43,7 @@ export class AnswerDenemeComponent {
   toggleSelection(optionId: number): void {
     // Seçilen optionId'ye ait questionId'yi elde et
     const questionId = this.getQuestionIdByOptionId(optionId);
+    
   
     // Aynı questionId'ye sahip başka bir cevap varsa onu kaldır
     this.selectedAnswers = this.selectedAnswers.filter(
@@ -50,7 +51,8 @@ export class AnswerDenemeComponent {
     );
   
     // Yeni seçimi ekle
-    this.selectedAnswers.push({ optionId });
+    if(questionId)
+    this.selectedAnswers.push({ optionId,questionId });
   }
   
   // Helper function: optionId'ye göre questionId alır

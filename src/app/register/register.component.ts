@@ -61,9 +61,10 @@ export class RegisterComponent {
     this.dataService.register(registerRequest).subscribe(
       (response) => {
         console.log("Giriş Başarılı:");
+        this.router.navigate(['/email-verification']);
         
-        this.dataService.saveEmailLocal(registerRequest.email)
-        this.router.navigate(['/email-verification']); // Başarılı giriş sonrası yönlendirme
+         this.dataService.saveEmailLocal(registerRequest.email)
+         // Başarılı giriş sonrası yönlendirme
       },
       (error) => {
         console.log("Giriş Hatası:", error); 
