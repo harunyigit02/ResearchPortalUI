@@ -23,6 +23,7 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { ResearchRequirementFormComponent } from './research-requirement-form/research-requirement-form.component';
 import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResearchResultsComponent } from './research-results/research-results.component';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +51,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     EmailVerificationComponent,
     ResearchRequirementFormComponent,
     ConditionDenemeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ResearchResultsComponent
     
   ],
   templateUrl: './app.component.html',

@@ -237,6 +237,10 @@ export class DataService {
     return this.http.get<any>(`${this.apiUrl}/ResearchRequirement/MatchedResearchRequirements`,{headers,params});
   }
 
+  getResearchAnswers(researchId:number):Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/Answer/${researchId}/Answers`)
+  }
+
   getParticipantInfos(token:string):Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,

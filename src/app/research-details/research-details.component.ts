@@ -171,6 +171,11 @@ export class ResearchDetailsComponent implements OnInit {
     return false;
   }
 
+  viewResearchResults() {
+    // Araştırma sonuçlarını görüntüleme sayfasına yönlendirme
+    this.router.navigate(['/research-results', this.research.id]);
+  }
+
 
 
 

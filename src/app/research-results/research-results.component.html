@@ -1,0 +1,11 @@
+<div *ngFor="let group of groupedAnswers">
+    <h3>Katılımcı {{ group.answers[0]?.participantId }}</h3>
+    <div class="answers-container">
+      <div *ngFor="let answer of group.answers" class="answer-box">
+        <p><strong>Soru ID:</strong> {{ answer.questionId }}</p>
+        <p><strong>Seçilen Seçenek ID:</strong> {{ answer.optionId }}</p>
+        <p><strong>Cevap Zamanı:</strong> {{ answer.participatedAt | date:'short' }}</p>
+      </div>
+    </div>
+    <hr />
+  </div>
