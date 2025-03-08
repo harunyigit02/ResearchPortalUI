@@ -32,7 +32,8 @@ export const Ethnicity = {
   5: 'Middle Eastern',     // Orta Doğulu
   6: 'Native American',    // Kızılderili
   7: 'Pacific Islander',   // Pasifik Adalı
-  8: 'Other',
+  8: 'Balkan',
+  9: 'Other',
 };
 
 export const MaritalStatus = {
