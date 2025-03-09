@@ -1,0 +1,66 @@
+<div class="container mt-5 text-center">
+    <!-- Büyük Başlık -->
+    <h1 class="text-primary fw-bold">Anket Analizi</h1>
+  
+    <!-- Kullanıcı Bilgilendirme Kutusu -->
+    <div class="info-box bg-light text-dark p-3 mt-3 rounded shadow-sm">
+      <p class="m-0">
+        Burada İstediğiniz seçenekleri seçen katılımcıları filtreleyerek o seçeneği seçen 
+        katılımcıların 
+        diğer sorulardaki hareketlerini gözlemleyebilirsiniz.
+         İlk olarak filtrelemek istediğiniz seçeneği işaretleyin ardından katılımcı 
+         hareketlerini görmek istediğiniz soruyu seçin. Ardından Hesapla butonuna basın.
+          Kullanıcıların soruya olan davranışlarını analiz edebilirsiniz.
+    
+      </p>
+    </div>
+  
+    <!-- Seçenek Seçme Başlığı -->
+    <h3 class="mt-4" [ngClass]="{ 'text-primary': !selectedOption, 'text-success': selectedOption }">
+      {{ selectedOption ? 'Lütfen hedef soruyu seçin' : 'Lütfen filtrelemek istediğiniz seçeneği seçin' }}
+    </h3>
+  
+    <!-- Seçenekler -->
+    <div class="questions-container mt-4" *ngIf="!selectedOption">
+      <div *ngIf="research.questions.length > 0">
+        <div *ngFor="let question of research.questions" class="question-box border rounded p-3 mb-3">
+          <strong class="text-dark">Soru: {{ question.questionText }}</strong>
+          <ul class="list-unstyled mt-2">
+            <li *ngFor="let option of question.options" 
+                class="option-box border rounded p-2 mt-1 text-primary"
+                (click)="selectOption(option.id)">
+              {{ option.optionText }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sorular (Seçenek seçildiğinde aktif olacak) -->
+    <div class="questions-container mt-4" *ngIf="selectedOption">
+      <div *ngIf="research.questions.length > 0">
+        <div *ngFor="let question of research.questions" 
+            class="question-box2 border rounded p-3 mb-3"
+            (click)="selectQuestion(question.id)"
+            [ngClass]="{'border-success': selectedQuestion === question.id}">
+          <strong class="text-dark">Soru: {{ question.questionText }}</strong>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Hesapla Butonu -->
+    <button *ngIf="selectedQuestion" class="btn btn-success mt-4" (click)="calculate()">Hesapla</button>
+  
+    <!-- Analiz Sonucu -->
+    <div *ngIf="analysisResult && analysisResult.length > 0" class="result-box mt-4 p-3 bg-light border rounded shadow-sm">
+        <h4 class="text-success">Analiz Sonucu:</h4>
+        
+        <div *ngFor="let result of analysisResult" class="result-item mb-2">
+          <strong class="text-dark">Seçenek: {{ result.optionText  }}</strong>
+          <p class="m-0">Katılımcı Sayısı: {{ result.count }}</p>
+          <p class="m-0">Yüzde: {{ result.percentage }}</p>
+        </div>
+      </div>
+</div>
+
+

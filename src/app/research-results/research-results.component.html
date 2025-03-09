@@ -1,11 +1,35 @@
-<div *ngFor="let group of groupedAnswers">
-    <h3>Katılımcı {{ group.answers[0]?.participantId }}</h3>
-    <div class="answers-container">
-      <div *ngFor="let answer of group.answers" class="answer-box">
-        <p><strong>Soru ID:</strong> {{ answer.questionId }}</p>
-        <p><strong>Seçilen Seçenek ID:</strong> {{ answer.optionId }}</p>
-        <p><strong>Cevap Zamanı:</strong> {{ answer.participatedAt | date:'short' }}</p>
+<div class="container justify-content-end">
+  <div>
+     <button  class="btn btn-success mb-2" (click)="navigateQuestionAnalysis()">Seçenek Bazlı Hesaplama</button>
+  </div>
+  <div *ngFor="let group of groupedAnswers; let i = index" class="participant-card">
+    <div class="card shadow-lg">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Katılımcı {{ i + 1 }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="answers-container">
+          <div *ngFor="let answer of group.questionAnswers" class="answer-box">
+            <div class="question-box">
+              <p class="question-text"><strong>Soru:</strong> {{ answer.questionText }}</p>
+              <ul class="options-list">
+                <li *ngFor="let option of answer.options" class="option-item">
+                  <input 
+                    type="radio" 
+                    [checked]="option.optionId === answer.selectedOptionId"
+                    disabled 
+                  />
+                  {{ option.optionText }}
+                </li>
+              </ul>
+              <p class="answer-time">
+                <strong>Cevap Zamanı:</strong> 
+                {{ answer.participatedAt !== '0001-01-01T00:00:00' ? (answer.participatedAt | date:'short') : 'Cevaplanmadı' }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <hr />
   </div>
+</div>

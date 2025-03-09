@@ -20,6 +20,7 @@ import { ResearchRequirementFormComponent } from './research-requirement-form/re
 import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResearchResultsComponent } from './research-results/research-results.component';
+import { QuestionAnalysisComponent } from './question-analysis/question-analysis.component';
 
 
 export const routes: Routes = [
@@ -43,5 +44,6 @@ export const routes: Routes = [
     {path: 'condition-deneme', component: ConditionDenemeComponent},
     {path: 'profile', component: UserProfileComponent},
     {path: 'research-result/:researchId', component: ResearchResultsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+    {path: 'question-analysis', component: QuestionAnalysisComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
 
 ];

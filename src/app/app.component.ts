@@ -24,6 +24,7 @@ import { ResearchRequirementFormComponent } from './research-requirement-form/re
 import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResearchResultsComponent } from './research-results/research-results.component';
+import { QuestionAnalysisComponent } from './question-analysis/question-analysis.component';
 
 @Component({
   selector: 'app-root',
@@ -52,7 +53,8 @@ import { ResearchResultsComponent } from './research-results/research-results.co
     ResearchRequirementFormComponent,
     ConditionDenemeComponent,
     UserProfileComponent,
-    ResearchResultsComponent
+    ResearchResultsComponent,
+    QuestionAnalysisComponent
     
   ],
   templateUrl: './app.component.html',

@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
   styleUrl: './research-results.component.css'
 })
 export class ResearchResultsComponent {
-  researchId = 1; // Örnek olarak araştırma ID
+  researchId!:number; // Örnek olarak araştırma ID
   groupedAnswers: any[] = [];
 
 
@@ -27,9 +27,14 @@ export class ResearchResultsComponent {
     }
 
     getResearchAnswers() {
+      this.researchId= Number(localStorage.getItem("ResearchId"));
       this.dataService.getResearchAnswers(this.researchId).subscribe(response => {
         this.groupedAnswers = response;
       });
+    }
+
+    navigateQuestionAnalysis(){
+      this.router.navigate(["/question-analysis"]);
     }
 
 }

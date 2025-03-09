@@ -247,6 +247,12 @@ export class DataService {
     })
     return this.http.get<any>(`${this.apiUrl}/ParticipantInfo/UserInfos`,{headers});
   }
+  getQuestionParticipantPercentage(optionId: number, questionId: number): Observable<any[]> {
+    let params=new HttpParams()
+    .set('optionId',optionId)
+    .set('questionId',questionId)
+    return this.http.get<any[]>(`${this.apiUrl}/Answer/AnalyzeTargetQuestion`, {params});
+  }
 
 
 

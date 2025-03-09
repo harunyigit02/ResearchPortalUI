@@ -1,0 +1,43 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .info-box {
+    border-left: 5px solid #007bff;
+  }
+  
+  .questions-container {
+    text-align: left;
+  }
+  
+  .question-box2 {
+    border: 2px solid #007bff;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .question-box2:hover {
+    background:  green !important;
+    color: white;
+  }
+  
+  .option-box {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .option-box:hover {
+    background: #007bff;
+    color: white;
+  }
+  
+  .border-success {
+    border-color: green !important;
+  }
+  
+  .result-box {
+    border-left: 5px solid green;
+  }
+  
