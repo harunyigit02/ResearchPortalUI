@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { PagedResult } from '../Models/pagingResult.model';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-my-articles',
@@ -25,12 +26,36 @@ export class MyArticlesComponent {
   searchKeyword: string = '';
   startDate:any;
   endDate:any;
+  searchKeywordChanged = new Subject<string>();
+  dropdownVisible: { [key: number]: boolean } = {};
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.searchKeywordChanged.pipe(debounceTime(500)).subscribe(() => {
+      this.onSearchChange();
+    });
+  }
 
   ngOnInit(): void {
     this.getUserArticles(); // Kullanıcıya özel makaleleri al
     this.getCategories(); // Kategorileri al
+  }
+
+  toggleDropdown(articleId: number) {
+    // Eğer zaten açıksa, kapat; değilse, aç
+    this.dropdownVisible[articleId] = !this.dropdownVisible[articleId];
+    console.log("articleID:",articleId);
+    console.log("asd:",this.dropdownVisible[articleId]);
+  }
+
+  editArticle(articleId: number): void {
+    console.log(`Makale düzenleniyor: ${articleId}`);
+    // Burada düzenleme işlemi yapılacak (düzenleme sayfasına yönlendirme vs.)
+  }
+
+  // Kaydetme işlemi
+  saveArticle(articleId: number): void {
+    console.log(`Makale kaydediliyor: ${articleId}`);
+    // Kaydetme işlemi yapılacak
   }
 
   getUserArticles(): void {
@@ -119,6 +144,21 @@ export class MyArticlesComponent {
         this.errorMessage = 'Görüntülenme sayısını alırken hata oluştu: ' + err.message;
       }
     });
+  }
+
+  deleteArticle(id: number): void {
+    if (confirm('Bu makaleyi silmek istediğinizden emin misiniz?')) {
+      this.dataService.deleteArticle(id).subscribe({
+        next: () => {
+          // Silme işlemi başarılı olursa makale listesini güncelle
+          this.articles = this.articles.filter(article => article.id !== id);
+          this.getUserArticles();
+        },
+        error: (err) => {
+          this.errorMessage = 'Makale silinirken hata oluştu: ' + err.message;
+        }
+      });
+    }
   }
 
 }

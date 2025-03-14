@@ -13,7 +13,7 @@
     class="form-control search-box"
     placeholder="Makale başlığı veya açıklaması ara..."
     [(ngModel)]="searchKeyword"
-    (keyup)="onSearchChange()"
+    (keyup)="searchKeywordChanged.next(searchKeyword)"
   />
 </div>
 
@@ -78,10 +78,25 @@
   <div class="row">
     <div *ngFor="let article of articles" class="col-md-6 col-lg-4 mb-4">
       <div class="card article-card p-3">
-        <!-- Top Section: Published Date and Category -->
-        <div class="d-flex justify-content-between align-items-center">
-          <span class="badge bg-primary text-white">{{ getCategoryName(article.categoryId) }}</span>
-          <div class="text-end text-muted small">{{ article.publishedAt | date: 'dd.MM.yyyy' }}</div>
+        <div class="">
+          <div class="article-options mr-2">
+            <button class="options-button" (click)="toggleDropdown(article.id)">
+              &#x22EE; <!-- Unicode for vertical ellipsis (three dots) -->
+            </button>
+            <!-- Dropdown menu -->
+            <div *ngIf="dropdownVisible[article.id]" class="dropdownmenu" >
+              <ul>
+                <li (click)="editArticle(article.id)"> Makaleyi Düzenle</li>
+                <li (click)="saveArticle(article.id)">Makaleyi Kaydet</li>
+                <li (click)="deleteArticle(article.id)" class="deleteBbutton">Makaleyi Sil</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Top Section: Published Date and Category -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-primary text-white ml-4">{{ getCategoryName(article.categoryId) }}</span>
+            <div class="text-end text-muted small">{{ article.publishedAt | date: 'dd.MM.yyyy' }}</div>
+          </div>
         </div>
 
         <!-- Title -->
@@ -93,13 +108,14 @@
         </p>
 
         <!-- Views Count and Button -->
-        <div class="d-flex justify-content-between align-items-center mt-2">
+        <div class="d-flex justify-content-around align-items-center mt-2">
           <span class="text-muted small">Görüntülenme: {{ article.totalViews }}</span>
-          <div class="text-center mt-3">
-            <button class="btn btn-outline-primary" (click)="goToArticle(article.id)">Makaleye Git</button>
-          </div>
+          <button class="btn btn-outline-primary" (click)="goToArticle(article.id)">Makaleye Git</button>
+          
         </div>
       </div>
+      
+    </div>
     </div>
   </div>
 
@@ -123,4 +139,6 @@
       </li>
     </ul>
   </nav>
-</div>
+
+
+  
