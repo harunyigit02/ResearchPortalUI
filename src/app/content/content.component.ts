@@ -55,7 +55,9 @@ export class ContentComponent {
   }
   onPageChange(page: number): void {
     this.pageNumber = page;
+    window.scrollTo({ top: 50, behavior: 'smooth' });
     this.getArticles();
+    
   }
   onSearchChange(): void {
     // Her arama değişikliğinde sayfa numarasını sıfırla ve yeni istek gönder
