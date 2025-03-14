@@ -50,6 +50,7 @@ export class UnPublishedResearchListComponent {
 
   editResearch(researchId: number): void {
     console.log(`Makale düzenleniyor: ${researchId}`);
+    this.router.navigate([`edit-research/${researchId}`]);
     // Burada düzenleme işlemi yapılacak (düzenleme sayfasına yönlendirme vs.)
   }
 
