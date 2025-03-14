@@ -21,6 +21,8 @@ import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.co
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResearchResultsComponent } from './research-results/research-results.component';
 import { QuestionAnalysisComponent } from './question-analysis/question-analysis.component';
+import { EditResearchFormComponent } from './edit-research-form/edit-research-form.component';
+import { EditArticleFormComponent } from './edit-article-form/edit-article-form.component';
 
 
 export const routes: Routes = [
@@ -45,5 +47,8 @@ export const routes: Routes = [
     {path: 'profile', component: UserProfileComponent},
     {path: 'research-result/:researchId', component: ResearchResultsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
     {path: 'question-analysis', component: QuestionAnalysisComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+    {path: 'edit-research/:id', component: EditResearchFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+    {path: 'edit-article/:id', component: EditArticleFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+
 
 ];

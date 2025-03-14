@@ -80,12 +80,19 @@ export class DataService {
 
 
   }
+  getArticleById(id:number):Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/Article/${id}`);
+  }
 
   addArticle(article: Article,token:string): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
     return this.http.post<any>(`${this.apiUrl}/Article`, article,{ headers });
+   }
+
+   updateArticle(id:number,article:Article):Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/Article/${id}`,article);
    }
 
    deleteArticle(id:number):Observable<any> {

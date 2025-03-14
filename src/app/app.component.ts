@@ -25,6 +25,8 @@ import { ConditionDenemeComponent } from './condition-deneme/condition-deneme.co
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResearchResultsComponent } from './research-results/research-results.component';
 import { QuestionAnalysisComponent } from './question-analysis/question-analysis.component';
+import { EditArticleFormComponent } from './edit-article-form/edit-article-form.component';
+import { EditResearchFormComponent } from './edit-research-form/edit-research-form.component';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +56,9 @@ import { QuestionAnalysisComponent } from './question-analysis/question-analysis
     ConditionDenemeComponent,
     UserProfileComponent,
     ResearchResultsComponent,
-    QuestionAnalysisComponent
+    QuestionAnalysisComponent,
+    EditArticleFormComponent,
+    EditResearchFormComponent
     
   ],
   templateUrl: './app.component.html',

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PagedResult } from '../Models/pagingResult.model';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-articles',
@@ -29,7 +30,7 @@ export class MyArticlesComponent {
   searchKeywordChanged = new Subject<string>();
   dropdownVisible: { [key: number]: boolean } = {};
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,private router:Router) {
     this.searchKeywordChanged.pipe(debounceTime(500)).subscribe(() => {
       this.onSearchChange();
     });
@@ -49,6 +50,7 @@ export class MyArticlesComponent {
 
   editArticle(articleId: number): void {
     console.log(`Makale düzenleniyor: ${articleId}`);
+    this.router.navigate([`edit-article/${articleId}`])
     // Burada düzenleme işlemi yapılacak (düzenleme sayfasına yönlendirme vs.)
   }
 
