@@ -113,6 +113,119 @@
     background-color: #ffc107 !important; /* Özel turuncu */
     color: #ffffff !important; /* Beyaz yazı */
   }
+
+
+
+  .research-options{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    margin-right: 20px;
+  }
+
+
+
+
+
+
+  .options-button {
+    
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    z-index: 100;
+    border-radius: 70%;
+    
+  }
+  .options-button:hover{
+    background-color: #c7c9cb;
+    
+
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #333;
+    margin: 2px 0;
+    border-radius: 50%;
+  }
+  
+  .dropdown-menu {
+    position: flex;
+    top: 30px;
+    left: 0;
+    background-color: black;
+    border: 1px solid #b90d0d;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    z-index: 999;
+  }
+
+  .dropdownmenu {
+    background-color: #ffffff; /* Beyaz arka plan */
+    z-index: 999;
+    padding: 15px;
+    border-radius: 8px; /* Yuvarlatılmış köşeler */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    width: 200px; /* Menü genişliği */
+    transition: all 0.3s ease-in-out; /* Yavaşça geçiş efekti */
+  }
+  
+  /* Menüdeki liste öğeleri için stil */
+  .dropdownmenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Her bir liste öğesi için stil */
+  .dropdownmenu li {
+    padding: 12px;
+    cursor: pointer;
+    width: 100%; /* Her elemanı menünün tam genişliğinde yapar */
+    text-align: center; /* Yazıyı ortalar */
+    font-weight: bold; /* Yazıyı kalın yapar */
+    font-size: 14px;
+    color: #333; /* Koyu gri metin rengi */
+    transition: background-color 0.3s, transform 0.2s; /* Hover efekt geçişi */
+    border-radius: 6px; /* Yuvarlatılmış kenarlar */
+  }
+  
+  /* Hover efekti */
+  .dropdownmenu li:hover {
+    background-color: #f2f2f2; /* Hover'da arka plan rengini değiştirir */
+    transform: scale(1.05); /* Hover'da hafif büyütme efekti */
+  }
+
+
+  .deleteBbutton {
+    color: #ff4d4d; /* Kırmızı yazı rengi */
+    background-color: rgb(255, 0, 0); /* Beyaz arka plan rengi */
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 6px; /* Yuvarlatılmış köşeler */
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #ff4d4d; /* Kırmızı sınır */
+    transition: background-color 0.3s, transform 0.2s; /* Hover geçişi */
+  }
+  
+  /* 'Sil' butonuna hover efekti */
+  .deleteButton:hover {
+    background-color: #ff4d4d; /* Hover'da kırmızı arka plan */
+    color: white; /* Hover'da yazıyı beyaz yap */
+    transform: scale(1.05); /* Hover'da hafif büyütme */
+  }
   
   
   

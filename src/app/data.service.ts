@@ -88,6 +88,18 @@ export class DataService {
     return this.http.post<any>(`${this.apiUrl}/Article`, article,{ headers });
    }
 
+   deleteArticle(id:number):Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/Article/${id}`);
+   }
+
+   deleteResearch(id:number):Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/Research/${id}`)
+   }
+
+   deleteMultipleArticle(articleIds:number[]):Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/Article/MultiDelete`, {body: articleIds});
+   }
+
    getCategories(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Category`);
   }

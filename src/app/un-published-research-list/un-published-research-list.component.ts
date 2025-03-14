@@ -28,6 +28,7 @@ export class UnPublishedResearchListComponent {
   startDate:string|null=null;
   endDate:string|null=null;
   matched:any;
+  dropdownVisible: { [key: number]: boolean } = {};
 
 
   constructor(
@@ -38,6 +39,24 @@ export class UnPublishedResearchListComponent {
   ngOnInit(): void {
     this.getResearches();
     this.getCategories();
+  }
+
+  toggleDropdown(researchId: number) {
+    // Eğer zaten açıksa, kapat; değilse, aç
+    this.dropdownVisible[researchId] = !this.dropdownVisible[researchId];
+    console.log("researchId:",researchId);
+    console.log("asd:",this.dropdownVisible[researchId]);
+  }
+
+  editResearch(researchId: number): void {
+    console.log(`Makale düzenleniyor: ${researchId}`);
+    // Burada düzenleme işlemi yapılacak (düzenleme sayfasına yönlendirme vs.)
+  }
+
+  // Kaydetme işlemi
+  saveResearch(researchId: number): void {
+    console.log(`Makale kaydediliyor: ${researchId}`);
+    // Kaydetme işlemi yapılacak
   }
 
   getResearches(): void {
@@ -108,6 +127,21 @@ export class UnPublishedResearchListComponent {
     console.log(`Araştırmaya git: ${id}`);
     localStorage.setItem("ResearchId",id.toString())
     this.router.navigate([`/research-detail/${id}`]);
+  }
+
+  deleteResearch(id: number): void {
+    if (confirm('Bu Araştırmayı silmek istediğinizden emin misiniz?')) {
+      this.dataService.deleteResearch(id).subscribe({
+        next: () => {
+          // Silme işlemi başarılı olursa makale listesini güncelle
+          this.researches = this.researches.filter(researches => researches.id !== id);
+          this.getResearches();
+        },
+        error: (err) => {
+          this.errorMessage = 'Araştırma silinirken hata oluştu: ' + err.message;
+        }
+      });
+    }
   }
 
 

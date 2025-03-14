@@ -73,8 +73,21 @@
   <div class="row">
     <div *ngFor="let research of researches" class="col-md-6 col-lg-4 mb-4">
       <div class="card research-card p-3">
+        <div class="research-options mr-3">
+          <button class="options-button" (click)="toggleDropdown(research.id)">
+            &#x22EE; <!-- Unicode for vertical ellipsis (three dots) -->
+          </button>
+          <!-- Dropdown menu -->
+          <div *ngIf="dropdownVisible[research.id]" class="dropdownmenu" >
+            <ul>
+              <li (click)="editResearch(research.id)"> Araştırmayı Düzenle</li>
+              <li (click)="saveResearch(research.id)">Araştırmayı Kaydet</li>
+              <li (click)="deleteResearch(research.id)" class="deleteBbutton">Araştırmayı Sil</li>
+            </ul>
+          </div>
+        </div>
         <!-- Üst Kısım: Yayınlanma Tarihi ve Kategori -->
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center ml-3">
           <span class="badge bg-primary text-white">{{ getCategoryName(research.categoryId) }}</span>
           <div class="text-end text-muted small">{{ research.publishedAt | date: 'dd.MM.yyyy' }}</div>
         </div>
