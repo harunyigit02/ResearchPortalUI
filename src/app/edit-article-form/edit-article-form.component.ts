@@ -27,6 +27,7 @@ export class EditArticleFormComponent {
 
 
     ngOnInit(): void {
+      
       // Formu oluştur
       this.articleForm = this.fb.group({
         title: ['', Validators.required],

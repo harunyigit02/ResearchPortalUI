@@ -234,6 +234,10 @@ export class DataService {
     return result;
   }
 
+  updateResearchRequirement(id:number,researchRequirement:ResearchRequirement):Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/ResearchRequirement/${id}`,researchRequirement);
+  }
+
   getMatchedResearches(token: string | null,pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null,maxDate:string|null):Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
