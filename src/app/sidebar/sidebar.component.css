@@ -2,7 +2,7 @@
   top: 60px; /* Navbar yüksekliği kadar aşağıda başlasın */
   height: calc(100vh - 60px); /* Ekranın tamamını kapla ve navbar yüksekliğini çıkar */
   background-color: #333030; /* Sidebar rengi */
-  width: 200px;
+  width: 1px;
   padding-top: 20px; /* Üstten biraz boşluk bırak */
   overflow-y: auto; /* Scroll aktif et */
   transition: width 0.3s ease;
@@ -68,3 +68,4 @@
 .nav-link:hover {
   color: rgb(255, 255, 255);
 }
+

@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent {
   userRole:any
+  isSidebarOpen = false; // Başlangıçta kapalı
+
+  
   constructor(
     private router:Router,
     private dataService: DataService
@@ -24,6 +27,9 @@ export class SidebarComponent {
 
   hasRole(roles: string[]): boolean {
     return roles.includes(this.userRole);
+  }
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
 }
