@@ -20,7 +20,8 @@ export const Location = {
   2: 'İstanbul',
   3: 'İzmir',
   4: 'Adana',
-  5:'Sakarya'
+  5:'Sakarya',
+  6: 'Konya',
 
 };
 

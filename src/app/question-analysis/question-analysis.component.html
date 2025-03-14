@@ -50,10 +50,16 @@
   
     <!-- Hesapla Butonu -->
     <button *ngIf="selectedQuestion" class="btn btn-success mt-4" (click)="calculate()">Hesapla</button>
+
+    <div *ngIf="errorMessageCheck">
+      <strong class="errorMessage mb-2">{{ errorMessageCheck }}</strong>
+
+    </div>
   
     <!-- Analiz Sonucu -->
     <div *ngIf="analysisResult && analysisResult.length > 0" class="result-box mt-4 p-3 bg-light border rounded shadow-sm">
         <h4 class="text-success">Analiz Sonucu:</h4>
+        
         
         <div *ngFor="let result of analysisResult" class="result-item mb-2">
           <strong class="text-dark">Seçenek: {{ result.optionText  }}</strong>

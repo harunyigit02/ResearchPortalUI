@@ -19,6 +19,7 @@ export class QuestionAnalysisComponent {
   selectedOption: any = null;
   selectedQuestion: any = null;
   analysisResult: any = null;
+  errorMessageCheck: string | null = null;
 
   constructor( private dataService:DataService){}
 
@@ -65,11 +66,16 @@ export class QuestionAnalysisComponent {
           // Seçeneklerin listesinden optionId'ye karşılık gelen optionText'i bul
           const question = this.research.questions.find(q => q.id === this.selectedQuestion);
           const option = question?.options.find(o => o.id === item.optionId);
+          
           return {
             ...item,
             optionText: option?.optionText // optionText'i de ekliyoruz
           };
         });
+        if(this.analysisResult.length == 0) {
+          this.errorMessageCheck = "Girilen sorguya dair cevap bulunamadı.";
+          console.log("error message:",this.errorMessageCheck);
+        }
         console.log(this.analysisResult);
       });
     }
