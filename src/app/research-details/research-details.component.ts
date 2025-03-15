@@ -193,6 +193,11 @@ export class ResearchDetailsComponent implements OnInit {
 
   }
 
+  navigateUpdateQuestion(){
+    const researchId = Number(this.route.snapshot.paramMap.get('id'));
+    this.router.navigate([`edit-question/${researchId}`]);
+  }
+
 
 
 

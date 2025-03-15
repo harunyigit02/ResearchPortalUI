@@ -24,6 +24,7 @@ import { QuestionAnalysisComponent } from './question-analysis/question-analysis
 import { EditResearchFormComponent } from './edit-research-form/edit-research-form.component';
 import { EditArticleFormComponent } from './edit-article-form/edit-article-form.component';
 import { EditRequirementsFormComponent } from './edit-requirements-form/edit-requirements-form.component';
+import { EditQuestionsComponent } from './edit-questions/edit-questions.component';
 
 
 export const routes: Routes = [
@@ -51,6 +52,9 @@ export const routes: Routes = [
     {path: 'edit-research/:id', component: EditResearchFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
     {path: 'edit-article/:id', component: EditArticleFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
     {path: 'edit-research-requirement/:id', component: EditRequirementsFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+    {path: 'edit-question/:id', component: EditQuestionsComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin','Researcher'] }},
+
+
 
 
 ];

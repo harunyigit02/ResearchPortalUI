@@ -10,6 +10,7 @@ import { RegisterRequest } from './Models/register-request.model';
 import { PagedResult } from './Models/pagingResult.model';
 import { VerifyEmail } from './Models/verify-email.model';
 import { ResearchRequirement } from './Models/research-requirement.model';
+import { Question } from './Models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -158,6 +159,8 @@ export class DataService {
   }
 
 
+
+
   getPublishedResearches(pageNumber:number,pageSize:number,categoryId:number|null|undefined,keyword:string|null|undefined,minDate:string|null|undefined,maxDate:string|null|undefined):Observable<any>{
     let params=new HttpParams()
     .set('pageNumber',pageNumber)
@@ -276,6 +279,19 @@ export class DataService {
     .set('questionId',questionId)
     return this.http.get<any[]>(`${this.apiUrl}/Answer/AnalyzeTargetQuestion`, {params});
   }
+
+  getQuestionsByResearchId(researchId:number):Observable<any>{
+    return this.http.get<any[]>(`${this.apiUrl}/Question/ByResearch/${researchId}`);
+  }
+
+  updateQuestion(id:number,question:Question):Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/Question/${id}`,question);
+  }
+
+  deleteQuestion(id:number):Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/Question/${id}`);
+  }
+
 
 
 
