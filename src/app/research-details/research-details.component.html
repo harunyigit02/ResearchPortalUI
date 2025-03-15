@@ -37,65 +37,68 @@
             <div *ngIf="researchRequirements.maxAge != null">
               <strong>Maksimum Yaş:</strong> {{ researchRequirements.maxAge }}
             </div>
-            <div *ngIf="researchRequirements.gender != null">
+            <div *ngIf="researchRequirements.gender.length > 0">
               <strong>Cinsiyet:</strong>
               <ul>
-                <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
+                 <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.location != null">
+            <div *ngIf="researchRequirements.location.length > 0">
               <strong>Konum:</strong>
               <ul>
                 <li *ngFor="let location of transformEnumToString(researchRequirements.location, 'location')">{{ location }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.educationLevel != null">
+            <div *ngIf="researchRequirements.educationLevel.length > 0">
               <strong>Eğitim Seviyesi:</strong>
               <ul>
                 <li *ngFor="let education of transformEnumToString(researchRequirements.educationLevel, 'educationLevel')">{{ education }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.occupation != null">
+            <div *ngIf="researchRequirements.occupation.length > 0">
               <strong>Meslek:</strong>
               <ul>
                 <li *ngFor="let occupation of transformEnumToString(researchRequirements.occupation, 'occupation')">{{ occupation }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.ethnicity != null">
+            <div *ngIf="researchRequirements.ethnicity.length > 0">
               <strong>Etnik Köken:</strong>
               <ul>
                 <li *ngFor="let ethnicity of transformEnumToString(researchRequirements.ethnicity, 'ethnicity')">{{ ethnicity }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.maritalStatus != null">
+            <div *ngIf="researchRequirements.maritalStatus.length > 0">
               <strong>Medeni Durum:</strong>
               <ul>
                 <li *ngFor="let status of transformEnumToString(researchRequirements.maritalStatus, 'maritalStatus')">{{ status }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.parentalStatus != null">
+            <div *ngIf="researchRequirements.parentalStatus.length > 0">
               <strong>Anne/Baba Durumu:</strong>
               <ul>
                 <li *ngFor="let status of transformEnumToString(researchRequirements.parentalStatus, 'parentalStatus')">{{ status }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.childStatus != null">
+            <div *ngIf="researchRequirements.childStatus.length > 0">
               <strong>Çocuk Durumu:</strong>
               <ul>
                 <li *ngFor="let status of transformEnumToString(researchRequirements.childStatus, 'childStatus')">{{ status }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.disabilityStatus != null">
+            <div *ngIf="researchRequirements.disabilityStatus.length > 0">
               <strong>Engellilik Durumu:</strong>
               <ul>
                 <li *ngFor="let status of transformEnumToString(researchRequirements.disabilityStatus, 'disabilityStatus')">{{ status }}</li>
               </ul>
             </div>
-            <div *ngIf="researchRequirements.housingType != null">
+            <div *ngIf="researchRequirements.housingType.length > 0">
               <strong>Konaklama Türü:</strong>
               <ul>
                 <li *ngFor="let housing of transformEnumToString(researchRequirements.housingType, 'housingType')">{{ housing }}</li>
               </ul>
+            </div>
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-outline-primary" (click)="navigateUpdateResearchRequirementPage()">Güncelle</button>
             </div>
           </div>
         </div>

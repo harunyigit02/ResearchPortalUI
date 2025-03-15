@@ -40,7 +40,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
-            [checked]="researchForm.value.gender.includes(option[0])"
+            [checked]="researchForm.get('gender')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'gender')"
             id="gender{{ option[0] }}"
           />
@@ -62,6 +62,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('location')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'location')"
             id="location{{ option[0] }}"
           />
@@ -83,6 +84,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('educationLevel')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'educationLevel')"
             id="educationLevel{{ option[0] }}"
           />
@@ -104,6 +106,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('ethnicity')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'ethnicity')"
             id="ethnicity{{ option[0] }}"
           />
@@ -125,6 +128,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('maritalStatus')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'maritalStatus')"
             id="maritalStatus{{ option[0] }}"
           />
@@ -146,6 +150,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('parentalStatus')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'parentalStatus')"
             id="parentalStatus{{ option[0] }}"
           />
@@ -167,6 +172,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('childStatus')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'childStatus')"
             id="childStatus{{ option[0] }}"
           />
@@ -188,6 +194,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('disabilityStatus')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'disabilityStatus')"
             id="disabilityStatus{{ option[0] }}"
           />
@@ -212,6 +219,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('housingType')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'housingType')"
             id="housingType{{ option[0] }}"
           />
@@ -231,6 +239,7 @@
             type="checkbox"
             class="form-check-input"
             [value]="option[0]"
+            [checked]="researchForm.get('occupation')?.value?.includes(+option[0])"
             (change)="onCheckboxChange($event, 'occupation')"
             id="occupation{{ option[0] }}"
           />

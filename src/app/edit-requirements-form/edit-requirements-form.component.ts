@@ -15,6 +15,8 @@ import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, Housi
 })
 export class EditRequirementsFormComponent {
 
+  researchId!:number
+
    researchForm!: FormGroup;
     researchRequirement!:ResearchRequirement
     // Enum verileri
@@ -35,15 +37,15 @@ export class EditRequirementsFormComponent {
     constructor(private dataService:DataService,private router:Router,private fb: FormBuilder,private route:ActivatedRoute) {}
   
     ngOnInit() {
-      const researchId = this.route.snapshot.paramMap.get('id');
-      this.dataService.getResearchRequirementByResearchId(Number(researchId)).subscribe({
+      this.researchId = Number(this.route.snapshot.paramMap.get('id'));
+      this.dataService.getResearchRequirementByResearchId(this.researchId).subscribe({
         next: (data) => {
           console.log("data verileri",data);
           this.researchForm.patchValue({
             minAge:data.minAge,
             maxAge:data.maxAge,
-            gender: data.gender,            // gender alanını dolduruyoruz
-            location: data.location,        // location alanını dolduruyoruz
+            gender: data.gender,           
+            location: data.location,       
             educationLevel: data.educationLevel,
             occupation: data.occupation,
             ethnicity: data.ethnicity,
@@ -61,7 +63,7 @@ export class EditRequirementsFormComponent {
       });
       
       this.researchForm = this.fb.group({
-        researchId: [researchId],
+        researchId: [this.researchId],
         minAge: [null],
         maxAge: [null],
         gender: [null],  // Başlangıçta null
@@ -84,29 +86,40 @@ export class EditRequirementsFormComponent {
     onCheckboxChange(event: any, formControlName: string) {
       const control = this.researchForm.get(formControlName);
       if(control){
+        let currentValue = control.value || [];
         if (event.target.checked) {
-          // Eğer daha önce null ise bir array oluştur
-          if (control.value === null) {
-            control.setValue([]);
-          }
           // Seçenek ekle
-          control.value.push(+event.target.value);
+          currentValue.push(+event.target.value);
         } else {
           // Seçenek kaldır
-          const index = control.value.indexOf(+event.target.value);
+          const index = currentValue.indexOf(+event.target.value);
           if (index !== -1) {
-            control.value.splice(index, 1);
+            currentValue.splice(index, 1);
           }
         }
+        control.setValue(currentValue);  // Yeni değeri form kontrolüne ata
       }
     }
   
     // Formu gönderme
     onSubmit() {
-  
-      console.log("son veri:",this.researchForm.value);
-      
+      if (this.researchForm.invalid) {
+        return; // Form geçerli değilse işlem yapılmaz
       }
+  
+      const updatedResearchRequirement: ResearchRequirement = this.researchForm.value;
+  
+      // Güncelleme isteğini gönderme
+      this.dataService.updateResearchRequirement(this.researchId,updatedResearchRequirement).subscribe({
+        next: (response) => {
+          console.log("Güncelleme başarılı", response);
+          this.router.navigate([`research-detail/${this.researchForm.value.researchId}`]);
+        },
+        error: (err) => {
+          console.error("Güncelleme işlemi sırasında hata oluştu", err);
+        }
+      });
+    }
   
   
       

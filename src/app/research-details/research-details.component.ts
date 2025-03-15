@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { DataService } from '../data.service';
 import { Research } from '../Models/research.model';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResearchRequirement } from '../Models/research-requirement.model';
 import { ChildStatus, DisabilityStatus, EducationLevel, Ethnicity, Gender, HousingType, Location, MaritalStatus, Occupation, ParentalStatus } from '../Enums/participant-infos';
 
@@ -26,7 +26,7 @@ export class ResearchDetailsComponent implements OnInit {
   userId:any;
 
 
-  constructor(private dataService:DataService, private router:Router){}
+  constructor(private dataService:DataService, private router:Router, private route:ActivatedRoute){}
 
 
   ngOnInit(): void {
@@ -119,6 +119,16 @@ export class ResearchDetailsComponent implements OnInit {
     const researchId = Number(localStorage.getItem("ResearchId"));
     this.dataService.getResearchRequirementByResearchId(researchId).subscribe({
       next: (data) => {
+        data.gender = data.gender ?? [],
+        data.location = data.location ?? [],
+        data.educationLevel = data.educationLevel ?? [],
+        data.occupation = data.occupation ?? [],
+        data.ethnicity = data.ethnicity ?? [],
+        data.maritalStatus = data.maritalStatus ?? [],
+        data.parentalStatus = data.parentalStatus ?? [],
+        data.childStatus = data.childStatus ?? [],
+        data.disabilityStatus = data.disabilityStatus ?? [],
+        data.housingType = data.housingType ?? []
         this.researchRequirements = data;
         console.log('Araştırma Şartları------------:', this.researchRequirements);
       },
@@ -126,6 +136,7 @@ export class ResearchDetailsComponent implements OnInit {
         console.log('Hata oluştu.', err.message);
       }
     });
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",this.researchRequirements);
   }
 
   toggleResearchRequirements() {
@@ -174,6 +185,12 @@ export class ResearchDetailsComponent implements OnInit {
   viewResearchResults() {
     // Araştırma sonuçlarını görüntüleme sayfasına yönlendirme
     this.router.navigate([`/research-result/${this.id}`]);
+  }
+
+  navigateUpdateResearchRequirementPage(){
+    const researchId = Number(this.route.snapshot.paramMap.get('id'));
+    this.router.navigate([`edit-research-requirement/${researchId}`]);
+
   }
 
 
