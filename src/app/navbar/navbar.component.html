@@ -14,15 +14,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        <!-- Kullanıcı login olmuşsa email ve rolü göster -->
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <span class="navbar-text mr-3">
+            {{ user?.email }} - {{ user?.role }}
+          </span>
+        </li>
+        <!-- Login veya Logout butonu -->
         <li class="nav-item" *ngIf="isLoggedIn">
           <button class="btn" 
-          [ngClass]="{
-            'btn-outline-secondary': !isLoggedIn, 
-            'btn-danger': isLoggedIn
-          }" 
-          (click)="onAuthAction()">
-          <i class="fas fa-user-circle"></i>
-          {{ isLoggedIn ? 'Logout' : 'Login' }}
+            [ngClass]="{
+              'btn-outline-secondary': !isLoggedIn, 
+              'btn-danger': isLoggedIn
+            }" 
+            (click)="onAuthAction()">
+            <i class="fas fa-user-circle"></i>
+            {{ isLoggedIn ? 'Logout' : 'Login' }}
           </button>
         </li>
       </ul>

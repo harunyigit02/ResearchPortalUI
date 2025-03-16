@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Article } from './Models/article.model';
 import { Research } from './Models/research.model';
 import { Answer } from './Models/answer.model';
@@ -11,6 +11,7 @@ import { PagedResult } from './Models/pagingResult.model';
 import { VerifyEmail } from './Models/verify-email.model';
 import { ResearchRequirement } from './Models/research-requirement.model';
 import { Question } from './Models/question.model';
+import { ProfileUser } from './Models/profileUser.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class DataService {
   private apiUrl = 'https://localhost:7237/api';
   private loginPageRoute = '/login';
   isLoginPage: boolean = false;
+  private userSubject: BehaviorSubject<ProfileUser | null> = new BehaviorSubject<ProfileUser | null>(null);
 
   constructor(private router:Router,private http: HttpClient) {
     this.router.events.subscribe(event => {
@@ -322,6 +324,7 @@ export class DataService {
 
   // Kullanıcıyı çıkış yaptırma (Token'ı silme)
   logout(): void {
+    this.userSubject.next(null);
     localStorage.removeItem('jwt_token');
   }
 
@@ -387,7 +390,54 @@ export class DataService {
 
 
 
-  //Participant Form
+  // ---------- User
+
+  getUser(token:string):Observable<any>{
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/Auth/User`,{headers})
+
+  }
+
+
+  getPagedUsers(pageNumber:number,pageSize:number,role:string|null|undefined,keyword:string|null|undefined,minDate:string|null|undefined,maxDate:string|null|undefined):Observable<any> {
+    console.log("dataService başında selectedCategoryId:",role,typeof(role));
+    let params= new HttpParams()
+    .set('pageNumber',pageNumber)
+    .set('pageSize',pageSize)
+    if(role!=null&&role!=undefined){
+      params=params.set('role',role);
+    }
+    if(keyword!=null&&keyword!=undefined){
+      params=params.set('keyword',keyword);
+    }
+    if(minDate!=null&&minDate!=undefined){
+      params=params.set('minDate',minDate);
+    }
+    if(maxDate!=null&&maxDate!=undefined){
+      params=params.set('maxDate',maxDate);
+    }
+    console.log(" dataService  sonunda selectedcategoryId:",role);
+    console.log("param:"+params);
+
+    return this.http.get<PagedResult<ProfileUser>>(`${this.apiUrl}/Auth/Users`, { params });
+
+
+
+  }
+
+
+
+
+
+
+
+  getUserObservable(): Observable<ProfileUser | null> {
+    return this.userSubject.asObservable();
+  }
 
 
 

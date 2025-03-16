@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginRequest } from '../Models/login-request.model';
+import { BehaviorSubject } from 'rxjs';
+import { ProfileUser } from '../Models/profileUser.model';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,8 @@ import { LoginRequest } from '../Models/login-request.model';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   errorMessage: string = '';
+  private userSubject = new BehaviorSubject<ProfileUser | null>(null);
+  user$ = this.userSubject.asObservable();
 
   constructor(private authService: DataService, private router: Router) {}
 
@@ -36,6 +40,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(loginRequest).subscribe(
       (response) => {
+        this.userSubject.next(response);
         console.log("Giriş Başarılı:", response);
         this.authService.saveToken(response.token);
         this.checkParticipantInfo(); // Başarılı giriş sonrası yönlendirme

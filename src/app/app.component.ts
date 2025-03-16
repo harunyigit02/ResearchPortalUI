@@ -29,6 +29,7 @@ import { EditArticleFormComponent } from './edit-article-form/edit-article-form.
 import { EditResearchFormComponent } from './edit-research-form/edit-research-form.component';
 import { EditRequirementsFormComponent } from './edit-requirements-form/edit-requirements-form.component';
 import { EditQuestionsComponent } from './edit-questions/edit-questions.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @Component({
   selector: 'app-root',
@@ -62,7 +63,8 @@ import { EditQuestionsComponent } from './edit-questions/edit-questions.componen
     EditArticleFormComponent,
     EditResearchFormComponent,
     EditRequirementsFormComponent,
-    EditQuestionsComponent
+    EditQuestionsComponent,
+    UserListComponent
     
   ],
   templateUrl: './app.component.html',

@@ -8,3 +8,7 @@
   .navbar-brand{
     color: aliceblue !important;
   }
+  .navbar-text{
+    color: aliceblue !important;
+    z-index: 100;
+  }
