@@ -64,14 +64,14 @@ export class DataService {
     if(categoryId!=null&&categoryId!=undefined){
       params=params.set('categoryId',categoryId);
     }
-    if(keyword){
+    if(keyword!=null&&keyword!=undefined){
       params=params.set('keyword',keyword);
     }
     if(minDate!=null&&minDate!=undefined){
-      params=params.set('keyword',minDate);
+      params=params.set('minDate',minDate);
     }
     if(maxDate!=null&&maxDate!=undefined){
-      params=params.set('keyword',maxDate);
+      params=params.set('maxDate',maxDate);
     }
     console.log(" dataService  sonunda selectedcategoryId:",categoryId);
     console.log("param:"+params);
@@ -195,6 +195,8 @@ export class DataService {
    updateResearch(id:number,research: Research): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/Research/${id}`, research);
    }
+
+   
 
 
    getArticleViewsCount(articleId:number):Observable<any>{

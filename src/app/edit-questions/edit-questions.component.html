@@ -1,5 +1,9 @@
 <div class="container">
-    <h2 class="title">Research ID: {{ researchId }} - Soruları Düzenle</h2>
+    <h2 class="title">Soruları Düzenle</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-primary" (click)="navigateAddQuestionPage()">Soru Ekle</button>
+    </div>
   
     <div *ngFor="let question of questions" class="question-card">
       <div *ngIf="selectedQuestion?.id === question.id" class="edit-form">

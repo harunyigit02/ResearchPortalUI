@@ -83,6 +83,11 @@ export class EditQuestionsComponent {
     this.router.navigate([`research-detail/${researchId}`]);
   }
 
+  navigateAddQuestionPage(){
+    const researchId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`add-research-form/${researchId}`])
+  }
+
 
 
 

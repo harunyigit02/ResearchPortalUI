@@ -24,10 +24,10 @@
   
         <div class="mb-3">
           <label for="participationMode" class="form-label">Katılım Şekli</label>
-          <select id="participationMode" formControlName="isFaceToFace" class="form-control" required>
-            <option value="" disabled>Katılım şekli seçin</option>
-            <option [value]="true" [selected]="researchForm.get('isFaceToFace')?.value === true">Yüz Yüze</option>
-            <option [value]="false" [selected]="researchForm.get('isFaceToFace')?.value === false">Form</option>
+          <select id="participationMode" class="form-control" (change)="onParticipationModeChange($event)">
+            <option value="" disabled [selected]="researchForm.get('isFaceToFace')?.value == null">Katılım şekli seçin</option>
+            <option value="true" [selected]="researchForm.get('isFaceToFace')?.value === true">Yüz Yüze</option>
+            <option value="false" [selected]="researchForm.get('isFaceToFace')?.value === false">Form</option>
           </select>
           <div *ngIf="researchForm.get('isFaceToFace')?.invalid && researchForm.get('isFaceToFace')?.touched" class="text-danger">
             Bu alan zorunludur.

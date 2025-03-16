@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormQuestion } from '../Models/form-question.model';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-research-form',
@@ -20,13 +20,17 @@ export class AddResearchFormComponent {
   researchForm: FormGroup;
   questions: any[] = []; // Soruları tutan dizi
   questionCount: number = 1; // Soru numarasını takip etmek için
-  researchId:number=Number(localStorage.getItem("ResearchId"));
+  researchId!:number;
 
-  constructor(private dataService:DataService, private fb: FormBuilder,private router:Router) {
+  constructor(private dataService:DataService, private fb: FormBuilder,private router:Router,private route:ActivatedRoute) {
     this.researchForm = this.fb.group({
       questionText: [''],
       options: this.fb.array([])
     });
+  }
+
+  ngOnInit(){
+    this.researchId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   get options(): FormArray {

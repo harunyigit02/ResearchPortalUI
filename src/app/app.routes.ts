@@ -33,7 +33,7 @@ export const routes: Routes = [
     {path: 'heroes-list', component: HeroesListComponent},
     {path: 'articles', component: ContentComponent, canActivate: [AuthGuard]},
     {path: 'add-article', component: AddArticleComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin'] }},
-    {path: 'add-research-form', component: AddResearchFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin'] }},
+    {path: 'add-research-form/:id', component: AddResearchFormComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin'] }},
     {path: 'researches', component: ResearchListComponent, canActivate: [AuthGuard]},
     {path: 'add-research', component: AddResearchComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin'] }},
     {path: 'research-detail/:id', component: ResearchDetailsComponent, canActivate: [AuthGuard, ]},

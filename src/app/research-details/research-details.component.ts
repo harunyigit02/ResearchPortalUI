@@ -67,6 +67,7 @@ export class ResearchDetailsComponent implements OnInit {
     // Güncellenen araştırmayı sunucuya gönder
     this.dataService.updateResearch(this.id, this.research).subscribe({
       next: response => {
+        console.log("AAAAAAAAAAAAAAAAAA GÜNCELLENDİ:",this.research)
         this.handleSuccess('Araştırma başarıyla güncellendi!');
       },
       error: error => {

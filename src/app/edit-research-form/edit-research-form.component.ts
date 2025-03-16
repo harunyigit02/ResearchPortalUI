@@ -90,7 +90,8 @@ updateResearch(id:number): void {
   this.isLoading = true;
   const updatedResearch = {
     
-    ...this.researchForm.value
+    ...this.researchForm.value,
+     
   };
 
   this.dataService.updateResearch(id,updatedResearch).subscribe({
@@ -108,6 +109,10 @@ updateResearch(id:number): void {
       this.isLoading = false;
     }
   });
+}
+onParticipationModeChange(event: Event) {
+  const target = event.target as HTMLSelectElement;
+  this.researchForm.get('isFaceToFace')?.setValue(target.value === 'true'); // String "true" → Boolean true, "false" → Boolean false
 }
 
 
