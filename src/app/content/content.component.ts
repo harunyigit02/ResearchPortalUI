@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { PagedResult } from '../Models/pagingResult.model';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-content',
@@ -25,10 +26,15 @@ export class ContentComponent {
   searchKeyword: string = '';
   startDate:any;
   endDate:any;
+  searchKeywordChanged = new Subject<string>();
 
 
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.searchKeywordChanged.pipe(debounceTime(500)).subscribe(() => {
+          this.onSearchChange();
+        });
+  }
 
   ngOnInit(): void {
     this.getArticles();

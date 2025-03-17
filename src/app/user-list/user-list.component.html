@@ -5,11 +5,18 @@
     <div class="card p-3 mb-4 shadow-sm">
       <div class="row g-3">
         <div class="col-md-4">
-          <input type="text" [(ngModel)]="searchKeyword" class="form-control" (input)="onSearchChange()" placeholder="Kullanıcı Ara...">
+          <input
+    id="searchInput"
+    type="text"
+    class="form-control search-box"
+    placeholder="Kullanıcı ara..."
+    [(ngModel)]="searchKeyword"
+    (keyup)="searchKeywordChanged.next(searchKeyword)"
+  />
         </div>
         <div class="col-md-3">
           <select [(ngModel)]="selectedRole" class="form-select" (change)="onRoleChange()">
-            <option value="">Tüm Roller</option>
+            <option value="null">Tüm Roller</option>
             <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>

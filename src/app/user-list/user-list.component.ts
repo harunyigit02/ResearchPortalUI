@@ -4,6 +4,7 @@ import { ProfileUser } from '../Models/profileUser.model';
 import { PagedResult } from '../Models/pagingResult.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -23,8 +24,13 @@ export class UserListComponent {
   searchKeyword: string = '';
   startDate:any;
   endDate:any;
+  searchKeywordChanged = new Subject<string>();
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.searchKeywordChanged.pipe(debounceTime(500)).subscribe(() => {
+                  this.onSearchChange();
+                });
+  }
 
   ngOnInit(){
     this.getUsers();

@@ -10,7 +10,8 @@
     class="form-control search-box"
     placeholder="Makale başlığı veya açıklaması ara..."
     [(ngModel)]="searchKeyword"
-    (keyup)="onSearchChange()"
+    (keyup)="searchKeywordChanged.next(searchKeyword)"
+    
   />
 </div>
 

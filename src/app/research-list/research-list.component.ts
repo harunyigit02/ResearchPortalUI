@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PagedResult } from '../Models/pagingResult.model';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-research-list',
@@ -29,11 +30,16 @@ export class ResearchListComponent {
   matched:boolean=false;
   startDate: any = null;
   endDate: any = null;
+  searchKeywordChanged = new Subject<string>();
 
   constructor(
     private router:Router,
     private dataService: DataService
-  ) {}
+  ) {
+     this.searchKeywordChanged.pipe(debounceTime(500)).subscribe(() => {
+              this.onSearchChange();
+            });
+  }
 
   ngOnInit(): void {
     this.getResearches();
