@@ -18,47 +18,63 @@ export class AddArticleComponent {
   isLoading = false; // Yükleme durumu için değişken
   successMessage: string | null = null; // Başarılı ekleme için mesaj
   errorMessage: string | null = null;
+  selectedFile: File | null = null;
+
 
   constructor( private dataService:DataService, private fb: FormBuilder) {
     this.articleForm = this.fb.group({
       title: ['', Validators.required],
       categoryId: ['', Validators.required],       // Başlık için zorunlu alan
       description: ['', Validators.required],
-      content: ['', Validators.required],  // Açıklama için zorunlu alan
+        // Açıklama için zorunlu alan
       // Diğer alanlar için gerekli form kontrolünü ekleyebilirsiniz
     });
   }
   ngOnInit(): void {
     this.getCategories();
   }
-
-  addArticle(): void {
-    if (this.articleForm.valid) {
-      this.isLoading = true; // Yükleme durumunu başlat
-      const token=localStorage.getItem("jwt_token");
-
-      if(token){
-        this.dataService.addArticle(this.articleForm.value,token)
-        .subscribe({
-          next: response => {
-            this.successMessage = 'Makale başarıyla eklendi!'; // Başarılı mesajı
-            this.errorMessage = null; // Hata mesajını sıfırla
-            this.articleForm.reset(); // Formu sıfırla
-            this.isLoading = false; // Yükleme durumunu bitir
-          },
-          error: error => {
-            console.error('Makale ekleme hatası:', error);
-            this.errorMessage = 'Makale eklenirken bir hata oluştu!'; // Hata mesajı
-            this.successMessage = null; // Başarılı mesajı sıfırla
-            this.isLoading = false; // Yükleme durumunu bitir
-          }
-        });
-    } else {
-      this.errorMessage = 'Form geçersiz! Lütfen gerekli alanları doldurun.'; // Hata mesajı
-      this.successMessage = null; // Başarılı mesajı sıfırla
+  
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      console.log("Seçilen dosya:", this.selectedFile); // DEBUG
     }
-      }
   }
+
+addArticle(): void {
+  if (this.articleForm.valid && this.selectedFile) {
+    this.isLoading = true;
+    const token = localStorage.getItem("jwt_token");
+
+    const formData = new FormData();
+    formData.append("file", this.selectedFile); // IFormFile parametresi
+    formData.append("title", this.articleForm.get("title")?.value);
+    formData.append("categoryId", this.articleForm.get("categoryId")?.value);
+    formData.append("description", this.articleForm.get("description")?.value);
+
+    // content artık textarea değil, PDF dosyası olduğundan gönderilmesine gerek yok
+
+    if (token) {
+      this.dataService.addArticle(formData, token).subscribe({
+        next: (res) => {
+          this.successMessage = "Makale başarıyla eklendi!";
+          this.articleForm.reset();
+          this.selectedFile = null;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Makale ekleme hatası:", err);
+          this.errorMessage = "Makale eklenirken bir hata oluştu!";
+          this.isLoading = false;
+        }
+      });
+    }
+  } else {
+    this.errorMessage = "Form eksik veya PDF yüklenmedi.";
+    this.successMessage = null;
+  }
+}
 
   getCategories(): void {
     this.dataService.getCategories().subscribe({

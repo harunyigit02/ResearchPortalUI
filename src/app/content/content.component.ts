@@ -126,6 +126,30 @@ export class ContentComponent {
     });
   }
 
+  downloadArticle(id:number){
+    this.dataService.downloadArticle(id).subscribe({
+      next: (response: Blob) => {
+        // Blob verisini al
+        const blob = response;
 
+        // Blob'dan geçici bir URL oluştur
+        const url = window.URL.createObjectURL(blob);
+
+        // Yeni bir <a> etiketi oluştur ve tıklama işlemi ile indir
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Makale_${id}.pdf`; // İndirilecek dosyanın adı
+
+        // A etiketine tıklama işlemi simüle et
+        a.click();
+
+        // URL'yi serbest bırak
+        window.URL.revokeObjectURL(url);
+  }
+
+  
+
+    });
+}
 
 }

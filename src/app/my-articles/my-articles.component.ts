@@ -41,6 +41,8 @@ export class MyArticlesComponent {
     this.getCategories(); // Kategorileri al
   }
 
+  
+
   toggleDropdown(articleId: number) {
     // Eğer zaten açıksa, kapat; değilse, aç
     this.dropdownVisible[articleId] = !this.dropdownVisible[articleId];
@@ -48,11 +50,38 @@ export class MyArticlesComponent {
     console.log("asd:",this.dropdownVisible[articleId]);
   }
 
+
+  
+
   editArticle(articleId: number): void {
     console.log(`Makale düzenleniyor: ${articleId}`);
     this.router.navigate([`edit-article/${articleId}`])
     // Burada düzenleme işlemi yapılacak (düzenleme sayfasına yönlendirme vs.)
   }
+
+  downloadArticle(id:number){
+    this.dataService.downloadArticle(id).subscribe({
+      next: (response) => {
+        const blob = response as Blob;
+
+        // 📦 Tarayıcının dosya adını kullanması için Content-Disposition'ı bırakıyoruz
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+
+        // ❗ Dosya adını manuel belirlemeden bırakıyoruz (tarayıcı kendi alıyor)
+        a.download = `Makale_${id}.pdf`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(downloadUrl);
+  }
+
+  
+
+    });
+}
 
   // Kaydetme işlemi
   saveArticle(articleId: number): void {

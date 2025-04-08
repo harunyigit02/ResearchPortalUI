@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Article } from './Models/article.model';
@@ -12,6 +12,7 @@ import { VerifyEmail } from './Models/verify-email.model';
 import { ResearchRequirement } from './Models/research-requirement.model';
 import { Question } from './Models/question.model';
 import { ProfileUser } from './Models/profileUser.model';
+import { FilterDto } from './Models/filterDto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,12 +88,23 @@ export class DataService {
     return this.http.get<any>(`${this.apiUrl}/Article/${id}`);
   }
 
-  addArticle(article: Article,token:string): Observable<any> {
+  addArticle(formData: FormData, token: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.apiUrl}/Article`, article,{ headers });
-   }
+  
+    return this.http.post(`${this.apiUrl}/Article`, formData, { headers });
+  }
+
+  downloadArticle(id: number): Observable<Blob> {
+    
+  
+    return this.http.get<Blob>(`${this.apiUrl}/Article/${id}/Download`, {
+      
+      
+      responseType: 'blob' as 'json'  // 'blob' türünde döndüğünden emin olun
+    });
+  }
 
    updateArticle(id:number,article:Article):Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/Article/${id}`,article);
@@ -277,11 +289,14 @@ export class DataService {
     })
     return this.http.get<any>(`${this.apiUrl}/ParticipantInfo/UserInfos`,{headers});
   }
-  getQuestionParticipantPercentage(optionId: number, questionId: number): Observable<any[]> {
-    let params=new HttpParams()
-    .set('optionId',optionId)
-    .set('questionId',questionId)
-    return this.http.get<any[]>(`${this.apiUrl}/Answer/AnalyzeTargetQuestion`, {params});
+  getQuestionParticipantPercentage(filterDto:FilterDto): Observable<any[]> {
+   
+    return this.http.post<any[]>(`${this.apiUrl}/Answer/AnalyzeTargetQuestion`, filterDto);
+  }
+
+  analyzeAllQuestions(optionIds:number[],researchId:number):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/Answer/AnalyzeAllQuestions/${researchId}`,optionIds);
+
   }
 
   getQuestionsByResearchId(researchId:number):Observable<any>{
