@@ -1,42 +1,46 @@
 .questions-container {
-    width: 100%;
-    
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .question-item {
-    background-color: #e3f2fd; /* Açık mavi arka plan */
-    border-radius: 8px;        /* Köşeleri yuvarlat */
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
-    width: 100%; /* Ekranı kaplayacak şekilde genişlet */
-  }
-  
-  .question-item strong {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-  }
-  .questions-container ul {
-    list-style-type: none; /* Madde işaretini kaldırır */
-    padding-left: 0; /* Soldaki boşluğu kaldırır */
-  }
-  
-  .option-item {
-    margin-left: 20px;
-    list-style-type: disc; /* Seçeneklerin başına madde işareti ekleyin */
-  }
-  .complete-button-container {
-    padding-right: 15px; /* Sağda boşluk bırak */
-    margin-top: 10px;
-    
-  }
-  .harun{
-    width: 100px;
-    background-color: aqua;
-  }
+  width: 100%;
+  padding: 20px;
+  background-color: #f5f8fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
 
+.question-item {
+  background-color: #e3f2fd;
+  border-left: 5px solid #0d6efd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease-in-out;
+}
 
-  
+.question-item:hover {
+  transform: scale(1.01);
+}
+
+.question-item strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #0d6efd;
+}
+
+.option-item {
+  margin-left: 20px;
+  list-style-type: disc;
+  padding: 2px 0;
+}
+
+.complete-button-container {
+  margin-top: 20px;
+  padding-right: 15px;
+}
+
+input.form-control {
+  border-radius: 6px;
+}
+
+button.btn {
+  border-radius: 6px;
+}

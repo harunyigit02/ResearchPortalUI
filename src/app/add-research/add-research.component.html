@@ -1,60 +1,60 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Araştırma Ekle</h2>
-    <div class="card research-card p-4">
-      <form [formGroup]="researchForm" (ngSubmit)="addResearch()">
-        <div class="mb-3">
-          <label for="title" class="form-label">Başlık</label>
-          <input type="text" id="title" class="form-control" formControlName="title" placeholder="Başlığı girin">
-          <div *ngIf="researchForm.get('title')?.invalid && researchForm.get('title')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="glass-card p-5 w-100" style="max-width: 700px;">
+    <h2 class="text-center mb-4 text-gradient">📊 Araştırma Ekle</h2>
 
-        <div class="mb-3">
-          <label for="category" class="form-label">Kategori</label>
-          <select id="category" formControlName="categoryId" class="form-control" required>
-            <option value="" disabled selected>Kategori seçin</option>
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-          </select>
-          <div *ngIf="researchForm.get('categoryId')?.invalid && researchForm.get('categoryId')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
-        <div class="mb-3">
-            <label for="participationMode" class="form-label">Katılım Şekli</label>
-            <select id="participationMode" formControlName="isFaceToFace" class="form-control" required>
-              <option value="" disabled selected>Katılım şekli seçin</option>
-              <option value="true">Yüz Yüze</option>
-              <option value="false">Form</option>
-            </select>
-            <div *ngIf="researchForm.get('isFaceToFace')?.invalid && researchForm.get('isFaceToFace')?.touched" class="text-danger">
-              Bu alan zorunludur.
-            </div>
-          </div>
+    <form [formGroup]="researchForm" (ngSubmit)="addResearch()">
 
-        <div class="mb-3">
-          <label for="description" class="form-label">Açıklama</label>
-          <textarea id="description" class="form-control" formControlName="description" rows="4" placeholder="Açıklamayı girin"></textarea>
-          <div *ngIf="researchForm.get('description')?.invalid && researchForm.get('description')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
+      <div class="mb-4">
+        <label for="title" class="form-label">Başlık</label>
+        <input type="text" id="title" class="form-control custom-input" formControlName="title" placeholder="Araştırma başlığını yazınız">
+        <small *ngIf="researchForm.get('title')?.invalid && researchForm.get('title')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
 
-        
+      <div class="mb-4">
+        <label for="category" class="form-label">Kategori</label>
+        <select id="category" formControlName="categoryId" class="form-select custom-input">
+          <option value="" disabled selected>Kategori seçiniz</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+        <small *ngIf="researchForm.get('categoryId')?.invalid && researchForm.get('categoryId')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
 
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary" [disabled]="isLoading">
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Araştırma Ekle
-          </button>
-        </div>
+      <div class="mb-4">
+        <label for="participationMode" class="form-label">Katılım Şekli</label>
+        <select id="participationMode" formControlName="isFaceToFace" class="form-select custom-input">
+          <option value="" disabled selected>Katılım şekli seçin</option>
+          <option value="true">Yüz Yüze</option>
+          <option value="false">Form</option>
+        </select>
+        <small *ngIf="researchForm.get('isFaceToFace')?.invalid && researchForm.get('isFaceToFace')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
 
-        <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
-          {{ successMessage }}
-        </div>
-        <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
-          {{ errorMessage }}
-        </div>
-      </form>
-    </div>
+      <div class="mb-4">
+        <label for="description" class="form-label">Açıklama</label>
+        <textarea id="description" class="form-control custom-input" formControlName="description" rows="4" placeholder="Açıklama giriniz..."></textarea>
+        <small *ngIf="researchForm.get('description')?.invalid && researchForm.get('description')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
+
+      <button type="submit" class="btn btn-glass w-100" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+        Araştırma Ekle
+      </button>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+        {{ errorMessage }}
+      </div>
+
+    </form>
   </div>
+</div>

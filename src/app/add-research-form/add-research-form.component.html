@@ -1,30 +1,37 @@
-<h2>Form Ekle</h2>
-<form [formGroup]="researchForm">
-  <div class="mb-3">
-    <label for="questionText" class="form-label">Soru Metni:</label>
-    <input type="text" formControlName="questionText" class="form-control" placeholder="Soru metnini buraya yazın" />
-  </div>
+<h2 class="text-center mt-4 mb-4">📝 Soru Ekleme Formu</h2>
 
-  <div class="mb-3">
-    <label class="form-label" *ngIf="options.controls.length > 0">Seçenekler:</label>
-    <div formArrayName="options">
-      <div *ngFor="let option of options.controls; let i = index" class="input-group mb-2">
-        <input [formControlName]="i" class="form-control" placeholder="Seçenek {{i + 1}}" />
-        <button type="button" class="btn btn-danger" (click)="removeOption(i)">Kaldır</button>
-      </div>
+<div class="card shadow-sm p-4 mb-4">
+  <form [formGroup]="researchForm">
+    <div class="mb-3">
+      <label for="questionText" class="form-label">Soru Metni:</label>
+      <input type="text" formControlName="questionText" class="form-control" placeholder="Soru metnini buraya yazın" />
     </div>
-    <button type="button" class="btn btn-secondary" (click)="addOption()">Seçenek Ekle</button>
-  </div>
 
-  <button type="button" class="btn btn-primary" (click)="addQuestion()"> Soruyu Ekle</button>
-</form>
+    <div class="mb-3">
+      <label class="form-label" *ngIf="options.controls.length > 0">Seçenekler:</label>
+      <div formArrayName="options">
+        <div *ngFor="let option of options.controls; let i = index" class="input-group mb-2">
+          <input [formControlName]="i" class="form-control" placeholder="Seçenek {{i + 1}}" />
+          <button type="button" class="btn btn-outline-danger" (click)="removeOption(i)">
+            ❌
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline-secondary mt-2" (click)="addOption()">
+        ➕ Seçenek Ekle
+      </button>
+    </div>
 
-<hr>
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="addQuestion()">✅ Soruyu Ekle</button>
+    </div>
+  </form>
+</div>
 
-
-  <div *ngIf="questions.length > 0" class="questions-container">
-  <h3>Eklenen Sorular:</h3>
-  <ul>
+<!-- Eklenen Sorular -->
+<div *ngIf="questions.length > 0" class="questions-container">
+  <h3 class="text-center mb-3">📋 Eklenen Sorular</h3>
+  <ul class="list-unstyled">
     <li *ngFor="let question of questions; let i = index" class="question-item">
       <strong>Soru {{ i + 1 }}: {{ question.questionText }}</strong>
       <ul>
@@ -34,11 +41,7 @@
   </ul>
 </div>
 
-
-  <div *ngIf="questions.length > 0" class="d-flex justify-content-end complete-button-container">
-    <button type="button" class="btn btn-primary"(click)="goToResearchPage()">Tamamla</button>
-  </div>
-
-
-
-
+<!-- Tamamla Butonu -->
+<div *ngIf="questions.length > 0" class="d-flex justify-content-end complete-button-container">
+  <button type="button" class="btn btn-success" (click)="goToResearchPage()">✅ Tamamla</button>
+</div>
