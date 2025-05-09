@@ -40,8 +40,12 @@ export class AnswerDenemeComponent {
     });
   }
 
-  toggleSelection(optionId: number): void {
+  toggleSelection(optionId: number | null): void {
     // Seçilen optionId'ye ait questionId'yi elde et
+    if(optionId == null) {
+      console.log("id null.");
+      return;
+    }
     const questionId = this.getQuestionIdByOptionId(optionId);
     
   
@@ -81,7 +85,8 @@ export class AnswerDenemeComponent {
       });
     }
   }
-  isOptionSelected(optionId: number): boolean {
+  isOptionSelected(optionId: number | null ): boolean {
+    if(optionId == null) console.log("id null.");
     return this.selectedAnswers.some((answer) => answer.optionId === optionId);
   }
 

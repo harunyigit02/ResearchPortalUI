@@ -18,8 +18,8 @@
                   <input 
                     type="radio" 
                     name="question-{{ i }}" 
-                    (change)="toggleSelection(option.id)"
-                    [checked]="isOptionSelected(option.id)"
+                    (change)="toggleSelection(option.id ?? null)"
+                    [checked]="isOptionSelected(option.id ?? null)"
                     class="me-2"
                   />
                   {{ option.optionText }}
