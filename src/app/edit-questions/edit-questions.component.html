@@ -1,41 +1,54 @@
 <div class="container">
-    <h2 class="title">Soruları Düzenle</h2>
+  <h2 class="title">Soruları Düzenle</h2>
 
-    <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-primary" (click)="navigateAddQuestionPage()">Soru Ekle</button>
-    </div>
-  
-    <div *ngFor="let question of questions" class="question-card">
-      <div *ngIf="selectedQuestion?.id === question.id" class="edit-form">
-        <!-- Düzenleme formu -->
-        <div class="form-group">
-          <label for="questionText">Soru:</label>
-          <input id="questionText" [(ngModel)]="selectedQuestion!.questionText" class="form-control" />
-        </div>
-  
-        <div *ngFor="let option of selectedQuestion!.options; let i = index" class="form-group">
-          <label for="option{{ i }}">Seçenek {{ i + 1 }}:</label>
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" (click)="navigateAddQuestionPage()">Soru Ekle</button>
+  </div>
+
+  <div *ngFor="let question of questions" class="question-card">
+    <div *ngIf="selectedQuestion?.id === question.id" class="edit-form">
+      <!-- Düzenleme formu -->
+      <div class="form-group">
+        <label for="questionText">Soru:</label>
+        <input id="questionText" [(ngModel)]="selectedQuestion!.questionText" class="form-control" />
+      </div>
+
+      <div *ngFor="let option of selectedQuestion!.options; let i = index" class="form-group option-group">
+        <label for="option{{ i }}">Seçenek {{ i + 1 }}:</label>
+        <div class="input-group">
           <input id="option{{ i }}" [(ngModel)]="option.optionText" class="form-control" />
         </div>
-  
-        <div class="form-buttons">
-          <button (click)="saveQuestion()" class="btn save-btn">Kaydet</button>
-          <button (click)="cancelEdit()" class="btn cancel-btn">İptal</button>
+        <!-- Silme Butonu -->
+        <div class="option-actions">
+          <button class="btn btn-danger" (click)="removeOption(i)">
+            <i class="fa fa-trash-alt"></i> Sil
+          </button>
         </div>
       </div>
-  
-      <div *ngIf="selectedQuestion?.id !== question.id" class="view-mode">
-        <p>{{ question.questionText }}</p>
-        <ul>
-          <li *ngFor="let option of question.options">{{ option.optionText }}</li>
-        </ul>
-        <button (click)="editQuestion(question)" class="btn edit-btn">Düzenle</button>
-        <button (click)="deleteQuestion(question.id)" class="btn delete-btn ml-3">Sil</button>
-      </div>
       
+      <div class="add-option-btn-container">
+        <button class="btn btn-add-option" (click)="addOption()">+ Yeni Seçenek Ekle</button>
+      </div>
+
+      <div class="form-buttons">
+        <button (click)="saveQuestion()" class="btn btn-save">Kaydet</button>
+        <button (click)="cancelEdit()" class="btn btn-cancel">İptal</button>
+      </div>
     </div>
-    <div class="d-flex justify-content-end">
-    <button  class="btn edit-btn" (click)="navigateResearch()">Tamam</button>
+
+    <div *ngIf="selectedQuestion?.id !== question.id" class="view-mode">
+      <p>{{ question.questionText }}</p>
+      <ul>
+        <li *ngFor="let option of question.options">{{ option.optionText }}</li>
+      </ul>
+      <div class="button-group">
+        <button (click)="editQuestion(question)" class="btn btn-edit">Düzenle</button>
+        <button (click)="deleteQuestion(question.id)" class="btn btn-delete">Sil</button>
+      </div>
     </div>
   </div>
-  
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary" (click)="navigateResearch()">Tamam</button>
+  </div>
+</div>
