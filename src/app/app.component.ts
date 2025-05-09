@@ -30,6 +30,8 @@ import { EditResearchFormComponent } from './edit-research-form/edit-research-fo
 import { EditRequirementsFormComponent } from './edit-requirements-form/edit-requirements-form.component';
 import { EditQuestionsComponent } from './edit-questions/edit-questions.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @Component({
   selector: 'app-root',
@@ -64,7 +66,10 @@ import { UserListComponent } from './user-list/user-list.component';
     EditResearchFormComponent,
     EditRequirementsFormComponent,
     EditQuestionsComponent,
-    UserListComponent
+    UserListComponent,
+    NgChartsModule,
+    
+    
     
   ],
   templateUrl: './app.component.html',
