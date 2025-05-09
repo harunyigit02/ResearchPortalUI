@@ -1,53 +1,53 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Makale Ekle</h2>
-    <div class="card article-card p-4">
-      <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
-        <div class="mb-3">
-          <label for="title" class="form-label">Başlık</label>
-          <input type="text" id="title" class="form-control" formControlName="title" placeholder="Başlığı girin">
-          <div *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
-  
-        <div class="mb-3">
-          <label for="category" class="form-label">Kategori</label>
-          <select id="category" formControlName="categoryId" class="form-control" required>
-            <option value="" disabled selected>Kategori seçin</option>
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-          </select>
-          <div *ngIf="articleForm.get('categoryId')?.invalid && articleForm.get('categoryId')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
-  
-        <div class="mb-3">
-          <label for="description" class="form-label">Açıklama</label>
-          <textarea id="description" class="form-control" formControlName="description" rows="4" placeholder="Açıklamayı girin"></textarea>
-          <div *ngIf="articleForm.get('description')?.invalid && articleForm.get('description')?.touched" class="text-danger">
-            Bu alan zorunludur.
-          </div>
-        </div>
-  
-        <div class="mb-3">
-          <label for="content" class="form-label">PDF Yükle</label>
-          <input type="file" id="content" class="form-control" (change)="onFileSelected($event)" accept="application/pdf">
-        </div>
-  
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary" [disabled]="isLoading">
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Makale Ekle
-          </button>
-        </div>
-  
-        <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
-          {{ successMessage }}
-        </div>
-        <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
-          {{ errorMessage }}
-        </div>
-      </form>
-    </div>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="glass-card p-5 w-100" style="max-width: 700px;">
+    <h2 class="text-center mb-4 text-gradient">📝 Makale Ekle</h2>
+
+    <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
+
+      <div class="mb-4">
+        <label for="title" class="form-label">Başlık</label>
+        <input type="text" id="title" class="form-control custom-input" formControlName="title" placeholder="Makale başlığını yazınız">
+        <small *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
+
+      <div class="mb-4">
+        <label for="category" class="form-label">Kategori</label>
+        <select id="category" formControlName="categoryId" class="form-select custom-input">
+          <option value="" disabled selected>Kategori seçiniz</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+        <small *ngIf="articleForm.get('categoryId')?.invalid && articleForm.get('categoryId')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
+
+      <div class="mb-4">
+        <label for="description" class="form-label">Açıklama</label>
+        <textarea id="description" class="form-control custom-input" formControlName="description" rows="4" placeholder="Kısa bir açıklama yazınız..."></textarea>
+        <small *ngIf="articleForm.get('description')?.invalid && articleForm.get('description')?.touched" class="text-danger">
+          Bu alan zorunludur.
+        </small>
+      </div>
+
+      <div class="mb-4">
+        <label for="content" class="form-label">PDF Yükle</label>
+        <input type="file" id="content" class="form-control custom-input" (change)="onFileSelected($event)" accept="application/pdf">
+      </div>
+
+      <button type="submit" class="btn btn-glass w-100" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+        Makale Ekle
+      </button>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+        {{ errorMessage }}
+      </div>
+
+    </form>
   </div>
-  
+</div>
