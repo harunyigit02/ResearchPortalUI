@@ -5,11 +5,14 @@ import { DataService } from '../data.service';
 import { FormsModule } from '@angular/forms';
 import { FilterDto } from '../Models/filterDto.model';
 import { filter } from 'rxjs';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartDataset, ChartOptions, ChartType } from 'chart.js'; 
+
 
 @Component({
   selector: 'app-question-analysis',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, NgChartsModule],
   templateUrl: './question-analysis.component.html',
   styleUrl: './question-analysis.component.css'
 })
@@ -28,6 +31,29 @@ export class QuestionAnalysisComponent {
     optionIds: [],
     questionId: 0
   };
+
+  
+
+  public chartLabels: string[] = [];
+  public chartTypeVal: ChartType = 'bar';   // Pie chart
+  public chartData: ChartDataset<'bar'>[] = [];  // Daire grafiği için veri türü
+  public chartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            return `${tooltipItem.label}: ${tooltipItem.raw}%`;  // Yüzdeyi göstermek için
+          }
+        }
+      }
+    }
+  };
+
+  
 
 
   constructor( private dataService:DataService){}
@@ -95,6 +121,32 @@ export class QuestionAnalysisComponent {
           console.log("error message:",this.errorMessageCheck);
         }
         console.log(this.analysisResult);
+        this.chartLabels = this.analysisResult.map((result: any) => result.optionText);
+        this.chartData = [
+          {
+            data: this.analysisResult.map((result: any) =>
+              parseFloat(result.percentage.replace(',', '.').replace('%', ''))), // Yüzdeleri sayıya çeviriyoruz
+            label: 'Katılımcı Yüzdesi',
+            backgroundColor: ['rgba(63,81,181,0.5)', 'rgba(255,99,132,0.5)', 'rgba(75,192,192,0.5)'], // Renkler
+            borderColor: ['rgba(63,81,181,1)', 'rgba(255,99,132,1)', 'rgba(75,192,192,1)'],
+            borderWidth: 1
+          }
+        ];
+        this.chartOptions = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  return `${tooltipItem.label}: ${tooltipItem.raw}%`;  // Yüzdeyi göster
+                }
+              }
+            }
+          }
+        };
       });
     }
   }

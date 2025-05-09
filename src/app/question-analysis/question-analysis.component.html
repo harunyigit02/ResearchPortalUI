@@ -26,7 +26,10 @@
         <ul class="list-unstyled mt-2">
           <li *ngFor="let option of question.options" 
               class="option-box border rounded p-2 mt-1"
-              [ngClass]="{ 'bg-success text-white': selectedOptions?.includes(option.id), 'text-primary': !selectedOptions?.includes(option.id) }"
+              [ngClass]="{ 
+  'bg-success text-white': selectedOptions?.includes(option.id), 
+  'text-primary': !selectedOptions?.includes(option.id) 
+}"
               (click)="toggleOption(option.id)">
             {{ option.optionText }}
           </li>
@@ -61,10 +64,12 @@
   <!-- Analiz Sonucu -->
   <div *ngIf="analysisResult && analysisResult.length > 0" class="result-box mt-4 p-3 bg-light border rounded shadow-sm">
     <h4 class="text-success">Analiz Sonucu:</h4>
-    <div *ngFor="let result of analysisResult" class="result-item mb-2">
-      <strong class="text-dark">Seçenek: {{ result.optionText }}</strong>
-      <p class="m-0">Katılımcı Sayısı: {{ result.count }}</p>
-      <p class="m-0">Yüzde: {{ result.percentage }}</p>
-    </div>
+    <canvas baseChart
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="true"
+        [type]="chartTypeVal">
+</canvas>
   </div>
 </div>
