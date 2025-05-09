@@ -1,21 +1,21 @@
 <div class="container mt-5" *ngIf="research">
   <!-- Araştırma Detayları -->
-  <div class="card p-4 mb-4">
-      <h1 class="text-center">{{ research.title }}</h1>
-      <div class="text-center text-muted">{{ research.publishedAt | date: 'dd.MM.yyyy' }}</div>
-      <h2 class="mt-3">{{ research.description }}</h2>
-      <div class="d-flex justify-content-between">
-          <span class="badge bg-primary">{{ research.categoryName }}</span>
-          <span class="badge bg-secondary">{{ research.participationType }}</span>
-          <span class="badge bg-info">{{ research.status }}</span>
-      </div>
+  <div class="card research-card shadow-sm p-4 mb-4">
+    <h1 class="text-center research-title">{{ research.title }}</h1>
+    <div class="text-center text-muted">{{ research.publishedAt | date: 'dd.MM.yyyy' }}</div>
+    <h2 class="mt-3">{{ research.description }}</h2>
+    <div class="d-flex justify-content-between mt-3">
+      <span class="badge bg-primary">{{ research.categoryName }}</span>
+      <span class="badge bg-secondary">{{ research.participationType }}</span>
+      <span class="badge bg-info">{{ research.status }}</span>
+    </div>
   </div>
 
   <!-- Katılım Şartları ve Soruların Yan Yana Düzeni -->
   <div class="row">
     <!-- Katılım Şartları -->
     <div class="col-md-6">
-      <div class="card p-4 h-100">
+      <div class="card p-4 h-100 card-shadow">
         <h5>Araştırma Katılım Şartları</h5>
         <button class="btn btn-outline-primary mt-2" (click)="toggleResearchRequirements()">
           Katılım Şartlarını Görüntüle
@@ -23,7 +23,7 @@
 
         <div *ngIf="showResearchRequirements">
           <h5 class="mt-3">Katılım Şartları</h5>
-          
+
           <!-- Şartlar Yoksa -->
           <div *ngIf="isEmptyResearchRequirements()">
             <p><strong>Katılım Şartı Eklenmemiş.</strong></p>
@@ -40,7 +40,7 @@
             <div *ngIf="researchRequirements.gender.length > 0">
               <strong>Cinsiyet:</strong>
               <ul>
-                 <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
+                <li *ngFor="let gender of transformEnumToString(researchRequirements.gender, 'gender')">{{ gender }}</li>
               </ul>
             </div>
             <div *ngIf="researchRequirements.location.length > 0">
@@ -107,7 +107,7 @@
 
     <!-- Sorular -->
     <div class="col-md-6">
-      <div class="card p-4 h-100">
+      <div class="card p-4 h-100 card-shadow">
         <h5>Katılım Formu</h5>
         <button *ngIf="research.isCompleted" class="btn btn-outline-primary mt-2" (click)="goToParticipationFormPage()">Araştırmaya Katıl</button>
         <button *ngIf="!research.isCompleted" class="btn btn-outline-primary mt-2" (click)="toggleQuestions()">
@@ -116,34 +116,34 @@
 
         <div *ngIf="showQuestions">
           <h3 class="mt-3">Sorular:</h3>
-          
+
           <div *ngIf="research.questions && hasRole(['Admin'])">
             <div *ngIf="research.questions.length === 0">
               <h5>Henüz Eklenmiş Soru Yok.</h5>
               <button class="btn btn-outline-primary" (click)="goToFormPage()">Soru Ekle</button>
             </div>
             <ul *ngIf="research.questions.length > 0">
-              <li *ngFor="let question of research.questions; let i = index">
+              <li *ngFor="let question of research.questions; let i = index" class="question-item">
                 <strong>Soru {{ i + 1 }}: {{ question.questionText }}</strong>
                 <ul>
-                  <li *ngFor="let option of question.options">{{ option.optionText }}</li>
+                  <li *ngFor="let option of question.options" class="option-item">{{ option.optionText }}</li>
                 </ul>
               </li>
             </ul>
           </div>
           <div class="d-flex justify-content-end">
-          <button class="btn btn-outline-primary" (click)="navigateUpdateQuestion()">Düzenle</button>
+            <button class="btn btn-outline-primary" (click)="navigateUpdateQuestion()">Düzenle</button>
           </div>
         </div>
-        
+
       </div>
     </div>
-    
+
   </div>
 
   <div *ngIf="research && !research.isCompleted && isOwnResearch()" class="card p-4 mt-4">
     <button class="btn btn-outline-primary" (click)="viewResearchResults()">Araştırma Sonuçları</button>
- </div>
+  </div>
 
   <!-- Publish Button -->
   <div *ngIf="research && research.isCompleted&& isOwnResearch()" class="d-flex justify-content-end mt-4">
