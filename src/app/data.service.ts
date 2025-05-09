@@ -18,7 +18,7 @@ import { FilterDto } from './Models/filterDto.model';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://localhost:7237/api';
+  private apiUrl = 'http://localhost:7237/api';
   private loginPageRoute = '/login';
   isLoginPage: boolean = false;
   private userSubject: BehaviorSubject<ProfileUser | null> = new BehaviorSubject<ProfileUser | null>(null);
@@ -140,6 +140,12 @@ export class DataService {
     })
     return this.http.post(`${this.apiUrl}/Option`, optionData,{headers});
   }
+
+  deleteOption(optionId: number) {
+    
+    return this.http.delete(`${this.apiUrl}/Option/${optionId}`);
+  }
+  
   getResearches(pageNumber:number,pageSize:number): Observable<Research[]> {
     const params=new HttpParams()
     .set('pageNumber',pageNumber)
